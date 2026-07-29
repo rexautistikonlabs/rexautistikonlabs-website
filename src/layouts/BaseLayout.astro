@@ -12,6 +12,11 @@ const {
   title = "Rex Autistikōn Labs",
   description = "Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions."
 } = Astro.props;
+
+const siteName = "Rex Autistikōn Labs";
+const siteUrl = "https://rexautistikonlabs.org";
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -19,11 +24,58 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    
+    <!-- Primary SEO -->
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Theme & Icons -->
+    <meta name="theme-color" content="#0f766e" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data: Research Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ResearchOrganization",
+      "name": "Rex Autistikōn Labs",
+      "alternateName": "Rex Autistikon Research Foundation, Inc.",
+      "url": "https://rexautistikonlabs.org",
+      "logo": "https://rexautistikonlabs.org/logo.png",
+      "description": "Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions.",
+      "email": "info@rexautistikonlabs.org",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1485 Fouraker Rd #2402",
+        "addressLocality": "Jacksonville",
+        "addressRegion": "FL",
+        "postalCode": "32221",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.youtube.com/@RexAutistikon",
+        "https://substack.com/@rexautistikonlabs",
+        "https://doi.org/10.5281/zenodo.20737319"
+      ]
+    })} />
   </head>
   <body class="bg-white text-slate-800 font-sans antialiased">
     <Header />
