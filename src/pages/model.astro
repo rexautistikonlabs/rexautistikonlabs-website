@@ -7,14 +7,10 @@
 // "Normal" and a hypothesised "Neurodivergent" parameter set across the eight
 // sensor-rich myofascial and visceral interfaces described in the Pilot Study
 // Collaborator Handbook.
-//
-// Everything below the frontmatter is plain HTML + Tailwind. All computation
-// happens client-side in the <script> block at the bottom of this file, so the
-// page works as a fully static build with no server component.
 // ---------------------------------------------------------------------------
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'Interactive Model — Rex Autistikōn Labs';
+const title = 'Interactive Model';
 const description =
   'An interactive research and education model exploring how chronic mechanical restriction in eight sensor-rich myofascial and visceral interfaces may alter afferent signal fidelity, sensory precision, and prediction error.';
 ---
@@ -23,11 +19,11 @@ const description =
   <main class="mx-auto max-w-6xl px-5 py-12 text-slate-800">
 
     <!-- ===================================================================
-         1. PAGE HEADER — orientation for both researchers and lay readers
+         1. PAGE HEADER
          =================================================================== -->
     <header class="mb-10 border-b border-slate-200 pb-8">
       <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-800">
-        Research Instrumentation &middot; Phase 1
+        Research Instrumentation · Phase 1
       </p>
       <h1 class="mb-4 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">
         Interactive Model: Mechanical Restriction and Afferent Signal Fidelity
@@ -48,7 +44,7 @@ const description =
     </header>
 
     <!-- ===================================================================
-         2. CONTROL PANEL — mode presets and global parameters
+         2. CONTROL PANEL
          =================================================================== -->
     <section aria-labelledby="controls-heading" class="mb-8">
       <h2 id="controls-heading" class="mb-4 text-lg font-semibold text-slate-900">
@@ -56,21 +52,14 @@ const description =
       </h2>
 
       <div class="grid gap-5 lg:grid-cols-3">
-
-        <!-- 2a. Baseline mode selector (radio group, fully keyboard operable) -->
+        <!-- Baseline mode selector -->
         <fieldset class="rounded-lg border border-slate-200 bg-white p-5">
           <legend class="px-1 text-sm font-semibold text-slate-900">
             Baseline parameter set
           </legend>
           <div class="mt-2 space-y-2">
             <label class="flex cursor-pointer items-start gap-3 rounded-md border border-slate-200 p-3 transition hover:border-teal-600 hover:bg-teal-50/40 focus-within:ring-2 focus-within:ring-teal-600">
-              <input
-                type="radio"
-                name="mode"
-                value="normal"
-                checked
-                class="mt-1 h-4 w-4 accent-teal-700"
-              />
+              <input type="radio" name="mode" value="normal" checked class="mt-1 h-4 w-4 accent-teal-700" />
               <span>
                 <span class="block text-sm font-medium text-slate-900">Normal</span>
                 <span class="block text-xs leading-relaxed text-slate-500">
@@ -79,12 +68,7 @@ const description =
               </span>
             </label>
             <label class="flex cursor-pointer items-start gap-3 rounded-md border border-slate-200 p-3 transition hover:border-amber-600 hover:bg-amber-50/40 focus-within:ring-2 focus-within:ring-amber-600">
-              <input
-                type="radio"
-                name="mode"
-                value="nd"
-                class="mt-1 h-4 w-4 accent-amber-700"
-              />
+              <input type="radio" name="mode" value="nd" class="mt-1 h-4 w-4 accent-amber-700" />
               <span>
                 <span class="block text-sm font-medium text-slate-900">Neurodivergent</span>
                 <span class="block text-xs leading-relaxed text-slate-500">
@@ -102,89 +86,51 @@ const description =
           </button>
         </fieldset>
 
-        <!-- 2b. Global tissue parameters -->
+        <!-- Global tissue parameters -->
         <div class="rounded-lg border border-slate-200 bg-white p-5 lg:col-span-2">
           <p class="mb-4 text-sm font-semibold text-slate-900">Global tissue properties</p>
           <div class="grid gap-5 sm:grid-cols-2">
-
-            <!-- Restriction scale -->
             <div>
               <div class="mb-1 flex items-baseline justify-between">
-                <label for="restrictionSlider" class="text-sm font-medium text-slate-700">
-                  Restriction level
-                </label>
+                <label for="restrictionSlider" class="text-sm font-medium text-slate-700">Restriction level</label>
                 <output id="restrictionOut" for="restrictionSlider" class="font-mono text-sm text-slate-900">100%</output>
               </div>
-              <input
-                type="range" id="restrictionSlider"
-                min="0" max="150" step="1" value="100"
-                aria-describedby="restrictionHelp"
-                class="w-full accent-amber-700"
-              />
-              <p id="restrictionHelp" class="mt-1 text-xs leading-relaxed text-slate-500">
-                Scales the selected baseline profile. Moving this resets any
-                per-zone adjustments.
+              <input type="range" id="restrictionSlider" min="0" max="150" step="1" value="100" class="w-full accent-amber-700" />
+              <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                Scales the selected baseline profile. Moving this resets any per-zone adjustments.
               </p>
             </div>
 
-            <!-- Probe frequency -->
             <div>
               <div class="mb-1 flex items-baseline justify-between">
-                <label for="freqSlider" class="text-sm font-medium text-slate-700">
-                  Probe frequency
-                </label>
+                <label for="freqSlider" class="text-sm font-medium text-slate-700">Probe frequency</label>
                 <output id="freqOut" for="freqSlider" class="font-mono text-sm text-slate-900">2.0 Hz</output>
               </div>
-              <input
-                type="range" id="freqSlider"
-                min="0" max="100" step="1" value="53"
-                aria-describedby="freqHelp"
-                class="w-full accent-teal-700"
-              />
-              <p id="freqHelp" class="mt-1 text-xs leading-relaxed text-slate-500">
-                Rate of the mechanical event being sensed, 0.05–300 Hz
-                (logarithmic). Faster events are harder for stiff, viscous
-                tissue to transmit.
+              <input type="range" id="freqSlider" min="0" max="100" step="1" value="53" class="w-full accent-teal-700" />
+              <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                Rate of the mechanical event being sensed (0.05–300 Hz, logarithmic).
               </p>
             </div>
 
-            <!-- Stiffness multiplier G -->
             <div>
               <div class="mb-1 flex items-baseline justify-between">
-                <label for="gSlider" class="text-sm font-medium text-slate-700">
-                  Stiffness <span class="font-mono text-slate-500">G</span>
-                </label>
-                <output id="gOut" for="gSlider" class="font-mono text-sm text-slate-900">1.00&times;</output>
+                <label for="gSlider" class="text-sm font-medium text-slate-700">Stiffness <span class="font-mono text-slate-500">G</span></label>
+                <output id="gOut" for="gSlider" class="font-mono text-sm text-slate-900">1.00×</output>
               </div>
-              <input
-                type="range" id="gSlider"
-                min="50" max="400" step="5" value="100"
-                aria-describedby="gHelp"
-                class="w-full accent-teal-700"
-              />
-              <p id="gHelp" class="mt-1 text-xs leading-relaxed text-slate-500">
-                Elastic term. Higher stiffness means a given force produces less
-                tissue deformation, so mechanoreceptors are driven less strongly.
+              <input type="range" id="gSlider" min="50" max="400" step="5" value="100" class="w-full accent-teal-700" />
+              <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                Elastic term. Higher stiffness reduces tissue deformation and receptor drive.
               </p>
             </div>
 
-            <!-- Viscosity multiplier eta -->
             <div>
               <div class="mb-1 flex items-baseline justify-between">
-                <label for="etaSlider" class="text-sm font-medium text-slate-700">
-                  Viscosity <span class="font-mono text-slate-500">&eta;</span>
-                </label>
-                <output id="etaOut" for="etaSlider" class="font-mono text-sm text-slate-900">1.00&times;</output>
+                <label for="etaSlider" class="text-sm font-medium text-slate-700">Viscosity <span class="font-mono text-slate-500">η</span></label>
+                <output id="etaOut" for="etaSlider" class="font-mono text-sm text-slate-900">1.00×</output>
               </div>
-              <input
-                type="range" id="etaSlider"
-                min="50" max="400" step="5" value="100"
-                aria-describedby="etaHelp"
-                class="w-full accent-amber-700"
-              />
-              <p id="etaHelp" class="mt-1 text-xs leading-relaxed text-slate-500">
-                Damping term. Higher viscosity lowers the corner frequency, so
-                rapid events are smeared and attenuated more than slow ones.
+              <input type="range" id="etaSlider" min="50" max="400" step="5" value="100" class="w-full accent-amber-700" />
+              <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                Damping term. Higher viscosity attenuates rapid events more than slow ones.
               </p>
             </div>
           </div>
@@ -198,15 +144,13 @@ const description =
     <section aria-labelledby="viz-heading" class="mb-8 grid gap-5 lg:grid-cols-5">
       <h2 id="viz-heading" class="sr-only">Model visualisation and readouts</h2>
 
-      <!-- 3a. Systemic tensegrity network (SVG, drawn once, updated by JS) -->
+      <!-- Systemic network -->
       <div class="rounded-lg border border-slate-200 bg-white p-5 lg:col-span-3">
         <div class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
           <h3 class="text-base font-semibold text-slate-900">Systemic network</h3>
           <p class="text-xs text-slate-500">Select a zone to inspect it</p>
         </div>
 
-        <!-- The SVG is decorative-plus: every zone is also reachable through the
-             <select> below and the data table, so no information is SVG-only. -->
         <svg
           id="netSvg"
           viewBox="0 0 420 560"
@@ -216,17 +160,14 @@ const description =
         >
           <title id="netTitle">Simplified biotensegrity network of eight sensor-rich zones</title>
           <desc id="netDesc">
-            Eight nodes arranged from cranial to pelvic, connected by fascial
-            links. Node colour and size indicate how much of the expected
-            afferent signal survives; link thickness indicates restriction along
-            that connection. Equivalent values are given in the data table below.
+            Eight nodes arranged from cranial to pelvic, connected by fascial links.
+            Node colour and size indicate retained signal fidelity; link thickness indicates restriction.
           </desc>
           <g id="edgeLayer" stroke-linecap="round"></g>
           <g id="pulseLayer" aria-hidden="true"></g>
           <g id="nodeLayer"></g>
         </svg>
 
-        <!-- Legend -->
         <div class="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-slate-100 pt-4 text-xs text-slate-600">
           <span class="flex items-center gap-2">
             <span class="h-3 w-3 rounded-full" style="background:hsl(185 60% 42%)"></span>
@@ -240,17 +181,11 @@ const description =
             <span class="h-3 w-3 rounded-full" style="background:hsl(25 72% 42%)"></span>
             Heavily attenuated
           </span>
-          <span class="w-full text-center text-slate-500">
-            Colour and node size show fidelity relative to an unrestricted
-            equivalent; link thickness shows restriction.
-          </span>
         </div>
       </div>
 
-      <!-- 3b. Zone inspector + systemic readouts -->
+      <!-- Zone inspector -->
       <div class="space-y-5 lg:col-span-2">
-
-        <!-- Zone selector and per-zone metrics -->
         <div class="rounded-lg border border-slate-200 bg-white p-5">
           <label for="zoneSelect" class="mb-1 block text-sm font-semibold text-slate-900">
             Zone under inspection
@@ -261,41 +196,26 @@ const description =
           ></select>
           <p id="zoneNote" class="mt-2 text-xs leading-relaxed text-slate-500"></p>
 
-          <!-- Per-zone restriction override -->
           <div class="mt-4">
             <div class="mb-1 flex items-baseline justify-between">
-              <label for="zoneRestriction" class="text-sm font-medium text-slate-700">
-                Restriction in this zone
-              </label>
+              <label for="zoneRestriction" class="text-sm font-medium text-slate-700">Restriction in this zone</label>
               <output id="zoneRestrictionOut" for="zoneRestriction" class="font-mono text-sm text-slate-900">0.06</output>
             </div>
-            <input
-              type="range" id="zoneRestriction"
-              min="0" max="100" step="1" value="6"
-              class="w-full accent-amber-700"
-            />
+            <input type="range" id="zoneRestriction" min="0" max="100" step="1" value="6" class="w-full accent-amber-700" />
           </div>
 
-          <!-- Frequency-response plot for the selected zone -->
           <figure class="mt-5">
-            <svg
-              id="respSvg" viewBox="0 0 340 170"
-              class="h-auto w-full" role="img" aria-labelledby="respTitle respDesc"
-            >
+            <svg id="respSvg" viewBox="0 0 340 170" class="h-auto w-full" role="img" aria-labelledby="respTitle respDesc">
               <title id="respTitle">Frequency response of the selected zone</title>
               <desc id="respDesc">
-                Transmitted signal amplitude plotted against event frequency on a
-                logarithmic axis. The dashed curve is the unrestricted
-                expectation; the solid curve is the current model state.
+                Transmitted signal amplitude versus event frequency. Dashed = unrestricted expectation; solid = current state.
               </desc>
             </svg>
             <figcaption class="mt-1 text-xs leading-relaxed text-slate-500">
-              Dashed: unrestricted expectation. Solid: current state. Vertical
-              line: probe frequency.
+              Dashed: unrestricted expectation. Solid: current state. Vertical line: probe frequency.
             </figcaption>
           </figure>
 
-          <!-- Numeric readouts for the selected zone -->
           <dl class="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-slate-100 pt-4 text-sm">
             <div>
               <dt class="text-xs text-slate-500">Retained fidelity</dt>
@@ -306,15 +226,15 @@ const description =
               <dd id="mH" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">Effective precision &pi;<sub>eff</sub></dt>
+              <dt class="text-xs text-slate-500">Effective precision π<sub>eff</sub></dt>
               <dd id="mPi" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">Prediction error &epsilon;</dt>
+              <dt class="text-xs text-slate-500">Prediction error ε</dt>
               <dd id="mEps" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">Weighted error &pi;&epsilon;</dt>
+              <dt class="text-xs text-slate-500">Weighted error πε</dt>
               <dd id="mXi" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
@@ -322,7 +242,7 @@ const description =
               <dd id="mF" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">Gradient &part;F/&part;r</dt>
+              <dt class="text-xs text-slate-500">Gradient ∂F/∂r</dt>
               <dd id="mGrad" class="font-mono text-slate-900">—</dd>
             </div>
           </dl>
@@ -339,9 +259,7 @@ const description =
             <div class="h-2 w-full overflow-hidden rounded-full bg-slate-200">
               <div id="mpaBar" class="h-full rounded-full bg-teal-700 transition-all duration-300" style="width:0%"></div>
             </div>
-            <p class="mt-1 text-xs text-slate-500">
-              Eight zones scored 0–8 each, composite range 0–64.
-            </p>
+            <p class="mt-1 text-xs text-slate-500">Eight zones scored 0–8 each · composite range 0–64</p>
           </div>
           <dl class="grid grid-cols-3 gap-x-4 gap-y-3 border-t border-slate-200 pt-3 text-sm">
             <div>
@@ -349,11 +267,11 @@ const description =
               <dd id="sFid" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">Mean &pi;<sub>eff</sub></dt>
+              <dt class="text-xs text-slate-500">Mean π<sub>eff</sub></dt>
               <dd id="sPi" class="font-mono text-slate-900">—</dd>
             </div>
             <div>
-              <dt class="text-xs text-slate-500">&Sigma;F</dt>
+              <dt class="text-xs text-slate-500">ΣF</dt>
               <dd id="sF" class="font-mono text-slate-900">—</dd>
             </div>
           </dl>
@@ -362,7 +280,7 @@ const description =
     </section>
 
     <!-- ===================================================================
-         4. INTERPRETATION PANEL — plain-language explanation, live updated
+         4. INTERPRETATION PANEL
          =================================================================== -->
     <section aria-labelledby="meaning-heading" class="mb-8 rounded-lg border border-slate-200 bg-white p-6">
       <h2 id="meaning-heading" class="mb-3 text-lg font-semibold text-slate-900">
@@ -372,7 +290,7 @@ const description =
     </section>
 
     <!-- ===================================================================
-         5. DATA TABLE — accessible, non-visual equivalent of the network
+         5. DATA TABLE
          =================================================================== -->
     <details class="mb-8 rounded-lg border border-slate-200 bg-white">
       <summary class="cursor-pointer px-6 py-4 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600">
@@ -381,8 +299,7 @@ const description =
       <div class="overflow-x-auto border-t border-slate-200 px-6 py-4">
         <table class="w-full text-left text-sm">
           <caption class="sr-only">
-            Computed model values for each of the eight sensor-rich zones at the
-            current parameter settings.
+            Computed model values for each of the eight sensor-rich zones at the current parameter settings.
           </caption>
           <thead>
             <tr class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
@@ -392,8 +309,8 @@ const description =
               <th scope="col" class="py-2 pr-3 text-right font-medium">MPA</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">|H|</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">Fidelity</th>
-              <th scope="col" class="py-2 pr-3 text-right font-medium">&pi;<sub>eff</sub></th>
-              <th scope="col" class="py-2 pr-3 text-right font-medium">&epsilon;</th>
+              <th scope="col" class="py-2 pr-3 text-right font-medium">π<sub>eff</sub></th>
+              <th scope="col" class="py-2 pr-3 text-right font-medium">ε</th>
               <th scope="col" class="py-2 text-right font-medium">F</th>
             </tr>
           </thead>
@@ -403,7 +320,7 @@ const description =
     </details>
 
     <!-- ===================================================================
-         6. METHOD NOTES + DISCLAIMER
+         6. METHOD NOTES
          =================================================================== -->
     <section aria-labelledby="method-heading" class="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
       <h2 id="method-heading" class="mb-3 text-lg font-semibold text-slate-900">
@@ -411,135 +328,90 @@ const description =
       </h2>
       <div class="space-y-3 text-sm leading-relaxed text-slate-700">
         <p>
-          Each zone is represented as a Kelvin–Voigt viscoelastic element, in
-          which stress relates to strain through an elastic term
-          <span class="font-mono">G</span> and a viscous term
-          <span class="font-mono">&eta;</span>. Driving such an element at
-          angular frequency <span class="font-mono">&omega;</span> yields a
-          transmitted strain amplitude
-          <span class="font-mono">|H(&omega;)| = G<sub>0</sub> / &radic;(G² + (&omega;&eta;)²)</span>,
-          normalised so that an unrestricted zone responds fully to very slow
-          events. Restriction <span class="font-mono">r</span> raises both terms,
-          and raises viscosity faster than stiffness, reflecting the densified,
-          less hydrated fascial state the hypothesis proposes.
+          Each zone is represented as a Kelvin–Voigt viscoelastic element. Driving the element at angular frequency ω yields transmitted strain amplitude
+          <span class="font-mono">|H(ω)| = G₀ / √(G² + (ωη)²)</span>,
+          normalised so an unrestricted zone responds fully to very slow events. Restriction <span class="font-mono">r</span> raises both stiffness and viscosity, with viscosity rising faster.
         </p>
         <p>
-          Effective sensory precision is taken as transmitted signal power
-          against a small irreducible noise term,
-          <span class="font-mono">&pi;<sub>eff</sub> = (|H|² + c) / (1 + c)</span>.
-          Because that term is added rather than clamped, precision never pins to
-          a constant and the free-energy gradient stays informative even at
-          extreme settings. Prediction error
-          <span class="font-mono">&epsilon;</span> is the difference between what
-          an unrestricted zone would deliver and what the current zone actually
-          delivers &mdash; the mismatch a generative model calibrated on
-          unrestricted tissue would encounter. Variational free energy for a
-          Gaussian channel then follows as
-          <span class="font-mono">F = ½&pi;&epsilon;² − ½ln&pi;</span>, so both
-          unresolved error and outright uncertainty carry a cost. The gradient
-          <span class="font-mono">&part;F/&part;r</span> indicates how strongly
-          free energy responds to a change in restriction at the current
-          operating point, which is the quantity a mechanical intervention would
-          be expected to act on.
+          Effective sensory precision is modelled as
+          <span class="font-mono">π<sub>eff</sub> = (|H|² + c) / (1 + c)</span>.
+          Prediction error ε is the difference between the unrestricted expectation and the current transmitted signal. Variational free energy follows as
+          <span class="font-mono">F = ½πε² − ½lnπ</span>.
+          The gradient ∂F/∂r indicates how strongly free energy responds to a change in mechanical restriction.
         </p>
         <p>
-          MPA–Zone scores map each zone's restriction onto a 0–8 integer scale,
-          giving a 0–64 composite intended for participant stratification. The
-          values used here are illustrative parameter sets, not clinical
-          measurements.
+          MPA–Zone scores map each zone’s restriction onto a 0–8 integer scale, giving a 0–64 composite intended for participant stratification. The values used here are illustrative parameter sets, not clinical measurements.
         </p>
       </div>
     </section>
 
+    <!-- ===================================================================
+         7. DISCLAIMER + INTELLECTUAL PROPERTY
+         =================================================================== -->
     <aside role="note" class="rounded-lg border-l-4 border-amber-600 bg-amber-50 p-5">
-      <h2 class="mb-2 text-sm font-semibold text-amber-950">Research and education tool</h2>
+      <h2 class="mb-2 text-sm font-semibold text-amber-950">Research and Education Tool</h2>
+      <p class="text-sm leading-relaxed text-amber-950/85 mb-3">
+        This Interactive Model is a simplified teaching and hypothesis-communication instrument. It is not a diagnostic device, not a clinical assessment, and not a source of individual health information. It does not describe any specific person and should not be used to infer, screen for, or evaluate any condition.
+      </p>
       <p class="text-sm leading-relaxed text-amber-950/85">
-        This model is a simplified teaching and hypothesis-communication
-        instrument. It is not a diagnostic device, not a clinical assessment, and
-        not a source of individual health information. It does not describe any
-        specific person and should not be used to infer, screen for, or evaluate
-        any condition. Autism is a form of human neurological variation; the
-        hypothesis explored here concerns mechanical contributions to sensory
-        signalling and makes no claim that autism is a mechanical disorder or
-        that it requires correction. Please consult a qualified clinician for
-        any health question.
+        © 2026 Rex Autistikon Research Foundation, Inc. All rights reserved.
+        The Interactive Model, including its structure, mathematical implementation, visual design, and underlying code, is the intellectual property of Rex Autistikon Research Foundation, Inc.
+        It is provided for research and educational purposes. Unauthorized commercial use, reproduction, or redistribution is prohibited without prior written permission from the Foundation.
       </p>
     </aside>
+
   </main>
 </BaseLayout>
 
 <script>
   // =========================================================================
-  // CLIENT-SIDE MODEL
-  // Vanilla ES module, bundled by Astro. No external dependencies.
+  // CLIENT-SIDE MODEL — Vanilla JS, no external dependencies
   // =========================================================================
 
-  // ---- 1. Zone dataset -----------------------------------------------------
-  // fc = characteristic corner frequency of the unrestricted tissue (Hz).
-  // Fast, low-inertia structures (middle ear) sit high; slow visceral and
-  // pelvic structures sit low. x/y are SVG coordinates in a 420x560 viewBox.
   const ZONES = [
-    { id: 1, label: 'Extraocular muscles & orbital fascia', short: 'Extraocular / orbital',
-      fc: 14, x: 128, y: 74,
+    { id: 1, label: 'Extraocular muscles & orbital fascia', short: 'Extraocular / orbital', fc: 14, x: 128, y: 74,
       note: 'Dense proprioceptive supply supporting gaze stabilisation and microsaccadic control.' },
-    { id: 2, label: 'Tensor tympani & stapedius', short: 'Middle ear',
-      fc: 90, x: 292, y: 74,
+    { id: 2, label: 'Tensor tympani & stapedius', short: 'Middle ear', fc: 90, x: 292, y: 74,
       note: 'Fastest zone in the model; mediates acoustic reflex gain control on incoming sound.' },
-    { id: 3, label: 'Nasal musculature & paranasal fascia', short: 'Nasal / paranasal',
-      fc: 1.2, x: 210, y: 126,
+    { id: 3, label: 'Nasal musculature & paranasal fascia', short: 'Nasal / paranasal', fc: 1.2, x: 210, y: 126,
       note: 'Respiratory-coupled airflow sensing across a slow, breath-linked band.' },
-    { id: 4, label: 'Tongue & floor of mouth', short: 'Tongue / oral floor',
-      fc: 6, x: 132, y: 180,
+    { id: 4, label: 'Tongue & floor of mouth', short: 'Tongue / oral floor', fc: 6, x: 132, y: 180,
       note: 'High receptor density serving articulation, bolus handling and oral spatial sense.' },
-    { id: 5, label: 'Pharyngeal & laryngeal structures', short: 'Pharynx / larynx',
-      fc: 9, x: 288, y: 180,
+    { id: 5, label: 'Pharyngeal & laryngeal structures', short: 'Pharynx / larynx', fc: 9, x: 288, y: 180,
       note: 'Swallow and phonation control, with strong vagal afferent representation.' },
-    { id: 6, label: 'Suboccipital complex', short: 'Suboccipital',
-      fc: 5, x: 210, y: 238,
+    { id: 6, label: 'Suboccipital complex', short: 'Suboccipital', fc: 5, x: 210, y: 238,
       note: 'Among the highest muscle-spindle densities in the body; anchors head-eye coordination.' },
-    { id: 7, label: 'Visceral fascia & diaphragm', short: 'Visceral / diaphragm',
-      fc: 0.45, x: 210, y: 358,
+    { id: 7, label: 'Visceral fascia & diaphragm', short: 'Visceral / diaphragm', fc: 0.45, x: 210, y: 358,
       note: 'Slow interoceptive and respiratory channel linking breath to autonomic state.' },
-    { id: 8, label: 'Pelvic floor & perineum', short: 'Pelvic floor',
-      fc: 0.7, x: 210, y: 470,
+    { id: 8, label: 'Pelvic floor & perineum', short: 'Pelvic floor', fc: 0.7, x: 210, y: 470,
       note: 'Postural and continence-related base of the axial tensegrity chain.' }
   ];
 
-  // Fascial links between zones (1-indexed pairs) forming the simplified network.
   const EDGES = [
     [1, 2], [1, 3], [1, 6], [2, 6], [3, 4],
     [4, 5], [4, 6], [5, 6], [5, 7], [6, 7], [7, 8]
   ];
 
-  // Baseline restriction profiles, r in [0,1].
   const PRESETS = {
     normal: [0.06, 0.05, 0.05, 0.08, 0.06, 0.10, 0.08, 0.05],
     nd:     [0.62, 0.70, 0.45, 0.55, 0.50, 0.75, 0.58, 0.52]
   };
 
-  // Restriction sensitivities: viscosity rises faster than stiffness.
   const A_STIFF = 3.0;
-  const B_VISC = 6.0;
-  // Irreducible noise term. Added rather than clamped so that precision never
-  // pins to a constant, which would flatten the free-energy gradient and make
-  // restriction look as though it had stopped mattering.
+  const B_VISC  = 6.0;
   const PI_FLOOR = 0.002;
-
-  // Probe-frequency slider maps 0-100 onto a log sweep of 0.05-300 Hz.
   const F_MIN = 0.05, F_MAX = 300;
-  const sliderToFreq = (v) =>
-    F_MIN * Math.pow(F_MAX / F_MIN, v / 100);
-  const freqToSlider = (f) =>
-    (100 * Math.log(f / F_MIN)) / Math.log(F_MAX / F_MIN);
 
-  // ---- 2. State ------------------------------------------------------------
+  const sliderToFreq = (v) => F_MIN * Math.pow(F_MAX / F_MIN, v / 100);
+  const freqToSlider = (f) => (100 * Math.log(f / F_MIN)) / Math.log(F_MAX / F_MIN);
+
   const state = {
     mode: 'normal',
-    scale: 1.0,     // restriction multiplier applied to the preset
-    gMul: 1.0,      // global stiffness multiplier
-    etaMul: 1.0,    // global viscosity multiplier
-    freq: 2.0,      // probe frequency, Hz
-    selected: 5,    // zero-based index; suboccipital by default
+    scale: 1.0,
+    gMul: 1.0,
+    etaMul: 1.0,
+    freq: 2.0,
+    selected: 5,
     r: PRESETS.normal.slice()
   };
 
@@ -547,35 +419,26 @@ const description =
     state.r = PRESETS[state.mode].map((v) => Math.min(1, v * state.scale));
   };
 
-  // ---- 3. Core mathematics -------------------------------------------------
-  // Kelvin-Voigt element driven at angular frequency w. Returns transmitted
-  // strain amplitude normalised so an unrestricted zone tends to 1 as w -> 0.
   function transmit(zone, r, f, gMul, etaMul) {
-    const etaBase = 1 / (2 * Math.PI * zone.fc); // G_base is 1 by construction
+    const etaBase = 1 / (2 * Math.PI * zone.fc);
     const G = (1 + A_STIFF * r) * gMul;
     const eta = etaBase * (1 + B_VISC * r) * etaMul;
     const w = 2 * Math.PI * f;
     return 1 / Math.sqrt(G * G + w * eta * w * eta);
   }
 
-  // Full per-zone evaluation at the current state.
   function evaluate(i, rOverride) {
     const zone = ZONES[i];
     const r = rOverride === undefined ? state.r[i] : rOverride;
     const H = transmit(zone, r, state.freq, state.gMul, state.etaMul);
-    // Expectation: the same zone with no restriction and nominal properties.
     const Hhat = transmit(zone, 0, state.freq, 1, 1);
     const pi = (H * H + PI_FLOOR) / (1 + PI_FLOOR);
     const eps = Hhat - H;
     const F = 0.5 * pi * eps * eps - 0.5 * Math.log(pi);
-    // Fidelity: how much of the unrestricted expectation survives. This is the
-    // quantity the visualisation encodes, because it isolates the effect of
-    // restriction from the zone's intrinsic bandwidth.
     const fidelity = Hhat > 0 ? Math.min(1, H / Hhat) : 0;
     return { zone, r, H, Hhat, fidelity, pi, eps, xi: pi * eps, F, mpa: Math.round(r * 8) };
   }
 
-  // Numerical gradient of free energy with respect to restriction.
   function freeEnergyGradient(i) {
     const h = 0.01;
     const lo = Math.max(0, state.r[i] - h);
@@ -584,13 +447,11 @@ const description =
     return (evaluate(i, hi).F - evaluate(i, lo).F) / (hi - lo);
   }
 
-  // Grade in [0,1] -> colour. Teal when signal survives, amber when it does not.
   const gradeColor = (v, l = 42) => {
     const g = Math.max(0, Math.min(1, v));
     return `hsl(${Math.round(25 + 160 * g)} ${Math.round(72 - 12 * g)}% ${l}%)`;
   };
 
-  // ---- 4. DOM references ---------------------------------------------------
   const $ = (id) => document.getElementById(id);
   const netSvg = $('netSvg');
   const edgeLayer = $('edgeLayer');
@@ -599,21 +460,20 @@ const description =
   const respSvg = $('respSvg');
   const zoneSelect = $('zoneSelect');
   const NS = 'http://www.w3.org/2000/svg';
+
   const el = (tag, attrs) => {
     const n = document.createElementNS(NS, tag);
     for (const k in attrs) n.setAttribute(k, attrs[k]);
     return n;
   };
-  const reduceMotion =
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- 5. Build static scaffolding ----------------------------------------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const edgeEls = [];
   const nodeEls = [];
   const pulseEls = [];
 
   function buildNetwork() {
-    // Edges first so nodes render above them.
     EDGES.forEach(([a, b]) => {
       const A = ZONES[a - 1], B = ZONES[b - 1];
       const line = el('line', {
@@ -628,7 +488,6 @@ const description =
       pulseEls.push({ dot, A, B, t: Math.random(), a: a - 1, b: b - 1 });
     });
 
-    // Nodes: each is a focusable group acting as a button.
     ZONES.forEach((z, i) => {
       const g = el('g', {
         tabindex: '0', role: 'button', class: 'cursor-pointer outline-none',
@@ -653,7 +512,6 @@ const description =
         'font-size': '9.5', fill: '#475569', 'pointer-events': 'none'
       });
       cap.textContent = z.short;
-
       g.append(halo, core, num, cap);
       g.addEventListener('click', () => selectZone(i));
       g.addEventListener('keydown', (e) => {
@@ -674,22 +532,17 @@ const description =
     zoneSelect.value = String(state.selected);
   }
 
-  // ---- 6. Frequency-response plot -----------------------------------------
   const P = { l: 40, r: 10, t: 12, b: 30, w: 340, h: 170 };
   const plotW = P.w - P.l - P.r;
   const plotH = P.h - P.t - P.b;
-  const fx = (f) =>
-    P.l + (Math.log(f / F_MIN) / Math.log(F_MAX / F_MIN)) * plotW;
+  const fx = (f) => P.l + (Math.log(f / F_MIN) / Math.log(F_MAX / F_MIN)) * plotW;
   const fy = (v) => P.t + (1 - v) * plotH;
 
   function drawResponse() {
-    respSvg.replaceChildren(
-      ...Array.from(respSvg.querySelectorAll('title, desc'))
-    );
+    respSvg.replaceChildren(...Array.from(respSvg.querySelectorAll('title, desc')));
     const zone = ZONES[state.selected];
     const r = state.r[state.selected];
 
-    // Axes and gridlines.
     [0.1, 1, 10, 100].forEach((f) => {
       respSvg.appendChild(el('line', {
         x1: fx(f), y1: P.t, x2: fx(f), y2: P.t + plotH,
@@ -702,6 +555,7 @@ const description =
       t.textContent = String(f);
       respSvg.appendChild(t);
     });
+
     [0, 0.5, 1].forEach((v) => {
       respSvg.appendChild(el('line', {
         x1: P.l, y1: fy(v), x2: P.l + plotW, y2: fy(v),
@@ -714,6 +568,7 @@ const description =
       t.textContent = v.toFixed(1);
       respSvg.appendChild(t);
     });
+
     const xlab = el('text', {
       x: P.l + plotW / 2, y: P.h - 2, 'text-anchor': 'middle',
       'font-size': '9', fill: '#64748b'
@@ -721,7 +576,6 @@ const description =
     xlab.textContent = 'Event frequency (Hz, log scale)';
     respSvg.appendChild(xlab);
 
-    // Curve generator over the log-frequency sweep.
     const path = (rr, gM, eM) => {
       let d = '';
       for (let k = 0; k <= 120; k++) {
@@ -742,7 +596,6 @@ const description =
       'stroke-width': 2.5
     }));
 
-    // Probe-frequency marker.
     respSvg.appendChild(el('line', {
       x1: fx(state.freq), y1: P.t, x2: fx(state.freq), y2: P.t + plotH,
       stroke: '#0f172a', 'stroke-width': 1, 'stroke-dasharray': '2 2', opacity: 0.55
@@ -753,12 +606,10 @@ const description =
     }));
   }
 
-  // ---- 7. Interpretation copy ---------------------------------------------
   function interpretation(rows, sel, totalMPA, meanPi) {
     const z = ZONES[state.selected];
     const s = rows[state.selected];
     const lossPct = Math.max(0, (1 - s.H / s.Hhat) * 100);
-
     const band =
       totalMPA <= 12 ? 'minimal' :
       totalMPA <= 26 ? 'mild' :
@@ -769,36 +620,22 @@ const description =
       `${z.short.toLowerCase()} zone transmits ${(s.H).toFixed(3)} of the ` +
       `signal an unrestricted equivalent would transmit ` +
       `(${s.Hhat.toFixed(3)}), a loss of ${lossPct.toFixed(0)} per cent. ` +
-      `Effective precision in this channel is ${s.pi.toFixed(3)}, meaning the ` +
-      `nervous system has ${s.pi > 0.6 ? 'a reliable' : s.pi > 0.25 ? 'a partially degraded' : 'a weak and noisy'} ` +
-      `estimate of what is happening mechanically there.`;
+      `Effective precision in this channel is ${s.pi.toFixed(3)}.`;
 
     const p2 =
       `Because the internal model expects the unrestricted response, the ` +
       `shortfall appears as a prediction error of ${Math.abs(s.eps).toFixed(3)}. ` +
-      (s.pi < 0.3
-        ? `Precision is low enough that this error is weighted down rather than ` +
-          `corrected, which in predictive-coding terms tends to produce reliance ` +
-          `on prior expectation over incoming evidence.`
-        : `Precision is high enough that this error is weighted meaningfully and ` +
-          `would be expected to drive correction.`) +
-      ` The gradient of free energy with respect to restriction is ` +
-      `${freeEnergyGradient(state.selected).toFixed(2)}; a larger magnitude ` +
-      `indicates that free energy in this zone is more responsive to a change ` +
-      `in mechanical restriction.`;
+      `The gradient of free energy with respect to restriction is ` +
+      `${freeEnergyGradient(state.selected).toFixed(2)}.`;
 
     const p3 =
       `Across all eight zones the composite MPA–Zone score is ${totalMPA} of 64, ` +
       `a ${band} restriction burden, with mean effective precision ` +
-      `${meanPi.toFixed(3)}. In the hypothesis under test, a profile of this ` +
-      `kind would predict that fast events are affected disproportionately: ` +
-      `slow, breath-scale signals still get through while rapid ones are ` +
-      `filtered out before they reach central processing.`;
+      `${meanPi.toFixed(3)}.`;
 
     return [p1, p2, p3];
   }
 
-  // ---- 8. Render pass ------------------------------------------------------
   function render() {
     const rows = ZONES.map((_, i) => evaluate(i));
     const totalMPA = rows.reduce((a, b) => a + b.mpa, 0);
@@ -806,8 +643,6 @@ const description =
     const meanFid = rows.reduce((a, b) => a + b.fidelity, 0) / rows.length;
     const totalF = rows.reduce((a, b) => a + b.F, 0);
 
-    // Nodes: colour and radius encode retained fidelity relative to the
-    // unrestricted expectation, isolating the effect of restriction.
     rows.forEach((s, i) => {
       const n = nodeEls[i];
       n.core.setAttribute('fill', gradeColor(s.fidelity));
@@ -815,15 +650,8 @@ const description =
       n.halo.setAttribute('opacity', i === state.selected ? '1' : '0');
       n.cap.setAttribute('fill', i === state.selected ? '#0f172a' : '#64748b');
       n.cap.setAttribute('font-weight', i === state.selected ? '600' : '400');
-      n.g.setAttribute(
-        'aria-label',
-        `Zone ${ZONES[i].id}: ${ZONES[i].label}. Restriction ${s.r.toFixed(2)}, ` +
-        `MPA ${s.mpa} of 8, retained fidelity ${(s.fidelity * 100).toFixed(0)} per cent, ` +
-        `effective precision ${s.pi.toFixed(3)}.`
-      );
     });
 
-    // Edges: thickness grows with restriction, colour with retained fidelity.
     edgeEls.forEach((e) => {
       const rr = (rows[e.a].r + rows[e.b].r) / 2;
       const fid = Math.min(rows[e.a].fidelity, rows[e.b].fidelity);
@@ -832,7 +660,6 @@ const description =
       e.line.setAttribute('opacity', String(0.45 + 0.5 * rr));
     });
 
-    // Selected-zone readouts.
     const s = rows[state.selected];
     $('mFid').textContent = `${(s.fidelity * 100).toFixed(0)}%`;
     $('mH').textContent = s.H.toFixed(3);
@@ -842,10 +669,8 @@ const description =
     $('mF').textContent = s.F.toFixed(3);
     $('mGrad').textContent = freeEnergyGradient(state.selected).toFixed(2);
     $('zoneNote').textContent =
-      `${ZONES[state.selected].note} Characteristic frequency ` +
-      `${ZONES[state.selected].fc} Hz.`;
+      `${ZONES[state.selected].note} Characteristic frequency ${ZONES[state.selected].fc} Hz.`;
 
-    // Systemic readouts.
     $('mpaScore').textContent = `${totalMPA} / 64`;
     const bar = $('mpaBar');
     bar.style.width = `${(totalMPA / 64) * 100}%`;
@@ -854,7 +679,6 @@ const description =
     $('sFid').textContent = `${(meanFid * 100).toFixed(0)}%`;
     $('sF').textContent = totalF.toFixed(2);
 
-    // Data table.
     $('dataBody').innerHTML = rows
       .map(
         (x) => `<tr>
@@ -871,7 +695,6 @@ const description =
       )
       .join('');
 
-    // Interpretation panel.
     $('meaningText').innerHTML = interpretation(rows, s, totalMPA, meanPi)
       .map((p) => `<p>${p}</p>`)
       .join('');
@@ -880,10 +703,8 @@ const description =
     lastRows = rows;
   }
 
-  // ---- 9. Pulse animation --------------------------------------------------
-  // Travelling dots visualise force/signal transmission along fascial links.
-  // Restricted links carry smaller, dimmer, slower pulses.
   let lastRows = null;
+
   function animate() {
     if (!lastRows) return requestAnimationFrame(animate);
     pulseEls.forEach((p) => {
@@ -898,7 +719,6 @@ const description =
     requestAnimationFrame(animate);
   }
 
-  // ---- 10. Event wiring ----------------------------------------------------
   function selectZone(i) {
     state.selected = i;
     zoneSelect.value = String(i);
@@ -925,7 +745,7 @@ const description =
     $('restrictionSlider').addEventListener('input', (e) => {
       state.scale = Number(e.target.value) / 100;
       $('restrictionOut').textContent = `${e.target.value}%`;
-      applyPreset();          // note: this intentionally clears per-zone edits
+      applyPreset();
       syncZoneSlider();
       render();
     });
@@ -973,7 +793,6 @@ const description =
     });
   }
 
-  // ---- 11. Boot ------------------------------------------------------------
   buildNetwork();
   buildZoneSelect();
   wire();
@@ -985,8 +804,6 @@ const description =
 </script>
 
 <style>
-  /* Visible focus ring for the SVG zone buttons, which Tailwind cannot target
-     through the ring utilities on SVG elements. */
   #netSvg g[role='button']:focus-visible circle:nth-child(2) {
     stroke: #0f172a;
     stroke-width: 3.5;
