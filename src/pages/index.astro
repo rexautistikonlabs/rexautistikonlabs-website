@@ -1,17 +1,86 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+  <!-- Hero -->
+  <section class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-6">
+        Rex Autistikōn Labs
+      </h1>
+      <p class="text-xl text-slate-600 max-w-3xl mb-4">
+        Independent research into the biomechanics of sensory and interoceptive signaling
+      </p>
+      <p class="text-lg text-slate-600 max-w-3xl mb-10 leading-relaxed">
+        We investigate how chronic mechanical restriction in sensor-rich myofascial and visceral interfaces may distort afferent information reaching the central nervous system in neurodevelopmental conditions.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="/research" class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-md hover:bg-teal-800 transition-colors">
+          Explore the Research
+        </a>
+        <a href="/model" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-md hover:bg-slate-50 transition-colors">
+          View the Interactive Model
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.20737319" target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-md hover:bg-slate-50 transition-colors">
+          Read the Primary Paper
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Our Mission</h2>
+      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl">
+        Rex Autistikōn Labs, operating under the Rex Autistikon Research Foundation, Inc., is an independent 501(c)(3) research initiative dedicated to advancing a rigorous, multi-scale understanding of peripheral mechanical contributions to sensory, motor, and regulatory differences observed in autism spectrum disorder and related conditions.
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl mt-4">
+        We integrate biotensegrity theory, fascia as a sensory organ, mechanotransduction, viscoelastic signal filtering, and predictive coding to generate testable hypotheses and mechanism-based research directions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Hypothesis -->
+  <section class="py-16 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Core Hypothesis</h2>
+      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl">
+        Chronic mechanical restriction within eight high-density, sensor-rich anatomical zones can alter force transmission and afferent signaling through neural, fluid-mediated, and mechanotransductive pathways. These zones function as high-leverage information gateways due to their exceptional mechanoreceptor density and relatively direct connectivity to brainstem and autonomic centers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Model Teaser -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-4">Interactive Multi-Scale Model</h2>
+      <p class="text-lg text-slate-600 mb-6 max-w-3xl">
+        A dynamic biotensegrity simulation exploring tension and compression under normal and restricted conditions — from systemic networks to mechanoreceptor response.
+      </p>
+      <p class="text-sm font-medium text-teal-700 mb-8">Status: Phase 1 prototype in active development</p>
+      <a href="/model" class="text-teal-700 font-medium hover:text-teal-800">
+        Learn more about the model →
+      </a>
+    </div>
+  </section>
+
+  <!-- Publication -->
+  <section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Primary Monograph</h2>
+      <div class="bg-white border border-slate-200 rounded-lg p-6 max-w-4xl">
+        <h3 class="text-lg font-medium text-slate-900 mb-2">
+          Sensor-Rich Myofascial and Visceral Interfaces as Modulators of Afferent Signaling in Neurodevelopmental Conditions: A Biotensegrity-Informed Hypothesis
+        </h3>
+        <p class="text-slate-600 mb-4">
+          Hai Young Kim · Rex Autistikon Research Foundation · 2026 (v2.1)
+        </p>
+        <a href="https://doi.org/10.5281/zenodo.20737319" target="_blank" rel="noopener" class="text-teal-700 font-medium hover:text-teal-800">
+          DOI: 10.5281/zenodo.20737319 →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

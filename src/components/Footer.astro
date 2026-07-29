@@ -1,0 +1,67 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      
+      <!-- Lab Identity -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-3">
+          Rex Autistikōn Labs
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-400">
+          Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+          Quick Links
+        </h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/research" class="hover:text-white transition-colors">Research</a></li>
+          <li><a href="/model" class="hover:text-white transition-colors">Interactive Model</a></li>
+          <li><a href="/publications" class="hover:text-white transition-colors">Publications</a></li>
+          <li><a href="/support" class="hover:text-white transition-colors">Support the Research</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal & Contact -->
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+          Organization
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li>Rex Autistikon Research Foundation, Inc.</li>
+          <li>501(c)(3) Public Charity</li>
+          <li>EIN: 42-3220323</li>
+          <li class="pt-2">
+            1485 Fouraker Rd #2402<br />
+            Jacksonville, FL 32221<br />
+            United States
+          </li>
+          <li class="pt-2">
+            <a href="mailto:info@rexautistikonlabs.org" class="hover:text-white transition-colors">
+              info@rexautistikonlabs.org
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+      <p>
+        © {currentYear} Rex Autistikon Research Foundation, Inc. All rights reserved.
+      </p>
+      <p>
+        Tax-deductible contributions are welcome.
+      </p>
+    </div>
+  </div>
+</footer>
