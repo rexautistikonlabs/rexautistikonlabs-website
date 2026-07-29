@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Newsletter" description="Subscribe to updates from Rex Autistikōn Labs.">
+  <section class="py-16">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Newsletter</h1>
+
+      <p class="text-lg text-slate-600 leading-relaxed mb-10">
+        Receive occasional updates on research progress, new open-access publications, developments in the interactive biotensegrity model, and opportunities for collaboration.
+      </p>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-8">
+        <h2 class="text-xl font-semibold text-slate-900 mb-3">Stay Informed</h2>
+        <p class="text-slate-600 mb-6">
+          We send low-frequency, high-signal updates. No spam.
+        </p>
+
+        <a 
+          href="https://substack.com/@rexautistikonlabs" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center px-8 py-4 bg-teal-700 text-white text-lg font-medium rounded-lg hover:bg-teal-800 transition-colors"
+        >
+          Subscribe on Substack
+        </a>
+      </div>
+
+      <p class="text-sm text-slate-500">
+        You can unsubscribe at any time. We respect your inbox.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
