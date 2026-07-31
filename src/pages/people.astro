@@ -2,22 +2,61 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="People" description="People behind Rex Autistikōn Labs.">
+<BaseLayout title="People" description="People and collaboration interests at Rex Autistikōn Labs.">
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">People</h1>
 
+      <!-- Founder -->
       <div class="border border-slate-200 rounded-xl p-8 mb-10">
         <h2 class="text-xl font-semibold text-slate-900 mb-1">Hai Young Kim</h2>
         <p class="text-teal-700 font-medium mb-4">Founder & Independent Researcher</p>
         <p class="text-slate-600 leading-relaxed">
-          Hai Young Kim leads the theoretical and computational work of Rex Autistikōn Labs. His research focuses on the biomechanics of sensory and interoceptive signaling, with particular attention to sensor-rich myofascial and visceral interfaces in neurodevelopmental conditions.
+          Hai Young Kim leads the theoretical and computational work of Rex Autistikōn Labs. 
+          His research focuses on the biomechanics of sensory and interoceptive signaling, 
+          with particular attention to sensor-rich myofascial and visceral interfaces in 
+          neurodevelopmental conditions.
         </p>
       </div>
 
-      <div class="border border-dashed border-slate-300 rounded-xl p-8 text-center">
-        <p class="text-slate-500 mb-2">Collaborators & Advisors</p>
-        <p class="text-sm text-slate-400">This section will expand as formal collaborations are established.</p>
+      <!-- Collaboration interests -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-semibold text-slate-900 mb-4">Research interests we welcome collaboration on</h2>
+        <ul class="space-y-3 text-lg text-slate-600">
+          <li class="flex gap-3">
+            <span class="text-teal-700 font-medium">•</span>
+            <span>Shear-wave elastography of the eight sensor-rich zones</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-teal-700 font-medium">•</span>
+            <span>Interoceptive accuracy tasks and heartbeat-evoked potentials</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-teal-700 font-medium">•</span>
+            <span>Computational modelling of viscoelastic signal filtering and predictive coding</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-teal-700 font-medium">•</span>
+            <span>Connective tissue architecture and mechanoreceptor density in neurodevelopmental conditions</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-teal-700 font-medium">•</span>
+            <span>Open experimental protocol development and data sharing</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Advisory / status -->
+      <div class="border border-dashed border-slate-300 rounded-xl p-8 bg-slate-50">
+        <h2 class="text-lg font-semibold text-slate-900 mb-2">Collaborators & Advisors</h2>
+        <p class="text-slate-600 mb-4">
+          Formal collaborations and advisory relationships are under development. 
+          We welcome conversations with researchers, clinicians, and methodologists 
+          whose work intersects with the questions above.
+        </p>
+        <a href="/contact" class="text-teal-700 font-medium hover:text-teal-800">
+          Contact us about collaboration →
+        </a>
       </div>
     </div>
   </section>
