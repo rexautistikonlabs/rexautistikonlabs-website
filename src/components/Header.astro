@@ -1,16 +1,20 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const navItems = [
+const primaryItems = [
   { href: "/", label: "Home" },
   { href: "/research", label: "Research" },
-  { href: "/roadmap", label: "Roadmap" },
   { href: "/model", label: "Interactive Model" },
   { href: "/publications", label: "Publications" },
+];
+
+const moreItems = [
+  { href: "/roadmap", label: "Roadmap" },
   { href: "/education", label: "Education" },
   { href: "/people", label: "People" },
   { href: "/support", label: "Support" },
   { href: "/newsletter", label: "Newsletter" },
+  { href: "/sponsors", label: "Sponsors" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -19,7 +23,7 @@ const navItems = [
 <header class="border-b border-slate-200 bg-white sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      
+
       <!-- Logo + Name -->
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center gap-3">
@@ -40,8 +44,8 @@ const navItems = [
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center space-x-6">
-        {navItems.map((item) => (
+      <nav class="hidden lg:flex items-center gap-6">
+        {primaryItems.map((item) => (
           <a
             href={item.href}
             class={`text-sm font-medium transition-colors ${
@@ -53,6 +57,42 @@ const navItems = [
             {item.label}
           </a>
         ))}
+
+        <!-- More dropdown -->
+        <div class="relative" id="more-menu">
+          <button
+            id="more-button"
+            type="button"
+            class="inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            More
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+
+          <div
+            id="more-dropdown"
+            class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50"
+          >
+            <div class="py-1">
+              {moreItems.map((item) => (
+                <a
+                  href={item.href}
+                  class={`block px-4 py-2 text-sm ${
+                    currentPath === item.href
+                      ? "bg-teal-50 text-teal-800"
+                      : "text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </nav>
 
       <!-- Mobile menu button -->
@@ -76,7 +116,7 @@ const navItems = [
   <!-- Mobile Navigation -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white">
     <div class="px-4 pt-2 pb-4 space-y-1">
-      {navItems.map((item) => (
+      {[...primaryItems, ...moreItems].map((item) => (
         <a
           href={item.href}
           class={`block px-3 py-2 rounded-md text-base font-medium ${
@@ -93,12 +133,30 @@ const navItems = [
 </header>
 
 <script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
+  // Desktop "More" dropdown
+  const moreButton = document.getElementById('more-button');
+  const moreDropdown = document.getElementById('more-dropdown');
 
-  button?.addEventListener('click', () => {
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!expanded));
-    menu?.classList.toggle('hidden');
+  moreButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = moreButton.getAttribute('aria-expanded') === 'true';
+    moreButton.setAttribute('aria-expanded', String(!isOpen));
+    moreDropdown?.classList.toggle('hidden');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', () => {
+    moreButton?.setAttribute('aria-expanded', 'false');
+    moreDropdown?.classList.add('hidden');
+  });
+
+  // Mobile menu toggle
+  const mobileButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileButton?.addEventListener('click', () => {
+    const expanded = mobileButton.getAttribute('aria-expanded') === 'true';
+    mobileButton.setAttribute('aria-expanded', String(!expanded));
+    mobileMenu?.classList.toggle('hidden');
   });
 </script>
