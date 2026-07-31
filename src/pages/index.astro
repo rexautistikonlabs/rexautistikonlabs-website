@@ -2,28 +2,32 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Home">
+<BaseLayout 
+  title="Rex Autistikōn Labs" 
+  description="Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions."
+>
   <!-- Hero -->
-  <section class="bg-slate-50 border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <section class="py-16 sm:py-20 border-b border-slate-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-6">
         Rex Autistikōn Labs
       </h1>
-      <p class="text-xl text-slate-600 max-w-3xl mb-4">
+      <p class="text-xl sm:text-2xl text-slate-600 mb-4 max-w-3xl mx-auto">
         Independent research into the biomechanics of sensory and interoceptive signaling
       </p>
-      <p class="text-lg text-slate-600 max-w-3xl mb-10 leading-relaxed">
-        We investigate how chronic mechanical restriction in sensor-rich myofascial and visceral interfaces may distort afferent information reaching the central nervous system in neurodevelopmental conditions.
+      <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-10">
+        We investigate how chronic mechanical restriction in sensor-rich myofascial and visceral interfaces may alter afferent information reaching the central nervous system in neurodevelopmental conditions.
       </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="/research" class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-md hover:bg-teal-800 transition-colors">
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/research" class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors">
           Explore the Research
         </a>
-        <a href="/model" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-md hover:bg-slate-50 transition-colors">
-          View the Interactive Model
+        <a href="/model" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+          Interactive Model
         </a>
-        <a href="https://doi.org/10.5281/zenodo.20737319" target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-md hover:bg-slate-50 transition-colors">
-          Read the Primary Paper
+        <a href="/publications" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+          Publications
         </a>
       </div>
     </div>
@@ -31,56 +35,67 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <!-- Mission -->
   <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl font-semibold text-slate-900 mb-6">Our Mission</h2>
-      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl">
+      <p class="text-lg text-slate-600 leading-relaxed mb-6">
         Rex Autistikōn Labs, operating under the Rex Autistikon Research Foundation, Inc., is an independent 501(c)(3) research initiative dedicated to advancing a rigorous, multi-scale understanding of peripheral mechanical contributions to sensory, motor, and regulatory differences observed in autism spectrum disorder and related conditions.
       </p>
-      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl mt-4">
+      <p class="text-lg text-slate-600 leading-relaxed">
         We integrate biotensegrity theory, fascia as a sensory organ, mechanotransduction, viscoelastic signal filtering, and predictive coding to generate testable hypotheses and mechanism-based research directions.
       </p>
     </div>
   </section>
 
-  <!-- Core Hypothesis -->
-  <section class="py-16 bg-slate-50 border-y border-slate-200">
+  <!-- Key areas -->
+  <section class="py-12 bg-slate-50 border-y border-slate-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Core Hypothesis</h2>
-      <p class="text-lg text-slate-600 leading-relaxed max-w-4xl">
-        Chronic mechanical restriction within eight high-density, sensor-rich anatomical zones can alter force transmission and afferent signaling through neural, fluid-mediated, and mechanotransductive pathways. These zones function as high-leverage information gateways due to their exceptional mechanoreceptor density and relatively direct connectivity to brainstem and autonomic centers.
-      </p>
-    </div>
-  </section>
-
-  <!-- Model Teaser -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-semibold text-slate-900 mb-4">Interactive Multi-Scale Model</h2>
-      <p class="text-lg text-slate-600 mb-6 max-w-3xl">
-        A dynamic biotensegrity simulation exploring tension and compression under normal and restricted conditions — from systemic networks to mechanoreceptor response.
-      </p>
-      <p class="text-sm font-medium text-teal-700 mb-8">Status: Phase 1 prototype in active development</p>
-      <a href="/model" class="text-teal-700 font-medium hover:text-teal-800">
-        Learn more about the model →
-      </a>
-    </div>
-  </section>
-
-  <!-- Publication -->
-  <section class="py-16 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Primary Monograph</h2>
-      <div class="bg-white border border-slate-200 rounded-lg p-6 max-w-4xl">
-        <h3 class="text-lg font-medium text-slate-900 mb-2">
-          Sensor-Rich Myofascial and Visceral Interfaces as Modulators of Afferent Signaling in Neurodevelopmental Conditions: A Biotensegrity-Informed Hypothesis
-        </h3>
-        <p class="text-slate-600 mb-4">
-          Hai Young Kim · Rex Autistikon Research Foundation · 2026 (v2.1)
-        </p>
-        <a href="https://doi.org/10.5281/zenodo.20737319" target="_blank" rel="noopener" class="text-teal-700 font-medium hover:text-teal-800">
-          DOI: 10.5281/zenodo.20737319 →
-        </a>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Research Framework</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            A biotensegrity-informed hypothesis centered on eight sensor-rich myofascial and visceral interfaces.
+          </p>
+          <a href="/research" class="text-teal-700 text-sm font-medium hover:text-teal-800">Read more →</a>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Interactive Model</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Explore Normal vs Neurodivergent tension dynamics and their effects on signal fidelity in real time.
+          </p>
+          <a href="/model" class="text-teal-700 text-sm font-medium hover:text-teal-800">Launch model →</a>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6">
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Open Science</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Primary theoretical work is published with open access. Collaborations and experimental validation are welcome.
+          </p>
+          <a href="/publications" class="text-teal-700 text-sm font-medium hover:text-teal-800">View publications →</a>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Current status -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">Current Focus</h2>
+      <ul class="space-y-3 text-lg text-slate-600 mb-8">
+        <li class="flex gap-3">
+          <span class="text-teal-700">•</span>
+          <span>Phase 1 Interactive Model deployed and documented</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-teal-700">•</span>
+          <span>Open-access primary monograph and collaborator handbook available</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-teal-700">•</span>
+          <span>Experimental pathways (shear-wave elastography, interoceptive markers) in planning</span>
+        </li>
+      </ul>
+      <a href="/roadmap" class="text-teal-700 font-medium hover:text-teal-800">
+        View full research roadmap →
+      </a>
     </div>
   </section>
 </BaseLayout>
