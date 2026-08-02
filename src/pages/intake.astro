@@ -1,0 +1,359 @@
+---
+// src/pages/intake.astro
+import Layout from '../layouts/Layout.astro'; // adjust path if your layout is named differently
+---
+
+<Layout title="Data Intake | Rex Autistikōn Labs">
+  <main class="intake-page">
+    <section class="hero">
+      <h1>Research Data Intake</h1>
+      <p class="subtitle">
+        Secure submission portal for sensor-rich myofascial zone measurements.<br />
+        Phase 1 Kelvin-Voigt + free-energy calculations are performed server-side.
+      </p>
+    </section>
+
+    <section class="form-section">
+      <div class="card">
+        <h2>Participant & Protocol</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="participant">Participant Pseudonym</label>
+            <input type="text" id="participant" value="anonymous" />
+          </div>
+          <div class="field">
+            <label for="collaborator">Collaborator / Lab ID</label>
+            <input type="text" id="collaborator" value="" placeholder="e.g. mayo-clinic-lab" />
+          </div>
+          <div class="field">
+            <label for="freq">Probe Frequency (Hz)</label>
+            <input type="number" id="freq" value="2.0" step="0.1" min="0.1" />
+          </div>
+          <div class="field">
+            <label for="scale">Global Scale</label>
+            <input type="number" id="scale" value="1.0" step="0.1" min="0.1" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Eight Sensor-Rich Zones</h2>
+        <p class="hint">Enter restriction ratio (r), stiffness (G), viscosity (η), and MPA score (0–8) for each zone.</p>
+
+        <div id="zones-container"></div>
+      </div>
+
+      <div class="actions">
+        <button id="submitBtn" class="btn-primary" onclick="submitCalculation()">
+          Run Calculation
+        </button>
+        <p id="status" class="status"></p>
+      </div>
+
+      <div id="results" class="card results" style="display:none;">
+        <h2>Calculation Results</h2>
+        <div class="summary" id="summary"></div>
+        <pre id="raw-output"></pre>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .intake-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    color: #475569;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+    color: #0f4c81;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+
+  .hint {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.35rem;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.15s;
+  }
+
+  .field input:focus {
+    outline: none;
+    border-color: #0f766e;
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+  }
+
+  .zone-block {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .zone-block:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .zone-title {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.85rem;
+  }
+
+  .actions {
+    text-align: center;
+    margin: 2.5rem 0;
+  }
+
+  .btn-primary {
+    background: #0f766e;
+    color: white;
+    border: none;
+    padding: 0.85rem 2.25rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #0d9488;
+  }
+
+  .btn-primary:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+  }
+
+  .status {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .status.loading { color: #1d4ed8; }
+  .status.success { color: #166534; }
+  .status.error { color: #b91c1c; }
+
+  .results h2 {
+    margin-bottom: 1rem;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .summary-item .label {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+  }
+
+  .summary-item .value {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 1.25rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+</style>
+
+<script>
+  const ZONE_NAMES = [
+    "Extraocular / Orbital",
+    "Middle-ear",
+    "Nasal",
+    "Tongue",
+    "Pharyngeal / Laryngeal",
+    "Suboccipital",
+    "Visceral fascia / Diaphragm",
+    "Pelvic floor"
+  ];
+
+  // Build zone inputs
+  const container = document.getElementById('zones-container');
+  ZONE_NAMES.forEach((name, i) => {
+    const id = i + 1;
+    container.innerHTML += `
+      <div class="zone-block">
+        <div class="zone-title">Zone ${id}: ${name}</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Restriction r</label>
+            <input type="number" id="r_${id}" value="1.0" step="0.1" min="0.5" max="3.0">
+          </div>
+          <div class="field">
+            <label>Stiffness G</label>
+            <input type="number" id="g_${id}" value="1.0" step="0.1" min="0.1">
+          </div>
+          <div class="field">
+            <label>Viscosity η</label>
+            <input type="number" id="eta_${id}" value="1.0" step="0.1" min="0.1">
+          </div>
+          <div class="field">
+            <label>MPA Score (0–8)</label>
+            <input type="number" id="mpa_${id}" value="0" min="0" max="8">
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  // IMPORTANT: Replace with your real Function URL (the one with ?code=...)
+  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
+
+  async function submitCalculation() {
+    const btn = document.getElementById('submitBtn');
+    const status = document.getElementById('status');
+    const results = document.getElementById('results');
+    const summary = document.getElementById('summary');
+    const raw = document.getElementById('raw-output');
+
+    btn.disabled = true;
+    status.className = 'status loading';
+    status.textContent = 'Running calculation on Azure…';
+    results.style.display = 'none';
+
+    const zones = ZONE_NAMES.map((name, i) => {
+      const id = i + 1;
+      return {
+        zone_id: id,
+        name: name,
+        restriction_r: parseFloat(document.getElementById(`r_${id}`).value),
+        stiffness_G: parseFloat(document.getElementById(`g_${id}`).value),
+        viscosity_eta: parseFloat(document.getElementById(`eta_${id}`).value),
+        mpa_score: parseInt(document.getElementById(`mpa_${id}`).value)
+      };
+    });
+
+    const payload = {
+      participant_pseudonym: document.getElementById('participant').value || 'anonymous',
+      collaborator_id: document.getElementById('collaborator').value || 'unknown',
+      protocol_version: '1.0',
+      global_parameters: {
+        scale: parseFloat(document.getElementById('scale').value),
+        probe_frequency_hz: parseFloat(document.getElementById('freq').value),
+        c_constant: 0.1,
+        G0: 1.0
+      },
+      zones: zones
+    };
+
+    try {
+      const res = await fetch(FUNCTION_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+      status.className = 'status success';
+      status.textContent = 'Calculation complete';
+
+      summary.innerHTML = `
+        <div class="summary-item">
+          <div class="label">Composite MPA</div>
+          <div class="value">${data.composite_mpa}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Mean Fidelity</div>
+          <div class="value">${data.mean_fidelity}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Mean π_eff</div>
+          <div class="value">${data.mean_pi_eff}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Total Free Energy</div>
+          <div class="value">${data.total_free_energy}</div>
+        </div>
+      `;
+
+      raw.textContent = JSON.stringify(data, null, 2);
+      results.style.display = 'block';
+    } catch (err) {
+      status.className = 'status error';
+      status.textContent = 'Error: ' + err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+</script>
