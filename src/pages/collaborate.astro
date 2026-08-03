@@ -153,6 +153,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
+  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
+
   const form = document.getElementById('collaborator-form');
   const status = document.getElementById('form-status');
   const btn = document.getElementById('submit-btn');
@@ -167,15 +169,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // For now we log the data. Later we will send it to a secure Azure Function or Microsoft Form.
-    console.log('Collaborator request:', data);
+    // Convert checkboxes to booleans
+    data.agree_data_security = formData.has('agree_data_security');
+    data.agree_terms = formData.has('agree_terms');
+    data.agree_citation = formData.has('agree_citation');
 
-    // Temporary success message (we will replace this with a real backend in the next step)
-    setTimeout(() => {
+    try {
+      const res = await fetch(FUNCTION_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || `HTTP ${res.status}`);
+      }
+
       status.className = 'mt-4 text-sm text-green-700';
       status.textContent = 'Request submitted successfully. You will receive a response at the institutional email provided within 3–5 business days.';
       form.reset();
+    } catch (err) {
+      status.className = 'mt-4 text-sm text-red-700';
+      status.textContent = 'Error: ' + err.message;
+    } finally {
       btn.disabled = false;
-    }, 800);
+    }
   });
 </script>
