@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Collaborator Access Request | Rex Autistikōn Labs"
+  description="Formal request form for research partners to gain access to the Rex Autistikōn Labs data intake and calculation platform."
+>
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+        Collaborator Access Request
+      </h1>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        Rex Autistikōn Labs operates a controlled research environment. 
+        Please complete this form to request access to the secure data intake and calculation platform.
+      </p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-8 sm:p-10">
+      
+      <form id="collaborator-form" class="space-y-8">
+        
+        <!-- Section 1: Personal Information -->
+        <div>
+          <h2 class="text-lg font-semibold text-slate-900 mb-5 pb-2 border-b border-slate-100">
+            1. Personal & Institutional Information
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Full Name *</label>
+              <input type="text" name="full_name" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Institutional Email *</label>
+              <input type="email" name="email" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Organization / Institution *</label>
+              <input type="text" name="organization" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Role / Title *</label>
+              <input type="text" name="role" required placeholder="e.g. Principal Investigator, Research Fellow"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+            
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Department / Lab (optional)</label>
+              <input type="text" name="department"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Research Intent -->
+        <div>
+          <h2 class="text-lg font-semibold text-slate-900 mb-5 pb-2 border-b border-slate-100">
+            2. Research Intent
+          </h2>
+          
+          <div class="space-y-5">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                Brief description of intended use of the platform *
+              </label>
+              <textarea name="intended_use" rows="4" required
+                placeholder="Describe the research question, population, and how the 8-zone model will be applied..."
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition"></textarea>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                Do you currently have IRB / Ethics Committee approval for the related study?
+              </label>
+              <select name="irb_status"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+                <option value="">Select...</option>
+                <option value="approved">Yes – Approved</option>
+                <option value="pending">Pending / Under review</option>
+                <option value="not_required">Not required (theoretical / secondary analysis)</option>
+                <option value="planning">Planning to submit</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                Preferred start date (approximate)
+              </label>
+              <input type="date" name="start_date"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Data & Compliance -->
+        <div>
+          <h2 class="text-lg font-semibold text-slate-900 mb-5 pb-2 border-b border-slate-100">
+            3. Data Handling & Compliance
+          </h2>
+          
+          <div class="space-y-4">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="agree_data_security" required class="mt-1 h-4 w-4 text-teal-700 border-slate-300 rounded focus:ring-teal-500">
+              <span class="text-sm text-slate-700">
+                I understand that all submitted data will be stored in a secure Azure environment controlled by Rex Autistikon Research Foundation and will not be shared outside approved research collaborators without explicit written agreement.
+              </span>
+            </label>
+            
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="agree_terms" required class="mt-1 h-4 w-4 text-teal-700 border-slate-300 rounded focus:ring-teal-500">
+              <span class="text-sm text-slate-700">
+                I agree to use the platform solely for legitimate scientific research purposes consistent with the mission of Rex Autistikōn Labs.
+              </span>
+            </label>
+            
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="agree_citation" class="mt-1 h-4 w-4 text-teal-700 border-slate-300 rounded focus:ring-teal-500">
+              <span class="text-sm text-slate-700">
+                I agree to cite Rex Autistikōn Labs / the underlying theoretical framework in any resulting publications or presentations.
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-4">
+          <button type="submit" id="submit-btn"
+            class="w-full sm:w-auto px-8 py-3.5 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
+            Submit Access Request
+          </button>
+          <p id="form-status" class="mt-4 text-sm"></p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Note -->
+    <p class="mt-8 text-center text-sm text-slate-500">
+      After submission, requests are reviewed by the Rex Autistikōn Labs team. 
+      Approved collaborators will receive secure login credentials and onboarding instructions via the institutional email provided.
+    </p>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('collaborator-form');
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('submit-btn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    btn.disabled = true;
+    status.className = 'mt-4 text-sm text-blue-700';
+    status.textContent = 'Submitting request...';
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // For now we log the data. Later we will send it to a secure Azure Function or Microsoft Form.
+    console.log('Collaborator request:', data);
+
+    // Temporary success message (we will replace this with a real backend in the next step)
+    setTimeout(() => {
+      status.className = 'mt-4 text-sm text-green-700';
+      status.textContent = 'Request submitted successfully. You will receive a response at the institutional email provided within 3–5 business days.';
+      form.reset();
+      btn.disabled = false;
+    }, 800);
+  });
+</script>
