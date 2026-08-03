@@ -9,6 +9,10 @@
       "allowedRoles": ["authenticated"]
     },
     {
+      "route": "/admin/*",
+      "allowedRoles": ["authenticated"]
+    },
+    {
       "route": "/*",
       "allowedRoles": ["anonymous", "authenticated"]
     }
