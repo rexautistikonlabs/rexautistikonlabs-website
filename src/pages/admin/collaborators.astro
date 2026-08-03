@@ -204,7 +204,8 @@ import Layout from '../../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  const FUNCTION_KEY = "IbE0tv8ox0ux48tVZGZ3A8y3LlWyfP0SF2ONsty8Wk1iAzFuSZgiiQ==";
+  const LIST_KEY = "IbE0tv8ox0ux48tVZGZ3A8y3LlWyfP0SF2ONsty8Wk1iAzFuSZgiiQ==";
+  const UPDATE_KEY = "C0FJKBRpVi3gVMLSi0S-YwO7kvBo6Ml3yd2V6msvs0r1AzFuUr2HGw==";
   const BASE_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api";
 
   async function loadRequests() {
@@ -221,7 +222,7 @@ import Layout from '../../layouts/BaseLayout.astro';
     statusMsg.style.color = '#64748b';
 
     try {
-      const res = await fetch(`${BASE_URL}/list-requests?code=${FUNCTION_KEY}`);
+      const res = await fetch(`${BASE_URL}/list-requests?code=${LIST_KEY}`);
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
@@ -268,7 +269,7 @@ import Layout from '../../layouts/BaseLayout.astro';
     if (!confirm(`Are you sure you want to mark this request as ${newStatus}?`)) return;
 
     try {
-      const res = await fetch(`${BASE_URL}/update-request?code=${FUNCTION_KEY}`, {
+      const res = await fetch(`${BASE_URL}/update-request?code=${UPDATE_KEY}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: newStatus })
