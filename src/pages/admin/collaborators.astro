@@ -1,0 +1,292 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+---
+
+<Layout title="Admin – Collaborator Requests | Rex Autistikōn Labs">
+  <main class="admin-page">
+    <section class="hero">
+      <h1>Collaborator Access Requests</h1>
+      <p class="subtitle">
+        Review and manage research partner applications.<br />
+        Only authenticated foundation members can access this page.
+      </p>
+    </section>
+
+    <section class="admin-section">
+      <div class="card">
+        <div class="toolbar">
+          <button id="refreshBtn" class="btn-secondary">Refresh Requests</button>
+          <span id="statusMsg" class="status-msg"></span>
+        </div>
+
+        <div id="loading" class="loading">Loading requests…</div>
+        <div id="empty" class="empty" style="display:none;">No requests found.</div>
+
+        <div id="table-wrapper" style="display:none; overflow-x:auto;">
+          <table id="requests-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Organization</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>IRB</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="requests-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .admin-page {
+    min-height: 80vh;
+    background: #f8fafc;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .admin-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 1.75rem;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-secondary {
+    background: #f1f5f9;
+    color: #0f766e;
+    border: 1px solid #cbd5e1;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-secondary:hover {
+    background: #e2e8f0;
+  }
+
+  .status-msg {
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .loading, .empty {
+    text-align: center;
+    padding: 3rem;
+    color: #64748b;
+    font-size: 1.1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+
+  tr:hover td {
+    background: #f8fafc;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .status-pending {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .status-approved {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .status-denied {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .btn-approve, .btn-deny {
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-right: 0.4rem;
+  }
+
+  .btn-approve {
+    background: #10b981;
+    color: white;
+  }
+
+  .btn-approve:hover {
+    background: #059669;
+  }
+
+  .btn-deny {
+    background: #ef4444;
+    color: white;
+  }
+
+  .btn-deny:hover {
+    background: #dc2626;
+  }
+
+  .btn-approve:disabled, .btn-deny:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
+
+<script>
+  // Use the same Function key you already have
+  const FUNCTION_KEY = "MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFupAmusg==";
+  const BASE_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api";
+
+  async function loadRequests() {
+    const loading = document.getElementById('loading');
+    const empty = document.getElementById('empty');
+    const wrapper = document.getElementById('table-wrapper');
+    const tbody = document.getElementById('requests-body');
+    const statusMsg = document.getElementById('statusMsg');
+
+    loading.style.display = 'block';
+    empty.style.display = 'none';
+    wrapper.style.display = 'none';
+    statusMsg.textContent = '';
+    statusMsg.style.color = '#64748b';
+
+    try {
+      const res = await fetch(`${BASE_URL}/list-requests?code=${FUNCTION_KEY}`);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+      loading.style.display = 'none';
+
+      if (!data.requests || data.requests.length === 0) {
+        empty.style.display = 'block';
+        return;
+      }
+
+      tbody.innerHTML = data.requests.map(r => {
+        const date = r.submitted_utc ? new Date(r.submitted_utc).toLocaleString() : '—';
+        const statusClass = `status-${r.status || 'pending'}`;
+        const actions = (r.status === 'pending')
+          ? `<button class="btn-approve" onclick="updateStatus('${r.id}', 'approved')">Approve</button>
+             <button class="btn-deny" onclick="updateStatus('${r.id}', 'denied')">Deny</button>`
+          : '—';
+
+        return `
+          <tr data-id="${r.id}">
+            <td>${date}</td>
+            <td>${r.full_name || '—'}</td>
+            <td>${r.organization || '—'}</td>
+            <td>${r.role || '—'}</td>
+            <td><a href="mailto:${r.email}">${r.email || '—'}</a></td>
+            <td>${r.irb_status || '—'}</td>
+            <td><span class="status-badge ${statusClass}">${r.status || 'pending'}</span></td>
+            <td>${actions}</td>
+          </tr>
+        `;
+      }).join('');
+
+      wrapper.style.display = 'block';
+      statusMsg.textContent = `${data.requests.length} request(s) loaded`;
+    } catch (err) {
+      loading.style.display = 'none';
+      statusMsg.textContent = 'Error loading requests: ' + err.message;
+      statusMsg.style.color = '#dc2626';
+    }
+  }
+
+  window.updateStatus = async function(id, newStatus) {
+    if (!confirm(`Are you sure you want to mark this request as ${newStatus}?`)) return;
+
+    try {
+      const res = await fetch(`${BASE_URL}/update-request?code=${FUNCTION_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status: newStatus })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Update failed');
+
+      // Reload the table
+      loadRequests();
+    } catch (err) {
+      alert('Error updating status: ' + err.message);
+    }
+  };
+
+  document.getElementById('refreshBtn')?.addEventListener('click', loadRequests);
+
+  // Load on page open
+  loadRequests();
+</script>
