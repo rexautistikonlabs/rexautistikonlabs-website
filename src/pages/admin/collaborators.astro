@@ -204,8 +204,7 @@ import Layout from '../../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  // Use the same Function key you already have
-  const FUNCTION_KEY = "MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFupAmusg==";
+  const FUNCTION_KEY = "IbE0tv8ox0ux48tVZGZ3A8y3LlWyfP0SF2ONsty8Wk1iAzFuSZgiiQ==";
   const BASE_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api";
 
   async function loadRequests() {
@@ -278,7 +277,6 @@ import Layout from '../../layouts/BaseLayout.astro';
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Update failed');
 
-      // Reload the table
       loadRequests();
     } catch (err) {
       alert('Error updating status: ' + err.message);
