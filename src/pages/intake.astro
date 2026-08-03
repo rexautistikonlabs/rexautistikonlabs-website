@@ -1,6 +1,5 @@
 ---
-// src/pages/intake.astro
-import Layout from '../layouts/BaseLayout.astro'; // adjust path if your layout is named differently
+import Layout from '../layouts/BaseLayout.astro';
 ---
 
 <Layout title="Data Intake | Rex Autistikōn Labs">
@@ -247,7 +246,7 @@ import Layout from '../layouts/BaseLayout.astro'; // adjust path if your layout 
     `;
   });
 
- const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
+  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
 
   // Make the function available globally so the onclick works
   window.submitCalculation = async function() {
@@ -261,6 +260,18 @@ import Layout from '../layouts/BaseLayout.astro'; // adjust path if your layout 
     status.className = 'status loading';
     status.textContent = 'Running calculation on Azure…';
     results.style.display = 'none';
+
+    // Try to get the authentication token from Azure Static Web Apps
+    let accessToken = null;
+    try {
+      const authRes = await fetch('/.auth/me');
+      const authData = await authRes.json();
+      if (authData && authData.clientPrincipal && authData.clientPrincipal.accessToken) {
+        accessToken = authData.clientPrincipal.accessToken;
+      }
+    } catch (e) {
+      console.warn('Could not retrieve auth token', e);
+    }
 
     const zones = ZONE_NAMES.map((name, i) => {
       const id = i + 1;
@@ -288,9 +299,18 @@ import Layout from '../layouts/BaseLayout.astro'; // adjust path if your layout 
     };
 
     try {
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+
+      // Include the Microsoft access token if available
+      if (accessToken) {
+        headers['Authorization'] = `Bearer ${accessToken}`;
+      }
+
       const res = await fetch(FUNCTION_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify(payload)
       });
 
