@@ -48,10 +48,38 @@ import Layout from '../layouts/BaseLayout.astro';
         <p id="status" class="status"></p>
       </div>
 
-      <div id="results" class="card results" style="display:none;">
-        <h2>Calculation Results</h2>
-        <div class="summary" id="summary"></div>
-        <pre id="raw-output"></pre>
+      <!-- Improved Results Section -->
+      <div id="results" class="results-section" style="display:none;">
+        <div class="results-header">
+          <h2>Calculation Results</h2>
+          <button id="downloadBtn" class="btn-download" onclick="downloadJSON()">Download JSON</button>
+        </div>
+
+        <div class="summary-grid" id="summary"></div>
+
+        <div class="card">
+          <h3>Zone-Level Detail</h3>
+          <div class="table-wrapper">
+            <table id="zone-table">
+              <thead>
+                <tr>
+                  <th>Zone</th>
+                  <th>Fidelity</th>
+                  <th>π_eff</th>
+                  <th>Pred. Error</th>
+                  <th>Free Energy F</th>
+                  <th>MPA</th>
+                </tr>
+              </thead>
+              <tbody id="zone-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <details class="raw-details">
+          <summary>View Raw JSON Output</summary>
+          <pre id="raw-output"></pre>
+        </details>
       </div>
     </section>
   </main>
@@ -86,7 +114,7 @@ import Layout from '../layouts/BaseLayout.astro';
     margin-bottom: 1.75rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  .card h2 {
+  .card h2, .card h3 {
     font-size: 1.25rem;
     color: #0f4c81;
     margin-bottom: 1.25rem;
@@ -169,30 +197,98 @@ import Layout from '../layouts/BaseLayout.astro';
   .status.loading { color: #1d4ed8; }
   .status.success { color: #166534; }
   .status.error { color: #b91c1c; }
-  .results h2 {
-    margin-bottom: 1rem;
+
+  /* Results Section */
+  .results-section {
+    margin-top: 3rem;
   }
-  .summary {
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .results-header h2 {
+    font-size: 1.5rem;
+    color: #0f172a;
+    margin: 0;
+  }
+  .btn-download {
+    background: #f1f5f9;
+    color: #0f766e;
+    border: 1px solid #cbd5e1;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-download:hover {
+    background: #e2e8f0;
+  }
+  .summary-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   .summary-item {
-    background: #f8fafc;
-    padding: 1rem;
-    border-radius: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem;
     text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
   .summary-item .label {
     font-size: 0.8rem;
     color: #64748b;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
   .summary-item .value {
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #0f172a;
+  }
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  tr:hover td {
+    background: #f8fafc;
+  }
+  .raw-details {
+    margin-top: 1.5rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+  }
+  .raw-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #0f4c81;
   }
   pre {
     background: #0f172a;
@@ -202,6 +298,7 @@ import Layout from '../layouts/BaseLayout.astro';
     overflow-x: auto;
     font-size: 0.8rem;
     line-height: 1.45;
+    margin-top: 1rem;
   }
 </style>
 
@@ -248,30 +345,20 @@ import Layout from '../layouts/BaseLayout.astro';
 
   const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
 
-  // Make the function available globally so the onclick works
+  let lastResult = null;
+
   window.submitCalculation = async function() {
     const btn = document.getElementById('submitBtn');
     const status = document.getElementById('status');
     const results = document.getElementById('results');
     const summary = document.getElementById('summary');
+    const zoneBody = document.getElementById('zone-body');
     const raw = document.getElementById('raw-output');
 
     btn.disabled = true;
     status.className = 'status loading';
     status.textContent = 'Running calculation on Azure…';
     results.style.display = 'none';
-
-    // Try to get the authentication token from Azure Static Web Apps
-    let accessToken = null;
-    try {
-      const authRes = await fetch('/.auth/me');
-      const authData = await authRes.json();
-      if (authData && authData.clientPrincipal && authData.clientPrincipal.accessToken) {
-        accessToken = authData.clientPrincipal.accessToken;
-      }
-    } catch (e) {
-      console.warn('Could not retrieve auth token', e);
-    }
 
     const zones = ZONE_NAMES.map((name, i) => {
       const id = i + 1;
@@ -299,28 +386,21 @@ import Layout from '../layouts/BaseLayout.astro';
     };
 
     try {
-      const headers = {
-        'Content-Type': 'application/json'
-      };
-
-      // Include the Microsoft access token if available
-      if (accessToken) {
-        headers['Authorization'] = `Bearer ${accessToken}`;
-      }
-
       const res = await fetch(FUNCTION_URL, {
         method: 'POST',
-        headers: headers,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
 
-      status.className = 'status success';
-      status.textContent = 'Calculation complete';
+      lastResult = data;
 
+      status.className = 'status success';
+      status.textContent = 'Calculation complete and securely stored';
+
+      // Summary cards
       summary.innerHTML = `
         <div class="summary-item">
           <div class="label">Composite MPA</div>
@@ -340,6 +420,18 @@ import Layout from '../layouts/BaseLayout.astro';
         </div>
       `;
 
+      // Zone table
+      zoneBody.innerHTML = data.zone_results.map(z => `
+        <tr>
+          <td><strong>${z.zone_id}. ${z.name}</strong></td>
+          <td>${z.fidelity}</td>
+          <td>${z.pi_eff}</td>
+          <td>${z.prediction_error}</td>
+          <td>${z.free_energy_F}</td>
+          <td>${z.mpa_score}</td>
+        </tr>
+      `).join('');
+
       raw.textContent = JSON.stringify(data, null, 2);
       results.style.display = 'block';
     } catch (err) {
@@ -348,5 +440,16 @@ import Layout from '../layouts/BaseLayout.astro';
     } finally {
       btn.disabled = false;
     }
+  };
+
+  window.downloadJSON = function() {
+    if (!lastResult) return;
+    const blob = new Blob([JSON.stringify(lastResult, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `rex-calc-${lastResult.submission_id || 'result'}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 </script>
