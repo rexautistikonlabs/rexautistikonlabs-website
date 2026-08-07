@@ -151,10 +151,8 @@ import Layout from '../layouts/BaseLayout.astro';
 </style>
 
 <script is:inline>
-  // Collaborator-request Function URL + key
-  // If this fails with 401, open Azure → func-rex-calc → Functions → collaborator_request → Function Keys → copy default
   const REQUEST_URL =
-    "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request?code=MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFuAmusg==";
+    "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request?code=MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFupAmusg==";
 
   window.submitRequest = async function submitRequest() {
     const btn = document.getElementById("submitBtn");
