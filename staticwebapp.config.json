@@ -1,26 +1,39 @@
 {
   "routes": [
     {
-      "route": "/intake",
-      "allowedRoles": ["authenticated"]
-    },
-    {
-      "route": "/intake/*",
-      "allowedRoles": ["authenticated"]
-    },
-    {
       "route": "/admin/*",
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/*",
-      "allowedRoles": ["anonymous", "authenticated"]
+      "route": "/intake",
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/results",
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/.auth/login/aad",
+      "rewrite": "/.auth/login/aad"
+    },
+    {
+      "route": "/.auth/logout",
+      "rewrite": "/.auth/logout"
     }
   ],
   "responseOverrides": {
     "401": {
-      "redirect": "/.auth/login/aad",
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
       "statusCode": 302
     }
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif,svg}", "/css/*", "/js/*"]
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Content-Security-Policy": "frame-ancestors 'none'"
   }
 }
