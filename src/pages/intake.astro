@@ -114,6 +114,19 @@ import Layout from '../layouts/BaseLayout.astro';
             <input type="number" id="session" value="1" min="1">
           </div>
           <div class="field">
+            <label for="world_region">World Region *</label>
+            <select id="world_region" required>
+              <option value="">Select…</option>
+              <option value="north_america">North America</option>
+              <option value="europe">Europe</option>
+              <option value="asia_pacific">Asia-Pacific</option>
+              <option value="latin_america">Latin America</option>
+              <option value="africa">Africa</option>
+              <option value="middle_east">Middle East</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field">
             <label for="medication">Current relevant medication</label>
             <select id="medication">
               <option value="">Select…</option>
@@ -323,7 +336,6 @@ import Layout from '../layouts/BaseLayout.astro';
       participant_pseudonym: document.getElementById('participant').value || 'anonymous',
       collaborator_id: document.getElementById('collaborator').value || 'unknown',
       protocol_version: '1.1',
-      // New research fields
       group: document.getElementById('group').value,
       diagnosis_status: document.getElementById('diagnosis_status').value,
       age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
@@ -340,6 +352,7 @@ import Layout from '../layouts/BaseLayout.astro';
       },
       study_id: document.getElementById('study_id').value,
       session: parseInt(document.getElementById('session').value) || 1,
+      world_region: document.getElementById('world_region').value,
       medication: document.getElementById('medication').value,
       sensory_differences: document.getElementById('sensory_differences').checked,
       notes: document.getElementById('notes').value,
