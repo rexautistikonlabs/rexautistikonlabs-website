@@ -1,373 +1,238 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout 
-  title="Collaborator Access Request | Rex Autistikōn Labs"
-  description="Formal request form for research partners to gain access to the Rex Autistikōn Labs data intake and calculation platform."
->
-  <main class="collaborate-page">
-    
-    <!-- Hero -->
+<Layout title="Request Collaborator Access | Rex Autistikōn Labs">
+  <main class="page">
     <section class="hero">
       <h1>Collaborator Access Request</h1>
       <p class="subtitle">
-        Rex Autistikōn Labs operates a controlled research environment.<br />
-        Complete this form to request access to the secure data intake and calculation platform.
+        Institutional researchers may request access to the Data Intake and Results platforms.
+        Requests are reviewed by Rex Autistikōn Labs.
       </p>
     </section>
 
-    <!-- Short process intro -->
-    <section class="intro-section">
-      <div class="intro-card">
-        <p>
-          <strong>Process:</strong> Submit this form → Foundation review (3–5 business days) → 
-          Approved collaborators receive secure access to the <a href="/intake">Data Intake</a> portal.
-          See the full <a href="/how-to-collaborate">How to Collaborate</a> guide for details.
-        </p>
-      </div>
-    </section>
-
-    <!-- Form -->
-    <section class="form-section">
-      <div class="card">
-        <form id="collaborator-form">
-          
-          <!-- Section 1 -->
-          <div class="form-block">
-            <h2>1. Personal & Institutional Information</h2>
-            
-            <div class="grid-2">
-              <div class="field">
-                <label for="full_name">Full Name *</label>
-                <input type="text" id="full_name" name="full_name" required>
-              </div>
-              
-              <div class="field">
-                <label for="email">Institutional Email *</label>
-                <input type="email" id="email" name="email" required>
-              </div>
-              
-              <div class="field">
-                <label for="organization">Organization / Institution *</label>
-                <input type="text" id="organization" name="organization" required>
-              </div>
-              
-              <div class="field">
-                <label for="role">Role / Title *</label>
-                <input type="text" id="role" name="role" required placeholder="e.g. Principal Investigator, Research Fellow">
-              </div>
-              
-              <div class="field full">
-                <label for="department">Department / Lab (optional)</label>
-                <input type="text" id="department" name="department">
-              </div>
-            </div>
+    <section class="form-wrap">
+      <form id="accessForm" class="card" onsubmit="return false;">
+        <h2>1. Investigator</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="full_name">Full name <span class="req">*</span></label>
+            <input type="text" id="full_name" required />
           </div>
-
-          <!-- Section 2 -->
-          <div class="form-block">
-            <h2>2. Research Intent</h2>
-            
-            <div class="field">
-              <label for="intended_use">Brief description of intended use of the platform *</label>
-              <textarea id="intended_use" name="intended_use" rows="4" required
-                placeholder="Describe the research question, population, and how the 8-zone model will be applied..."></textarea>
-            </div>
-            
-            <div class="grid-2">
-              <div class="field">
-                <label for="irb_status">IRB / Ethics Committee status</label>
-                <select id="irb_status" name="irb_status">
-                  <option value="">Select...</option>
-                  <option value="approved">Yes – Approved</option>
-                  <option value="pending">Pending / Under review</option>
-                  <option value="not_required">Not required (theoretical / secondary analysis)</option>
-                  <option value="planning">Planning to submit</option>
-                </select>
-              </div>
-              
-              <div class="field">
-                <label for="start_date">Preferred start date (approximate)</label>
-                <input type="date" id="start_date" name="start_date">
-              </div>
-            </div>
+          <div class="field">
+            <label for="email">Institutional email <span class="req">*</span></label>
+            <input type="email" id="email" required />
           </div>
-
-          <!-- Section 3 -->
-          <div class="form-block">
-            <h2>3. Data Handling & Compliance</h2>
-            
-            <div class="checkboxes">
-              <label class="checkbox-label">
-                <input type="checkbox" name="agree_data_security" required>
-                <span>I understand that all submitted data will be stored in a secure Azure environment controlled by Rex Autistikon Research Foundation and will not be shared outside approved research collaborators without explicit written agreement.</span>
-              </label>
-              
-              <label class="checkbox-label">
-                <input type="checkbox" name="agree_terms" required>
-                <span>I agree to use the platform solely for legitimate scientific research purposes consistent with the mission of Rex Autistikōn Labs.</span>
-              </label>
-              
-              <label class="checkbox-label">
-                <input type="checkbox" name="agree_citation">
-                <span>I agree to cite Rex Autistikōn Labs / the underlying theoretical framework in any resulting publications or presentations.</span>
-              </label>
-            </div>
+          <div class="field">
+            <label for="organization">Organization / University <span class="req">*</span></label>
+            <input type="text" id="organization" required />
           </div>
-
-          <!-- Submit -->
-          <div class="actions">
-            <button type="submit" id="submit-btn" class="btn-primary">
-              Submit Access Request
-            </button>
-            <p id="form-status" class="status"></p>
+          <div class="field">
+            <label for="role">Role / title <span class="req">*</span></label>
+            <input type="text" id="role" required placeholder="e.g. Principal Investigator, Postdoctoral Fellow" />
           </div>
-        </form>
-      </div>
+          <div class="field">
+            <label for="department">Department</label>
+            <input type="text" id="department" />
+          </div>
+        </div>
 
-      <p class="note">
-        After submission, requests are reviewed by the Rex Autistikōn Labs team. 
-        Approved collaborators will receive secure login credentials and onboarding instructions via the institutional email provided.
+        <h2>2. Intended use</h2>
+        <div class="field">
+          <label for="intended_use">Describe intended research use <span class="req">*</span></label>
+          <textarea id="intended_use" rows="4" required placeholder="Study aims, population, and how the 8-zone platform will be used."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="irb_status">IRB / Ethics Committee status</label>
+            <select id="irb_status">
+              <option value="">—</option>
+              <option value="approved">Yes – Approved</option>
+              <option value="pending">Pending / in preparation</option>
+              <option value="not_required">Not required for this use</option>
+              <option value="planning">Planning stage</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="start_date">Preferred start date (approximate)</label>
+            <input type="date" id="start_date" />
+          </div>
+        </div>
+
+        <h2>3. Data handling &amp; compliance</h2>
+        <label class="check">
+          <input type="checkbox" id="agree_data_security" required />
+          <span>I understand that all submitted data will be stored in a secure Azure environment controlled by Rex Autistikon Research Foundation and will not be shared outside approved research collaborators without explicit written agreement.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="agree_terms" required />
+          <span>I agree to use the platform solely for legitimate scientific research purposes consistent with the mission of Rex Autistikōn Labs.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="agree_citation" required />
+          <span>I agree to cite Rex Autistikōn Labs / the underlying theoretical framework in any resulting publications or presentations.</span>
+        </label>
+
+        <div class="actions">
+          <button type="button" id="submitBtn" class="btn-primary" onclick="submitRequest()">
+            Submit Access Request
+          </button>
+          <p id="status" class="status"></p>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        After submission, requests are reviewed by the Rex Autistikōn Labs team. Approved collaborators
+        will receive onboarding instructions via the institutional email provided.
       </p>
     </section>
   </main>
-</BaseLayout>
+</Layout>
 
 <style>
-  .collaborate-page {
-    background: #f8fafc;
-    min-height: 80vh;
-  }
-
+  .page { background: #f1f5f9; min-height: 80vh; }
   .hero {
     background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
-    color: white;
-    text-align: center;
-    padding: 3.5rem 1.5rem;
+    color: white; text-align: center; padding: 3rem 1.5rem;
   }
+  .hero h1 { font-size: 2.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 640px; margin: 0 auto; line-height: 1.55; }
 
-  .hero h1 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-  }
-
-  .subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
-  }
-
-  .intro-section {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 1.5rem 1.5rem 0;
-  }
-
-  .intro-card {
-    background: #f0fdfa;
-    border: 1px solid #99f6e4;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    font-size: 0.95rem;
-    color: #134e4a;
-    line-height: 1.5;
-  }
-
-  .intro-card a {
-    color: #0f766e;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .intro-card a:hover {
-    text-decoration: underline;
-  }
-
-  .form-section {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 1.5rem 1.5rem 4rem;
-  }
-
+  .form-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   .card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2rem 2.25rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 1.75rem 1.85rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-
-  .form-block {
-    margin-bottom: 2.25rem;
+  .card h2 {
+    font-size: 1.1rem; color: #0f172a; margin: 1.5rem 0 1rem; font-weight: 600;
+    padding-bottom: 0.4rem; border-bottom: 1px solid #e2e8f0;
   }
+  .card h2:first-child { margin-top: 0; }
 
-  .form-block h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid #f1f5f9;
-  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
 
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 640px) {
-    .grid-2 { grid-template-columns: 1fr; }
-  }
-
-  .field {
-    margin-bottom: 0.25rem;
-  }
-
-  .field.full {
-    grid-column: 1 / -1;
-  }
-
+  .field { margin-bottom: 0.25rem; }
   .field label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #475569;
-    margin-bottom: 0.4rem;
+    display: block; font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 0.35rem;
+  }
+  .req { color: #b91c1c; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 0.55rem 0.75rem; border: 1px solid #cbd5e1;
+    border-radius: 8px; font-size: 0.95rem; background: #fff; color: #0f172a;
+  }
+  .field textarea { resize: vertical; min-height: 96px; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15,118,110,0.15);
   }
 
-  .field input,
-  .field textarea,
-  .field select {
-    width: 100%;
-    padding: 0.65rem 0.9rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: border-color 0.15s, box-shadow 0.15s;
+  .check {
+    display: flex; gap: 0.65rem; align-items: flex-start;
+    font-size: 0.9rem; color: #334155; line-height: 1.45; margin-bottom: 0.85rem;
   }
+  .check input { margin-top: 0.2rem; accent-color: #0f766e; flex-shrink: 0; }
 
-  .field input:focus,
-  .field textarea:focus,
-  .field select:focus {
-    outline: none;
-    border-color: #0f766e;
-    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
-  }
-
-  .checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .checkbox-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: #334155;
-    line-height: 1.45;
-  }
-
-  .checkbox-label input {
-    margin-top: 0.2rem;
-    accent-color: #0f766e;
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-  }
-
-  .actions {
-    padding-top: 0.5rem;
-  }
-
+  .actions { margin-top: 1.5rem; }
   .btn-primary {
-    background: #0f766e;
-    color: white;
-    border: none;
-    padding: 0.85rem 2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s;
+    background: #0f766e; color: white; border: none; padding: 0.8rem 1.75rem;
+    border-radius: 10px; font-weight: 600; font-size: 1rem; cursor: pointer;
   }
+  .btn-primary:hover { background: #0d9488; }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  .btn-primary:hover {
-    background: #0d9488;
-  }
-
-  .btn-primary:disabled {
-    background: #94a3b8;
-    cursor: not-allowed;
-  }
-
-  .status {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-  }
-
-  .status.loading { color: #1d4ed8; }
-  .status.success { color: #166534; }
+  .status { margin-top: 0.85rem; font-size: 0.95rem; min-height: 1.4em; }
   .status.error { color: #b91c1c; }
+  .status.success { color: #047857; }
 
-  .note {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #64748b;
-    line-height: 1.5;
+  .footer-note {
+    margin-top: 1.5rem; font-size: 0.85rem; color: #64748b; line-height: 1.5; text-align: center;
   }
 </style>
 
-<script>
-  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request";
+<script is:inline>
+  // Collaborator-request Function URL + key
+  // If this fails with 401, open Azure → func-rex-calc → Functions → collaborator_request → Function Keys → copy default
+  const REQUEST_URL =
+    "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request?code=MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFuAmusg==";
 
-  const form = document.getElementById('collaborator-form');
-  const status = document.getElementById('form-status');
-  const btn = document.getElementById('submit-btn');
+  window.submitRequest = async function submitRequest() {
+    const btn = document.getElementById("submitBtn");
+    const status = document.getElementById("status");
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
+    const full_name = document.getElementById("full_name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const organization = document.getElementById("organization").value.trim();
+    const role = document.getElementById("role").value.trim();
+    const intended_use = document.getElementById("intended_use").value.trim();
+    const agree_data_security = document.getElementById("agree_data_security").checked;
+    const agree_terms = document.getElementById("agree_terms").checked;
+    const agree_citation = document.getElementById("agree_citation").checked;
+
+    if (!full_name || !email || !organization || !role || !intended_use) {
+      status.className = "status error";
+      status.textContent = "Please complete all required fields.";
+      return;
+    }
+    if (!agree_data_security || !agree_terms || !agree_citation) {
+      status.className = "status error";
+      status.textContent = "Please accept all compliance statements.";
+      return;
+    }
+
+    const payload = {
+      full_name,
+      email,
+      organization,
+      role,
+      department: document.getElementById("department").value.trim(),
+      intended_use,
+      irb_status: document.getElementById("irb_status").value,
+      start_date: document.getElementById("start_date").value,
+      agree_data_security,
+      agree_terms,
+      agree_citation
+    };
+
     btn.disabled = true;
-    status.className = 'status loading';
-    status.textContent = 'Submitting request...';
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    data.agree_data_security = formData.has('agree_data_security');
-    data.agree_terms = formData.has('agree_terms');
-    data.agree_citation = formData.has('agree_citation');
+    status.className = "status";
+    status.textContent = "Submitting…";
 
     try {
-      const res = await fetch(FUNCTION_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      const res = await fetch(REQUEST_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
       });
 
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.error || `HTTP ${res.status}`);
+      const text = await res.text();
+      let data = null;
+      if (text && text.trim()) {
+        try {
+          data = JSON.parse(text);
+        } catch (parseErr) {
+          throw new Error("HTTP " + res.status + " — server returned non-JSON: " + text.slice(0, 180));
+        }
       }
 
-      status.className = 'status success';
-      status.textContent = 'Request submitted successfully. You will receive a response at the institutional email provided within 3–5 business days.';
-      form.reset();
+      if (!res.ok) {
+        const msg =
+          (data && (data.error || data.message)) ||
+          ("HTTP " + res.status + (text ? "" : " (empty response — often 401 bad key or CORS)"));
+        throw new Error(typeof msg === "string" ? msg : JSON.stringify(msg));
+      }
+
+      status.className = "status success";
+      status.textContent =
+        "Request submitted successfully" +
+        (data && data.request_id ? " (ID: " + data.request_id + ")" : "") +
+        ". You will be contacted at the email provided.";
+      document.getElementById("accessForm").reset();
     } catch (err) {
-      status.className = 'status error';
-      status.textContent = 'Error: ' + err.message;
+      status.className = "status error";
+      status.textContent = "Error: " + (err && err.message ? err.message : String(err));
     } finally {
       btn.disabled = false;
     }
-  });
+  };
 </script>
