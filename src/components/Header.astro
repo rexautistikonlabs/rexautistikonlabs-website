@@ -2,8 +2,19 @@
 const publicItems = [
   { href: "/", label: "Home" },
   { href: "/research", label: "Research" },
-  { href: "/how-to-collaborate", label: "How to Collaborate" },
-  { href: "/collaborate", label: "Request Access" },
+  { href: "/model", label: "Interactive Model" },
+  { href: "/publications", label: "Publications" },
+  { href: "/how-to-collaborate", label: "Collaborate" },
+];
+
+const moreItems = [
+  { href: "/education", label: "Education" },
+  { href: "/people", label: "People" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/support", label: "Support" },
+  { href: "/newsletter", label: "Newsletter" },
+  { href: "/sponsors", label: "Sponsors" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const collaboratorItems = [
@@ -32,7 +43,24 @@ const collaboratorItems = [
           </li>
         ))}
 
-        <!-- Collaborator Portal Dropdown -->
+        <!-- More dropdown -->
+        <li class="dropdown">
+          <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            More
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu">
+            {moreItems.map(item => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+
+        <!-- Collaborator Portal -->
         <li class="dropdown">
           <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
             Collaborator Portal
@@ -49,7 +77,7 @@ const collaboratorItems = [
           </ul>
         </li>
 
-        <!-- Admin (foundation personnel only) -->
+        <!-- Admin (foundation only) -->
         <li>
           <a href="/admin/collaborators" class="nav-link nav-admin">Admin</a>
         </li>
@@ -72,6 +100,10 @@ const collaboratorItems = [
   <nav class="nav-mobile" id="mobileNav" hidden>
     <ul>
       {publicItems.map(item => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+      <li class="mobile-section">More</li>
+      {moreItems.map(item => (
         <li><a href={item.href}>{item.label}</a></li>
       ))}
       <li class="mobile-section">Collaborator Portal</li>
@@ -142,13 +174,13 @@ const collaboratorItems = [
   .nav-desktop {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.15rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -158,16 +190,17 @@ const collaboratorItems = [
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.5rem 0.85rem;
+    padding: 0.5rem 0.75rem;
     color: rgba(255,255,255,0.85);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
     border-radius: 6px;
     background: none;
     border: none;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
   }
 
   .nav-link:hover {
@@ -176,8 +209,8 @@ const collaboratorItems = [
   }
 
   .nav-admin {
-    opacity: 0.7;
-    font-size: 0.85rem;
+    opacity: 0.65;
+    font-size: 0.82rem;
   }
 
   /* Dropdown */
@@ -233,14 +266,14 @@ const collaboratorItems = [
     color: #0f766e;
   }
 
-  /* Auth buttons */
+  /* Auth */
   .auth-area {
     display: flex;
     gap: 0.5rem;
   }
 
   .btn-login, .btn-logout {
-    padding: 0.4rem 0.9rem;
+    padding: 0.4rem 0.85rem;
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: 600;
@@ -316,18 +349,17 @@ const collaboratorItems = [
     font-weight: 600;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     .nav-desktop { display: none; }
     .mobile-toggle { display: flex; }
   }
 
-  @media (min-width: 901px) {
+  @media (min-width: 981px) {
     .nav-mobile { display: none !important; }
   }
 </style>
 
 <script>
-  // Mobile menu toggle
   const toggle = document.getElementById('mobileToggle');
   const mobileNav = document.getElementById('mobileNav');
   toggle?.addEventListener('click', () => {
