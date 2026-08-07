@@ -1,0 +1,478 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+---
+
+<Layout title="Research Framework | Rex Autistikōn Labs">
+  <main class="rf-page">
+    <section class="hero">
+      <p class="kicker">Research Framework</p>
+      <h1>From research question to falsifiable test</h1>
+      <p class="subtitle">
+        Rex Autistikōn Labs operates an independent research program on whether chronic mechanical
+        restriction in defined sensor-rich myofascial and visceral zones contributes to altered
+        afferent signaling relevant to sensory and interoceptive phenotypes. This page separates
+        established science, proposed mechanism, predictions, and experimental path.
+      </p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <a href="#question">1. Research question</a>
+      <a href="#hypothesis">2. Hypothesis</a>
+      <a href="#evidence">3. Evidence matrix</a>
+      <a href="#zones">4. Zone taxonomy</a>
+      <a href="#model">5. Computational model</a>
+      <a href="#testing">6. How we test it</a>
+      <a href="#falsify">7. Falsifiable predictions</a>
+      <a href="#limits">8. Scope and limits</a>
+      <a href="#platform">9. Research platform</a>
+    </nav>
+
+    <!-- 1 -->
+    <section id="question" class="block">
+      <h2>1. Research question</h2>
+      <p class="lead">
+        Why do differences in sensory processing, proprioception, interoception, and related
+        motor–autonomic features often co-occur in some neurodevelopmental presentations, and
+        can part of that covariance be linked to measurable mechanical conditions in specific
+        peripheral interfaces?
+      </p>
+      <p>
+        Conventional accounts emphasize central neural computation, genetics, and developmental
+        difference. Those accounts are necessary but may be incomplete if peripheral
+        mechanoreceptive and interoceptive interfaces systematically bias the afferent sample
+        available to central systems. The question is not whether the brain matters; it is
+        whether defined peripheral mechanical states are a tractable, measurable contributor
+        to afferent statistics.
+      </p>
+    </section>
+
+    <!-- 2 -->
+    <section id="hypothesis" class="block">
+      <h2>2. Hypothesis</h2>
+      <div class="callout">
+        <p>
+          <strong>Working hypothesis.</strong> Chronic mechanical restriction within specific
+          anatomical zones densely invested with mechanoreceptors and interoceptors can distort
+          afferent signaling (amplitude, timing, and effective precision of ascending input).
+          Over time, such distortion may contribute to sustained differences in sensory,
+          proprioceptive, and interoceptive regulation. The effect is proposed to be
+          zone-specific, cumulative, and quantifiable from tissue-level parameters.
+        </p>
+      </div>
+      <p>
+        This is a <em>mechanistic research hypothesis</em>, not a claim that autism or any
+        neurodevelopmental condition is caused by fascia, reduced to peripheral tissue, or
+        cured by mechanical intervention. Neurodevelopmental phenotypes are heterogeneous;
+        peripheral mechanics, if relevant, would be one contributor among many.
+      </p>
+      <h3>Logical chain (explicit)</h3>
+      <ol class="chain">
+        <li><span>Established</span> Mechanoreceptors and interoceptors transduce tissue deformation and internal state into afferent signals.</li>
+        <li><span>Established / emerging</span> Fascia and soft tissue exhibit viscoelastic behavior; mechanical context can modulate receptor signaling.</li>
+        <li><span>RAL hypothesis</span> Zone-level restriction (operationalized as parameter <em>r</em> with stiffness <em>G</em> and viscosity <em>η</em>) systematically reduces effective transmitted afferent amplitude and raises prediction-error / free-energy style costs in a multi-zone model.</li>
+        <li><span>RAL prediction</span> Structured differences in zone parameters will produce reproducible metric patterns (fidelity, π<sub>eff</sub>, free energy, MPA summaries) that can be compared across sessions, groups, and regions without implying diagnosis.</li>
+        <li><span>Open</span> Whether those metric patterns track sensory/interoceptive behavioral measures is an empirical question for controlled studies.</li>
+      </ol>
+    </section>
+
+    <!-- 3 -->
+    <section id="evidence" class="block">
+      <h2>3. Evidence matrix</h2>
+      <p>
+        The matrix below separates what is broadly established from what RAL treats as hypothesis.
+        Strength labels are qualitative program judgments for communication, not meta-analytic grades.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Status</th>
+              <th>Evidence strength</th>
+              <th>Role in RAL program</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Proprioceptive signaling from muscle and joint receptors</td>
+              <td><span class="tag est">Established</span></td>
+              <td>High</td>
+              <td>Background science</td>
+            </tr>
+            <tr>
+              <td>Interoceptive pathways and body-state representation</td>
+              <td><span class="tag est">Established</span></td>
+              <td>High</td>
+              <td>Background science</td>
+            </tr>
+            <tr>
+              <td>Viscoelastic behavior of soft tissue (Kelvin–Voigt-type models)</td>
+              <td><span class="tag est">Established</span></td>
+              <td>High</td>
+              <td>Modeling substrate</td>
+            </tr>
+            <tr>
+              <td>Fascial and soft-tissue mechanotransduction</td>
+              <td><span class="tag em">Emerging</span></td>
+              <td>Moderate</td>
+              <td>Motivates zone focus</td>
+            </tr>
+            <tr>
+              <td>Sensor-rich investment of selected cranio-cervical, oral, pharyngeal, visceral, and pelvic interfaces</td>
+              <td><span class="tag em">Emerging</span></td>
+              <td>Moderate (anatomy-dependent)</td>
+              <td>Zone taxonomy</td>
+            </tr>
+            <tr>
+              <td>Chronic mechanical restriction → systematically altered afference at these zones</td>
+              <td><span class="tag hyp">RAL hypothesis</span></td>
+              <td>Limited / emerging</td>
+              <td>Core claim under test</td>
+            </tr>
+            <tr>
+              <td>Altered afference → neurodevelopmental phenotype</td>
+              <td><span class="tag open">Unestablished</span></td>
+              <td>Unknown</td>
+              <td>Long-range question; not assumed</td>
+            </tr>
+            <tr>
+              <td>Operational 8-zone metric pipeline (fidelity, π<sub>eff</sub>, free energy, MPA)</td>
+              <td><span class="tag hyp">RAL construct</span></td>
+              <td>Model-defined</td>
+              <td>Measurement layer for tests</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Citation expansion for each row is a living task of the program. Where peer-reviewed
+        support is strong, it will be linked from zone dossiers and publications; where support
+        is weak, language remains provisional.
+      </p>
+    </section>
+
+    <!-- 4 -->
+    <section id="zones" class="block">
+      <h2>4. Zone taxonomy (eight sensor-rich interfaces)</h2>
+      <p>
+        Intake, calculation, and results use one consistent eight-zone schema. Labels denote
+        research interfaces, not diagnostic categories.
+      </p>
+      <div class="zone-grid">
+        <div class="zone-card"><span class="zn">1</span><div><strong>Extraocular / Orbital</strong><p>Oculomotor–orbital soft tissue and periocular mechanical context.</p></div></div>
+        <div class="zone-card"><span class="zn">2</span><div><strong>Middle-ear</strong><p>Middle-ear mechanical environment relevant to auditory coupling.</p></div></div>
+        <div class="zone-card"><span class="zn">3</span><div><strong>Nasal</strong><p>Nasal airway and associated soft-tissue mechanical context.</p></div></div>
+        <div class="zone-card"><span class="zn">4</span><div><strong>Tongue</strong><p>Tongue and floor-of-mouth complex.</p></div></div>
+        <div class="zone-card"><span class="zn">5</span><div><strong>Pharyngeal / Laryngeal</strong><p>Pharyngeal–laryngeal soft tissue interfaces.</p></div></div>
+        <div class="zone-card"><span class="zn">6</span><div><strong>Suboccipital</strong><p>Suboccipital muscular–fascial complex and upper cervical mechanical context.</p></div></div>
+        <div class="zone-card"><span class="zn">7</span><div><strong>Visceral fascia / Diaphragm</strong><p>Diaphragmatic and visceral fascial mechanical interface.</p></div></div>
+        <div class="zone-card"><span class="zn">8</span><div><strong>Pelvic floor</strong><p>Pelvic floor and perineal mechanical interface.</p></div></div>
+      </div>
+      <p class="note">
+        Anatomical detail, candidate receptors, and literature for each zone are intended to
+        live as zone dossiers in the interactive model (evidence status marked explicitly).
+      </p>
+    </section>
+
+    <!-- 5 -->
+    <section id="model" class="block">
+      <h2>5. Computational model (operational layer)</h2>
+      <p>
+        For each zone, collaborators supply restriction <em>r</em>, stiffness <em>G</em>,
+        viscosity <em>η</em>, and an integer MPA score. A Kelvin–Voigt-inspired transmission
+        step yields a transmitted amplitude treated as fidelity; an effective precision-weight
+        proxy π<sub>eff</sub> and a free-energy-style term <em>F</em> are computed so sessions
+        can be compared on a common scale.
+      </p>
+      <ul>
+        <li><strong>What the model is:</strong> a transparent, session-level scoring layer for multi-zone mechanical parameters.</li>
+        <li><strong>What the model is not:</strong> a validated biomarker, a diagnostic classifier, or proof of central pathophysiology.</li>
+        <li><strong>Why it exists:</strong> without shared metrics, the hypothesis cannot be tested across labs in a comparable way.</li>
+      </ul>
+      <p>
+        Model versioning is recorded on calculation outputs. Refinement of constitutive
+        assumptions (linearity, frequency dependence, zone coupling) is an expected part of
+        the program, not a retrospective embarrassment.
+      </p>
+    </section>
+
+    <!-- 6 -->
+    <section id="testing" class="block">
+      <h2>6. How we test it (experimental program)</h2>
+      <p>
+        The sequence is deliberately ordered so later phases depend on earlier measurement
+        competence. Phases may overlap once ethics and methods are in place.
+      </p>
+      <div class="phases">
+        <div class="phase">
+          <h3>Phase I — Schema and anatomical mapping</h3>
+          <p>
+            Stabilize zone definitions, parameter ranges, and documentation. Align anatomical
+            claims with literature; mark weak claims as provisional. Deliverable: locked
+            taxonomy + intake schema (in operation).
+          </p>
+        </div>
+        <div class="phase">
+          <h3>Phase II — Physiological and mechanical measurement</h3>
+          <p>
+            Pair zone parameters with independent measures where available (e.g. elastography-like
+            stiffness estimates, structured clinical observation protocols, sensory threshold
+            batteries chosen by partner labs). Deliverable: paired datasets under partner IRB.
+          </p>
+        </div>
+        <div class="phase">
+          <h3>Phase III — Controlled mechanical perturbation</h3>
+          <p>
+            Test whether specified, ethical mechanical changes at a zone produce predicted
+            short-horizon shifts in RAL metrics and in partner-chosen physiological readouts.
+            Deliverable: preregistered perturbation experiments.
+          </p>
+        </div>
+        <div class="phase">
+          <h3>Phase IV — Correlation with sensory / interoceptive measures</h3>
+          <p>
+            Assess whether metric patterns relate to validated sensory or interoceptive
+            instruments—without treating correlation as diagnosis. Deliverable: associative
+            analyses with transparent multiple-comparison practice.
+          </p>
+        </div>
+        <div class="phase">
+          <h3>Phase V — Intervention-linked studies (only if warranted)</h3>
+          <p>
+            Only if earlier phases support mechanistic relevance, test whether targeted
+            protocols change metrics and agreed outcomes. Deliverable: intervention trials
+            designed to fail clearly if effects are absent.
+          </p>
+        </div>
+      </div>
+      <p class="note">
+        Partner institutions remain responsible for human-subjects compliance. RAL provides
+        governed intake, calculation, storage, and de-identified aggregate views.
+      </p>
+    </section>
+
+    <!-- 7 -->
+    <section id="falsify" class="block">
+      <h2>7. Falsifiable predictions</h2>
+      <p>
+        The program is committed to revision or rejection when predictions fail under adequate tests.
+      </p>
+      <div class="pred-list">
+        <div class="pred">
+          <h3>P1 — Metric sensitivity</h3>
+          <p>
+            If restriction <em>r</em> is increased in a single zone while <em>G</em>, <em>η</em>,
+            and global parameters are held fixed within the model, computed fidelity for that
+            zone should decrease and free-energy-style cost should non-decrease. Failure of this
+            internal relationship under the published equations requires model correction.
+          </p>
+        </div>
+        <div class="pred">
+          <h3>P2 — Session reliability</h3>
+          <p>
+            Under standardized acquisition, repeated sessions on stable subjects should show
+            higher within-subject metric reliability than between randomly paired subjects
+            (thresholds preregistered per study). Persistent pure noise implies the operational
+            parameters are not capturing a stable latent state.
+          </p>
+        </div>
+        <div class="pred">
+          <h3>P3 — Perturbation coupling</h3>
+          <p>
+            If Phase III perturbations are correctly targeted, predicted zones should change
+            more than pre-specified control zones. Global undifferentiated change, or change
+            only in control zones, weakens the zone-specific hypothesis.
+          </p>
+        </div>
+        <div class="pred">
+          <h3>P4 — External correlate (conditional)</h3>
+          <p>
+            Where partners collect validated sensory/interoceptive measures, preregistered
+            associations with RAL metrics should replicate in direction. Repeated null results
+            under adequate power require narrowing or abandoning phenotype-linking claims—
+            without automatically voiding the biomechanical scoring layer itself.
+          </p>
+        </div>
+        <div class="pred">
+          <h3>P5 — Collective structure</h3>
+          <p>
+            De-identified group-level aggregates should not invent stable “signatures” that
+            disappear under split-half or multi-lab replication. Non-replicable aggregate
+            stories will be withdrawn from public scientific claims.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section id="limits" class="block">
+      <h2>8. Scope and limits</h2>
+      <div class="limits">
+        <div>
+          <h3>We claim</h3>
+          <ul>
+            <li>A clear research question and mechanistic hypothesis.</li>
+            <li>An operational multi-zone parameter schema and calculation pipeline.</li>
+            <li>Governed collaboration, authentication, and de-identified aggregation tools.</li>
+            <li>Willingness to revise or reject predictions under test.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>We do not claim</h3>
+          <ul>
+            <li>That autism or any condition is caused by myofascial restriction alone.</li>
+            <li>Diagnostic accuracy or clinical triage use.</li>
+            <li>Proven therapeutic efficacy of any intervention.</li>
+            <li>Institutional endorsement by universities or clinics listed as collaborators unless explicitly stated by them.</li>
+          </ul>
+        </div>
+      </div>
+      <p>
+        Independent status is intentional: Rex Autistikon Research Foundation, Inc. is a
+        501(c)(3) public charity (EIN 42-3220323). Determination documentation is available
+        via the Transparency page or upon request.
+      </p>
+    </section>
+
+    <!-- 9 -->
+    <section id="platform" class="block">
+      <h2>9. Research platform</h2>
+      <p>
+        The public program is paired with a live technical platform so tests are not purely rhetorical:
+      </p>
+      <ul>
+        <li><a href="/collaborate">Collaborator access request</a> — reviewed institutional onboarding.</li>
+        <li><a href="/intake">Data Intake</a> — eight-zone session submission.</li>
+        <li><a href="/results">Results Dashboard</a> — personal history and de-identified collective laboratory views.</li>
+        <li><a href="/model">Interactive model</a> — conceptual exploration of interfaces (dossier depth expanding).</li>
+        <li><a href="/publications">Publications</a> — primary documents, DOI, and future methods/data releases.</li>
+      </ul>
+      <p class="closing">
+        A skeptical reader should be able to disagree with the hypothesis and still recognize
+        a structured attempt to state assumptions, measurements, and failure conditions.
+        That is the standard this framework is written to meet.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .rf-page { background: #f8fafc; color: #0f172a; }
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: #fff; padding: 3rem 1.25rem 2.5rem; text-align: center;
+  }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;
+    opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 700;
+    max-width: 720px; margin: 0 auto 0.75rem; line-height: 1.25;
+  }
+  .subtitle {
+    max-width: 720px; margin: 0 auto; line-height: 1.6; opacity: 0.92; font-size: 1.02rem;
+  }
+
+  .toc {
+    max-width: 900px; margin: 0 auto; padding: 1.25rem 1.25rem 0;
+    display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; justify-content: center;
+  }
+  .toc a {
+    font-size: 0.8rem; color: #0f766e; text-decoration: none; font-weight: 600;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  .block {
+    max-width: 900px; margin: 0 auto; padding: 2.25rem 1.25rem 0.5rem;
+  }
+  .block h2 {
+    font-size: 1.35rem; margin: 0 0 0.85rem; color: #0f172a;
+    padding-bottom: 0.4rem; border-bottom: 2px solid #ccfbf1;
+  }
+  .block h3 { font-size: 1.02rem; margin: 1.25rem 0 0.5rem; color: #134e4a; }
+  .block p, .block li { line-height: 1.65; color: #334155; }
+  .lead { font-size: 1.08rem; color: #1e293b; }
+
+  .callout {
+    background: #fff; border: 1px solid #99f6e4; border-left: 4px solid #0f766e;
+    border-radius: 10px; padding: 1rem 1.15rem; margin: 0.75rem 0 1rem;
+  }
+  .callout p { margin: 0; color: #0f172a; }
+
+  .chain { margin: 0.75rem 0 0; padding-left: 1.1rem; }
+  .chain li { margin-bottom: 0.65rem; }
+  .chain span {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; background: #ecfdf5; color: #065f46;
+    padding: 0.15rem 0.45rem; border-radius: 4px; margin-right: 0.35rem;
+  }
+
+  .table-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 10px; border: 1px solid #e2e8f0; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.88rem; }
+  th, td { padding: 0.7rem 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  th { background: #f1f5f9; color: #475569; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  .tag {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    padding: 0.15rem 0.4rem; border-radius: 4px; letter-spacing: 0.03em;
+  }
+  .tag.est { background: #d1fae5; color: #065f46; }
+  .tag.em { background: #e0e7ff; color: #3730a3; }
+  .tag.hyp { background: #fef3c7; color: #92400e; }
+  .tag.open { background: #f1f5f9; color: #475569; }
+
+  .zone-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem; margin: 1rem 0;
+  }
+  .zone-card {
+    display: flex; gap: 0.75rem; background: #fff; border: 1px solid #e2e8f0;
+    border-radius: 10px; padding: 0.85rem 0.95rem;
+  }
+  .zn {
+    flex-shrink: 0; width: 1.75rem; height: 1.75rem; border-radius: 999px;
+    background: #0f766e; color: #fff; font-weight: 700; font-size: 0.8rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zone-card p { margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b; }
+  .zone-card strong { font-size: 0.92rem; color: #0f172a; }
+
+  .phases { display: grid; gap: 0.75rem; margin: 1rem 0; }
+  .phase {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 0.95rem 1.05rem;
+  }
+  .phase h3 { margin: 0 0 0.35rem; font-size: 0.98rem; color: #0f766e; }
+  .phase p { margin: 0; font-size: 0.92rem; }
+
+  .pred-list { display: grid; gap: 0.75rem; margin: 1rem 0; }
+  .pred {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 0.95rem 1.05rem;
+  }
+  .pred h3 { margin: 0 0 0.35rem; font-size: 0.98rem; color: #134e4a; }
+  .pred p { margin: 0; font-size: 0.92rem; }
+
+  .limits {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;
+  }
+  @media (max-width: 700px) { .limits { grid-template-columns: 1fr; } }
+  .limits > div {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .limits h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+  .limits ul { margin: 0; padding-left: 1.1rem; }
+  .limits li { margin-bottom: 0.35rem; font-size: 0.9rem; }
+
+  .note {
+    font-size: 0.88rem; color: #64748b; background: #f1f5f9;
+    border-radius: 8px; padding: 0.75rem 0.9rem; margin-top: 0.75rem;
+  }
+  .closing {
+    margin-top: 1.25rem; padding: 1rem 1.1rem; background: #ecfdf5;
+    border-radius: 10px; color: #064e3b; font-size: 0.95rem;
+  }
+  .block a { color: #0f766e; font-weight: 600; }
+  .block:last-of-type { padding-bottom: 3.5rem; }
+</style>
