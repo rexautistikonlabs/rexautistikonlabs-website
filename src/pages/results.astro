@@ -9,6 +9,7 @@ import Layout from '../layouts/BaseLayout.astro';
       <p class="subtitle">
         Personal history and interactive collective analysis of the 8-zone
         Kelvin–Voigt free-energy model — layer groups, select zones, compare metrics.
+        Each stored run carries a <strong>model version</strong> stamp.
       </p>
     </section>
 
@@ -25,6 +26,7 @@ import Layout from '../layouts/BaseLayout.astro';
 
       <div id="panelCollective" class="tab-panel" style="display:none;">
         <p id="collectiveStatus" class="muted">Loading aggregate data…</p>
+        <p id="versionNote" class="version-note" style="display:none;"></p>
 
         <div id="collectiveControls" class="controls" style="display:none;">
           <div class="control-block">
@@ -77,7 +79,10 @@ import Layout from '../layouts/BaseLayout.astro';
 
   .muted { color: #64748b; text-align: center; padding: 2rem 1rem; }
   .error { color: #b91c1c; text-align: center; padding: 1rem; }
-  .success { color: #047857; }
+  .version-note {
+    font-size: 0.85rem; color: #475569; background: #ecfdf5; border: 1px solid #99f6e4;
+    border-radius: 8px; padding: 0.65rem 0.85rem; margin-bottom: 1rem;
+  }
 
   .card {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
@@ -144,17 +149,6 @@ import Layout from '../layouts/BaseLayout.astro';
     "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/list-aggregate-results?code=0qJh7gK1oYJUuV5grwwvJ1IUkBdMRGpmg9O-FV_KI8JqAzFuzoujFw==";
   const MY_RESULTS_BASE =
     "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/list-my-results?code=Y1-l2FgFA4kcA-Gb3M1c4UPHumISr69gls6rtbmFD-pnAzFuKXyUwA==";
-
-  const ZONE_NAMES = {
-    1: "Extraocular / Orbital",
-    2: "Middle-ear",
-    3: "Nasal",
-    4: "Tongue",
-    5: "Pharyngeal / Laryngeal",
-    6: "Suboccipital",
-    7: "Visceral fascia / Diaphragm",
-    8: "Pelvic floor"
-  };
 
   const GROUP_COLORS = {
     neurotypical: "#0f766e",
@@ -236,19 +230,23 @@ import Layout from '../layouts/BaseLayout.astro';
       const url = MY_RESULTS_BASE + "&collaborator_id=" + encodeURIComponent(email);
       const data = await fetchJson(url);
       const items = data.items || [];
+      const activeMv = data.active_model_version || "";
       if (!items.length) {
         status.className = "muted";
-        status.textContent = "No stored results yet for " + email + ". Run a calculation on Data Intake.";
+        status.textContent = "No stored results yet for " + email + ". Run a calculation on Data Intake." +
+          (activeMv ? " (engine " + activeMv + ")" : "");
         list.innerHTML = "";
         return;
       }
       status.style.display = "none";
       list.innerHTML = items.map(item => {
         const ts = item.timestamp_utc || "";
+        const mv = item.model_version || "—";
         return `<div class="card">
           <h3>${item.participant_pseudonym || "anonymous"} · session ${item.session || 1}</h3>
-          <div class="meta">${ts}${item.group ? " · " + item.group : ""}${item.world_region ? " · " + item.world_region : ""}</div>
+          <div class="meta">${ts}${item.group ? " · " + item.group : ""}${item.world_region ? " · " + item.world_region : ""} · model <strong>${mv}</strong></div>
           <div class="metrics">
+            <div class="metric"><div class="label">Model</div><div class="value">${mv}</div></div>
             <div class="metric"><div class="label">Composite MPA</div><div class="value">${item.composite_mpa}</div></div>
             <div class="metric"><div class="label">Mean fidelity</div><div class="value">${item.mean_fidelity}</div></div>
             <div class="metric"><div class="label">Mean π_eff</div><div class="value">${item.mean_pi_eff}</div></div>
@@ -264,12 +262,23 @@ import Layout from '../layouts/BaseLayout.astro';
 
   async function loadCollective() {
     const status = document.getElementById("collectiveStatus");
+    const vNote = document.getElementById("versionNote");
     status.className = "muted";
     status.textContent = "Loading aggregate data…";
     try {
       aggregateData = await fetchJson(AGGREGATE_URL);
       status.style.display = "none";
       document.getElementById("collectiveControls").style.display = "grid";
+
+      const versions = aggregateData.by_model_version || {};
+      const active = aggregateData.active_model_version || "";
+      const vParts = Object.keys(versions).map(v => v + " (n=" + versions[v] + ")");
+      vNote.style.display = "block";
+      vNote.innerHTML =
+        "<strong>Model versions in aggregate:</strong> " +
+        (vParts.length ? vParts.join(", ") : "none yet") +
+        (active ? " · <strong>Current engine:</strong> " + active : "") +
+        ". Prefer comparing runs that share the same model version after formula changes.";
 
       const groups = Object.keys(aggregateData.by_group || {});
       activeGroups = new Set(groups);
@@ -313,7 +322,6 @@ import Layout from '../layouts/BaseLayout.astro';
       <div class="summary-item"><div class="label">Mean total F</div><div class="value">${overall.mean_total_free_energy ?? "—"}</div></div>
     `;
 
-    // Radar
     const zones = [1,2,3,4,5,6,7,8].filter(z => activeZones.has(z));
     const groups = [...activeGroups];
     const wrap = document.getElementById("radarWrap");
@@ -348,7 +356,6 @@ import Layout from '../layouts/BaseLayout.astro';
         labels += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#475569">Z${z}</text>`;
       });
 
-      // Normalize metric values 0-1 for display (cap free energy)
       function norm(v) {
         if (v == null || isNaN(v)) return 0;
         if (metric === "mean_free_energy_F") return Math.max(0, Math.min(1, v / 3));
@@ -379,7 +386,6 @@ import Layout from '../layouts/BaseLayout.astro';
       }).join("");
     }
 
-    // Region table
     const regions = aggregateData.by_region || {};
     const rkeys = Object.keys(regions);
     if (!rkeys.length) {

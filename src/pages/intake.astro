@@ -9,6 +9,7 @@ import Layout from '../layouts/BaseLayout.astro';
       <p class="subtitle">
         Secure submission portal for sensor-rich myofascial zone measurements.<br />
         Phase 1 Kelvin–Voigt + free-energy calculations are performed server-side.
+        Each run is stamped with a <strong>model version</strong> for later comparison.
       </p>
     </section>
 
@@ -242,6 +243,7 @@ import Layout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.04em; margin-bottom: 0.25rem;
   }
   .summary-item .value { font-size: 1.35rem; font-weight: 700; color: #0f172a; }
+  .summary-item .value.small { font-size: 1rem; }
   .raw-title { font-size: 0.9rem; color: #475569; margin: 1rem 0 0.5rem; }
   .raw {
     background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px;
@@ -298,8 +300,6 @@ import Layout from '../layouts/BaseLayout.astro';
     try {
       const res = await fetch("/.auth/me");
       const data = await res.json();
-
-      // Modern SWA shape: { clientPrincipal: { userDetails, userId, ... } }
       if (data && data.clientPrincipal) {
         const cp = data.clientPrincipal;
         const email = cp.userDetails || cp.userId || "";
@@ -309,26 +309,15 @@ import Layout from '../layouts/BaseLayout.astro';
           return;
         }
       }
-
-      // Older array shape
       if (Array.isArray(data) && data.length > 0) {
         const client = data[0] || {};
         let email = client.userDetails || client.user_id || client.userId || "";
-        const claims = client.user_claims || client.claims || [];
-        const emailClaim = claims.find(c => {
-          const t = (c.typ || c.type || "").toLowerCase();
-          return t.includes("emailaddress") || t.endsWith("/email") || t.includes("upn");
-        });
-        if (emailClaim && (emailClaim.val || emailClaim.value)) {
-          email = emailClaim.val || emailClaim.value;
-        }
         if (email) {
           input.value = email;
           input.placeholder = "";
           return;
         }
       }
-
       input.placeholder = "Sign in or type your email";
     } catch (e) {
       input.placeholder = "Sign in or type your email";
@@ -423,8 +412,9 @@ import Layout from '../layouts/BaseLayout.astro';
       }
 
       status.className = "status success";
-      status.textContent = "Calculation complete";
+      status.textContent = "Calculation complete · model " + (data.model_version || "—");
       summary.innerHTML = `
+        <div class="summary-item"><div class="label">Model version</div><div class="value small">${data.model_version || "—"}</div></div>
         <div class="summary-item"><div class="label">Composite MPA</div><div class="value">${data.composite_mpa}</div></div>
         <div class="summary-item"><div class="label">Mean Fidelity</div><div class="value">${data.mean_fidelity}</div></div>
         <div class="summary-item"><div class="label">Mean π_eff</div><div class="value">${data.mean_pi_eff}</div></div>
