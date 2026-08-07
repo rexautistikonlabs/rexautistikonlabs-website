@@ -13,13 +13,14 @@ const pathname = Astro.url.pathname;
 
     <nav class="nav" aria-label="Main">
       <a href="/" class:list={["nav-link", { active: pathname === "/" }]}>Home</a>
-      <a href="/research" class:list={["nav-link", { active: pathname.startsWith("/research") }]}>Research</a>
+      <a href="/research" class:list={["nav-link", { active: pathname.startsWith("/research") && pathname === "/research" }]}>Research</a>
       <a href="/model" class:list={["nav-link", { active: pathname.startsWith("/model") }]}>Interactive Model</a>
       <a href="/publications" class:list={["nav-link", { active: pathname.startsWith("/publications") }]}>Publications</a>
 
       <div class="dropdown">
         <button type="button" class="nav-link dropdown-toggle" aria-expanded="false">More</button>
         <div class="dropdown-menu">
+          <a href="/research-framework">Research Framework</a>
           <a href="/education">Education</a>
           <a href="/people">People</a>
           <a href="/roadmap">Roadmap</a>
