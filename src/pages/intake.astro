@@ -13,28 +13,144 @@ import Layout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="form-section">
+
+      <!-- Participant Classification -->
       <div class="card">
-        <h2>Participant & Protocol</h2>
+        <h2>Participant Classification</h2>
         <div class="grid-2">
           <div class="field">
+            <label for="group">Group *</label>
+            <select id="group" required>
+              <option value="">Select…</option>
+              <option value="neurotypical">Neurotypical control</option>
+              <option value="autistic">Autistic</option>
+              <option value="adhd">ADHD</option>
+              <option value="autistic_adhd">Autistic + ADHD</option>
+              <option value="other">Other neurodivergence</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="diagnosis_status">Diagnosis Status</label>
+            <select id="diagnosis_status">
+              <option value="">Select…</option>
+              <option value="clinically_confirmed">Clinically confirmed</option>
+              <option value="self_reported">Self-reported</option>
+              <option value="suspected">Suspected / under evaluation</option>
+              <option value="not_applicable">Not applicable</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="age">Age (years)</label>
+            <input type="number" id="age" min="1" max="120" step="1" placeholder="e.g. 28">
+          </div>
+          <div class="field">
+            <label for="sex">Sex / Gender</label>
+            <select id="sex">
+              <option value="">Select…</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="non_binary">Non-binary</option>
+              <option value="other">Other</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="handedness">Handedness</label>
+            <select id="handedness">
+              <option value="">Select…</option>
+              <option value="right">Right</option>
+              <option value="left">Left</option>
+              <option value="ambidextrous">Ambidextrous</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field">
             <label for="participant">Participant Pseudonym</label>
-            <input type="text" id="participant" value="anonymous" />
-          </div>
-          <div class="field">
-            <label for="collaborator">Collaborator / Lab ID</label>
-            <input type="text" id="collaborator" value="" placeholder="e.g. mayo-clinic-lab" />
-          </div>
-          <div class="field">
-            <label for="freq">Probe Frequency (Hz)</label>
-            <input type="number" id="freq" value="2.0" step="0.1" min="0.1" />
-          </div>
-          <div class="field">
-            <label for="scale">Global Scale</label>
-            <input type="number" id="scale" value="1.0" step="0.1" min="0.1" />
+            <input type="text" id="participant" value="anonymous">
           </div>
         </div>
       </div>
 
+      <!-- Neurodivergence Detail (shown only when needed) -->
+      <div class="card" id="neuro-detail" style="display:none;">
+        <h2>Neurodivergence Detail</h2>
+        <div class="grid-2">
+          <div class="field full">
+            <label for="primary_diagnosis">Primary diagnosis / label</label>
+            <input type="text" id="primary_diagnosis" placeholder="e.g. Autism Spectrum Disorder Level 1, ADHD-Combined">
+          </div>
+          <div class="field">
+            <label for="age_at_diagnosis">Age at diagnosis (if known)</label>
+            <input type="number" id="age_at_diagnosis" min="0" max="120" step="1">
+          </div>
+        </div>
+        <div class="field" style="margin-top:1rem;">
+          <label>Co-occurring conditions</label>
+          <div class="checkboxes">
+            <label class="checkbox-label"><input type="checkbox" id="co_anxiety"> Anxiety</label>
+            <label class="checkbox-label"><input type="checkbox" id="co_depression"> Depression</label>
+            <label class="checkbox-label"><input type="checkbox" id="co_spd"> Sensory Processing Disorder</label>
+            <label class="checkbox-label"><input type="checkbox" id="co_dyspraxia"> Dyspraxia</label>
+            <label class="checkbox-label"><input type="checkbox" id="co_other"> Other</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Study Context -->
+      <div class="card">
+        <h2>Study Context</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="study_id">Study / Protocol ID</label>
+            <input type="text" id="study_id" placeholder="e.g. REX-2026-01">
+          </div>
+          <div class="field">
+            <label for="collaborator">Collaborator / Lab ID</label>
+            <input type="text" id="collaborator" placeholder="e.g. mayo-clinic-lab">
+          </div>
+          <div class="field">
+            <label for="session">Session number</label>
+            <input type="number" id="session" value="1" min="1">
+          </div>
+          <div class="field">
+            <label for="medication">Current relevant medication</label>
+            <select id="medication">
+              <option value="">Select…</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="notes">Researcher notes (optional)</label>
+            <textarea id="notes" rows="2" placeholder="Any additional context for this session…"></textarea>
+          </div>
+        </div>
+        <div class="field" style="margin-top:1rem;">
+          <label class="checkbox-label">
+            <input type="checkbox" id="sensory_differences">
+            <span>Sensory differences reported by participant or caregiver</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Protocol parameters -->
+      <div class="card">
+        <h2>Protocol Parameters</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="freq">Probe Frequency (Hz)</label>
+            <input type="number" id="freq" value="2.0" step="0.1" min="0.1">
+          </div>
+          <div class="field">
+            <label for="scale">Global Scale</label>
+            <input type="number" id="scale" value="1.0" step="0.1" min="0.1">
+          </div>
+        </div>
+      </div>
+
+      <!-- Eight Zones -->
       <div class="card">
         <h2>Eight Sensor-Rich Zones</h2>
         <p class="hint">Enter restriction ratio (r), stiffness (G), viscosity (η), and MPA score (0–8) for each zone.</p>
@@ -48,18 +164,17 @@ import Layout from '../layouts/BaseLayout.astro';
         <p id="status" class="status"></p>
       </div>
 
+      <!-- Results -->
       <div id="results" class="results-section" style="display:none;">
         <div class="results-header">
           <h2>Calculation Results</h2>
-          <button id="downloadBtn" class="btn-download" onclick="downloadJSON()">Download JSON</button>
+          <button class="btn-download" onclick="downloadJSON()">Download JSON</button>
         </div>
-
         <div class="summary-grid" id="summary"></div>
-
         <div class="card">
           <h3>Zone-Level Detail</h3>
           <div class="table-wrapper">
-            <table id="zone-table">
+            <table>
               <thead>
                 <tr>
                   <th>Zone</th>
@@ -74,7 +189,6 @@ import Layout from '../layouts/BaseLayout.astro';
             </table>
           </div>
         </div>
-
         <details class="raw-details">
           <summary>View Raw JSON Output</summary>
           <pre id="raw-output"></pre>
@@ -85,231 +199,73 @@ import Layout from '../layouts/BaseLayout.astro';
 </Layout>
 
 <style>
-  .intake-page {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 5rem;
-  }
-  .hero {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  .hero h1 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.75rem;
-  }
-  .subtitle {
-    color: #475569;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
+  .intake-page { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  .hero { text-align: center; margin-bottom: 3rem; }
+  .hero h1 { font-size: 2.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem; }
+  .subtitle { color: #475569; font-size: 1.1rem; line-height: 1.6; }
   .card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.75rem 2rem;
-    margin-bottom: 1.75rem;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 1.75rem 2rem; margin-bottom: 1.75rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  .card h2, .card h3 {
-    font-size: 1.25rem;
-    color: #0f4c81;
-    margin-bottom: 1.25rem;
-    font-weight: 600;
+  .card h2, .card h3 { font-size: 1.25rem; color: #0f4c81; margin-bottom: 1.25rem; font-weight: 600; }
+  .hint { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 0.85rem; font-weight: 500; color: #475569; margin-bottom: 0.35rem; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 0.6rem 0.85rem; border: 1px solid #cbd5e1;
+    border-radius: 8px; font-size: 0.95rem; transition: border-color 0.15s;
   }
-  .hint {
-    font-size: 0.9rem;
-    color: #64748b;
-    margin-bottom: 1.5rem;
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
   }
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-  @media (max-width: 640px) {
-    .grid-2 { grid-template-columns: 1fr; }
-  }
-  .field label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #475569;
-    margin-bottom: 0.35rem;
-  }
-  .field input {
-    width: 100%;
-    padding: 0.6rem 0.85rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: border-color 0.15s;
-  }
-  .field input:focus {
-    outline: none;
-    border-color: #0f766e;
-    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
-  }
-  .zone-block {
-    border-top: 1px solid #f1f5f9;
-    padding-top: 1.25rem;
-    margin-top: 1.25rem;
-  }
-  .zone-block:first-child {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
-  }
-  .zone-title {
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 0.85rem;
-  }
-  .actions {
-    text-align: center;
-    margin: 2.5rem 0;
-  }
+  .field.full { grid-column: 1 / -1; }
+  .checkboxes { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 0.4rem; }
+  .checkbox-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #334155; cursor: pointer; }
+  .checkbox-label input { accent-color: #0f766e; }
+  .zone-block { border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1.25rem; }
+  .zone-block:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .zone-title { font-weight: 600; color: #0f172a; margin-bottom: 0.85rem; }
+  .actions { text-align: center; margin: 2.5rem 0; }
   .btn-primary {
-    background: #0f766e;
-    color: white;
-    border: none;
-    padding: 0.85rem 2.25rem;
-    border-radius: 8px;
-    font-size: 1.05rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s;
+    background: #0f766e; color: white; border: none; padding: 0.85rem 2.25rem;
+    border-radius: 8px; font-size: 1.05rem; font-weight: 500; cursor: pointer;
   }
-  .btn-primary:hover {
-    background: #0d9488;
-  }
-  .btn-primary:disabled {
-    background: #94a3b8;
-    cursor: not-allowed;
-  }
-  .status {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-  }
+  .btn-primary:hover { background: #0d9488; }
+  .btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
+  .status { margin-top: 1rem; font-size: 0.95rem; }
   .status.loading { color: #1d4ed8; }
   .status.success { color: #166534; }
   .status.error { color: #b91c1c; }
-
-  .results-section {
-    margin-top: 3rem;
-  }
-  .results-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .results-header h2 {
-    font-size: 1.5rem;
-    color: #0f172a;
-    margin: 0;
-  }
+  .results-section { margin-top: 3rem; }
+  .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .results-header h2 { font-size: 1.5rem; color: #0f172a; margin: 0; }
   .btn-download {
-    background: #f1f5f9;
-    color: #0f766e;
-    border: 1px solid #cbd5e1;
-    padding: 0.5rem 1.1rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.15s;
+    background: #f1f5f9; color: #0f766e; border: 1px solid #cbd5e1;
+    padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
   }
-  .btn-download:hover {
-    background: #e2e8f0;
-  }
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .summary-item {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.25rem;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 1.25rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  .summary-item .label {
-    font-size: 0.8rem;
-    color: #64748b;
-    margin-bottom: 0.35rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .summary-item .value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #0f172a;
-  }
-  .table-wrapper {
-    overflow-x: auto;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  th {
-    text-align: left;
-    padding: 0.75rem 1rem;
-    background: #f8fafc;
-    color: #334155;
-    font-weight: 600;
-    border-bottom: 2px solid #e2e8f0;
-  }
-  td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f1f5f9;
-  }
-  tr:hover td {
-    background: #f8fafc;
-  }
-  .raw-details {
-    margin-top: 1.5rem;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-  }
-  .raw-details summary {
-    cursor: pointer;
-    font-weight: 600;
-    color: #0f4c81;
-  }
-  pre {
-    background: #0f172a;
-    color: #e2e8f0;
-    padding: 1.25rem;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-size: 0.8rem;
-    line-height: 1.45;
-    margin-top: 1rem;
-  }
+  .summary-item .label { font-size: 0.8rem; color: #64748b; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  .summary-item .value { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
+  .table-wrapper { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th { text-align: left; padding: 0.75rem 1rem; background: #f8fafc; color: #334155; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 0.75rem 1rem; border-bottom: 1px solid #f1f5f9; }
+  tr:hover td { background: #f8fafc; }
+  .raw-details { margin-top: 1.5rem; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem 1.5rem; }
+  .raw-details summary { cursor: pointer; font-weight: 600; color: #0f4c81; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.8rem; line-height: 1.45; margin-top: 1rem; }
 </style>
 
 <script>
   const ZONE_NAMES = [
-    "Extraocular / Orbital",
-    "Middle-ear",
-    "Nasal",
-    "Tongue",
-    "Pharyngeal / Laryngeal",
-    "Suboccipital",
-    "Visceral fascia / Diaphragm",
-    "Pelvic floor"
+    "Extraocular / Orbital", "Middle-ear", "Nasal", "Tongue",
+    "Pharyngeal / Laryngeal", "Suboccipital", "Visceral fascia / Diaphragm", "Pelvic floor"
   ];
 
   const container = document.getElementById('zones-container');
@@ -319,30 +275,23 @@ import Layout from '../layouts/BaseLayout.astro';
       <div class="zone-block">
         <div class="zone-title">Zone ${id}: ${name}</div>
         <div class="grid-2">
-          <div class="field">
-            <label>Restriction r</label>
-            <input type="number" id="r_${id}" value="1.0" step="0.1" min="0.5" max="3.0">
-          </div>
-          <div class="field">
-            <label>Stiffness G</label>
-            <input type="number" id="g_${id}" value="1.0" step="0.1" min="0.1">
-          </div>
-          <div class="field">
-            <label>Viscosity η</label>
-            <input type="number" id="eta_${id}" value="1.0" step="0.1" min="0.1">
-          </div>
-          <div class="field">
-            <label>MPA Score (0–8)</label>
-            <input type="number" id="mpa_${id}" value="0" min="0" max="8">
-          </div>
+          <div class="field"><label>Restriction r</label><input type="number" id="r_${id}" value="1.0" step="0.1" min="0.5" max="3.0"></div>
+          <div class="field"><label>Stiffness G</label><input type="number" id="g_${id}" value="1.0" step="0.1" min="0.1"></div>
+          <div class="field"><label>Viscosity η</label><input type="number" id="eta_${id}" value="1.0" step="0.1" min="0.1"></div>
+          <div class="field"><label>MPA Score (0–8)</label><input type="number" id="mpa_${id}" value="0" min="0" max="8"></div>
         </div>
-      </div>
-    `;
+      </div>`;
   });
 
-  // No Function key – endpoint is now anonymous
-  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate";
+  // Show/hide neurodivergence detail
+  const groupSelect = document.getElementById('group');
+  const neuroDetail = document.getElementById('neuro-detail');
+  groupSelect.addEventListener('change', () => {
+    const val = groupSelect.value;
+    neuroDetail.style.display = (val && val !== 'neurotypical' && val !== 'prefer_not') ? 'block' : 'none';
+  });
 
+  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate";
   let lastResult = null;
 
   window.submitCalculation = async function() {
@@ -373,7 +322,27 @@ import Layout from '../layouts/BaseLayout.astro';
     const payload = {
       participant_pseudonym: document.getElementById('participant').value || 'anonymous',
       collaborator_id: document.getElementById('collaborator').value || 'unknown',
-      protocol_version: '1.0',
+      protocol_version: '1.1',
+      // New research fields
+      group: document.getElementById('group').value,
+      diagnosis_status: document.getElementById('diagnosis_status').value,
+      age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
+      sex: document.getElementById('sex').value,
+      handedness: document.getElementById('handedness').value,
+      primary_diagnosis: document.getElementById('primary_diagnosis')?.value || '',
+      age_at_diagnosis: document.getElementById('age_at_diagnosis')?.value ? parseInt(document.getElementById('age_at_diagnosis').value) : null,
+      co_occurring: {
+        anxiety: document.getElementById('co_anxiety')?.checked || false,
+        depression: document.getElementById('co_depression')?.checked || false,
+        spd: document.getElementById('co_spd')?.checked || false,
+        dyspraxia: document.getElementById('co_dyspraxia')?.checked || false,
+        other: document.getElementById('co_other')?.checked || false
+      },
+      study_id: document.getElementById('study_id').value,
+      session: parseInt(document.getElementById('session').value) || 1,
+      medication: document.getElementById('medication').value,
+      sensory_differences: document.getElementById('sensory_differences').checked,
+      notes: document.getElementById('notes').value,
       global_parameters: {
         scale: parseFloat(document.getElementById('scale').value),
         probe_frequency_hz: parseFloat(document.getElementById('freq').value),
@@ -389,32 +358,18 @@ import Layout from '../layouts/BaseLayout.astro';
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
 
       lastResult = data;
-
       status.className = 'status success';
       status.textContent = 'Calculation complete and securely stored';
 
       summary.innerHTML = `
-        <div class="summary-item">
-          <div class="label">Composite MPA</div>
-          <div class="value">${data.composite_mpa}</div>
-        </div>
-        <div class="summary-item">
-          <div class="label">Mean Fidelity</div>
-          <div class="value">${data.mean_fidelity}</div>
-        </div>
-        <div class="summary-item">
-          <div class="label">Mean π_eff</div>
-          <div class="value">${data.mean_pi_eff}</div>
-        </div>
-        <div class="summary-item">
-          <div class="label">Total Free Energy</div>
-          <div class="value">${data.total_free_energy}</div>
-        </div>
+        <div class="summary-item"><div class="label">Composite MPA</div><div class="value">${data.composite_mpa}</div></div>
+        <div class="summary-item"><div class="label">Mean Fidelity</div><div class="value">${data.mean_fidelity}</div></div>
+        <div class="summary-item"><div class="label">Mean π_eff</div><div class="value">${data.mean_pi_eff}</div></div>
+        <div class="summary-item"><div class="label">Total Free Energy</div><div class="value">${data.total_free_energy}</div></div>
       `;
 
       zoneBody.innerHTML = data.zone_results.map(z => `
@@ -425,8 +380,7 @@ import Layout from '../layouts/BaseLayout.astro';
           <td>${z.prediction_error}</td>
           <td>${z.free_energy_F}</td>
           <td>${z.mpa_score}</td>
-        </tr>
-      `).join('');
+        </tr>`).join('');
 
       raw.textContent = JSON.stringify(data, null, 2);
       results.style.display = 'block';
