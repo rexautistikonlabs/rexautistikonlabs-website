@@ -49,20 +49,17 @@ import Layout from '../../layouts/BaseLayout.astro';
     min-height: 80vh;
     background: #f8fafc;
   }
-
   .hero {
     background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
     color: white;
     padding: 3rem 1.5rem;
     text-align: center;
   }
-
   .hero h1 {
     font-size: 2.25rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
   }
-
   .subtitle {
     font-size: 1.1rem;
     opacity: 0.9;
@@ -70,20 +67,17 @@ import Layout from '../../layouts/BaseLayout.astro';
     margin: 0 auto;
     line-height: 1.5;
   }
-
   .admin-section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
-
   .card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     padding: 1.75rem;
   }
-
   .toolbar {
     display: flex;
     align-items: center;
@@ -91,7 +85,6 @@ import Layout from '../../layouts/BaseLayout.astro';
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
   }
-
   .btn-secondary {
     background: #f1f5f9;
     color: #0f766e;
@@ -102,29 +95,24 @@ import Layout from '../../layouts/BaseLayout.astro';
     cursor: pointer;
     transition: all 0.15s;
   }
-
   .btn-secondary:hover {
     background: #e2e8f0;
   }
-
   .status-msg {
     font-size: 0.9rem;
     color: #64748b;
   }
-
   .loading, .empty {
     text-align: center;
     padding: 3rem;
     color: #64748b;
     font-size: 1.1rem;
   }
-
   table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
   }
-
   th {
     text-align: left;
     padding: 0.75rem 1rem;
@@ -134,17 +122,14 @@ import Layout from '../../layouts/BaseLayout.astro';
     border-bottom: 2px solid #e2e8f0;
     white-space: nowrap;
   }
-
   td {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #e2e8f0;
     vertical-align: top;
   }
-
   tr:hover td {
     background: #f8fafc;
   }
-
   .status-badge {
     display: inline-block;
     padding: 0.2rem 0.6rem;
@@ -153,22 +138,18 @@ import Layout from '../../layouts/BaseLayout.astro';
     font-weight: 600;
     text-transform: uppercase;
   }
-
   .status-pending {
     background: #fef3c7;
     color: #92400e;
   }
-
   .status-approved {
     background: #d1fae5;
     color: #065f46;
   }
-
   .status-denied {
     background: #fee2e2;
     color: #991b1b;
   }
-
   .btn-approve, .btn-deny {
     padding: 0.35rem 0.75rem;
     border-radius: 6px;
@@ -178,34 +159,24 @@ import Layout from '../../layouts/BaseLayout.astro';
     cursor: pointer;
     margin-right: 0.4rem;
   }
-
   .btn-approve {
     background: #10b981;
     color: white;
   }
-
   .btn-approve:hover {
     background: #059669;
   }
-
   .btn-deny {
     background: #ef4444;
     color: white;
   }
-
   .btn-deny:hover {
     background: #dc2626;
-  }
-
-  .btn-approve:disabled, .btn-deny:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 </style>
 
 <script>
-  const LIST_KEY = "IbE0tv8ox0ux48tVZGZ3A8y3LlWyfP0SF2ONsty8Wk1iAzFuSZgiiQ==";
-  const UPDATE_KEY = "C0FJKBRpVi3gVMLSi0S-YwO7kvBo6Ml3yd2V6msvs0r1AzFuUr2HGw==";
+  // No Function keys – endpoints are now anonymous
   const BASE_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api";
 
   async function loadRequests() {
@@ -222,7 +193,7 @@ import Layout from '../../layouts/BaseLayout.astro';
     statusMsg.style.color = '#64748b';
 
     try {
-      const res = await fetch(`${BASE_URL}/list-requests?code=${LIST_KEY}`);
+      const res = await fetch(`${BASE_URL}/list-requests`);
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
@@ -269,7 +240,7 @@ import Layout from '../../layouts/BaseLayout.astro';
     if (!confirm(`Are you sure you want to mark this request as ${newStatus}?`)) return;
 
     try {
-      const res = await fetch(`${BASE_URL}/update-request?code=${UPDATE_KEY}`, {
+      const res = await fetch(`${BASE_URL}/update-request`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: newStatus })
@@ -285,7 +256,5 @@ import Layout from '../../layouts/BaseLayout.astro';
   };
 
   document.getElementById('refreshBtn')?.addEventListener('click', loadRequests);
-
-  // Load on page open
   loadRequests();
 </script>

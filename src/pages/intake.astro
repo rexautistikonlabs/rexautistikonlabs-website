@@ -48,7 +48,6 @@ import Layout from '../layouts/BaseLayout.astro';
         <p id="status" class="status"></p>
       </div>
 
-      <!-- Improved Results Section -->
       <div id="results" class="results-section" style="display:none;">
         <div class="results-header">
           <h2>Calculation Results</h2>
@@ -198,7 +197,6 @@ import Layout from '../layouts/BaseLayout.astro';
   .status.success { color: #166534; }
   .status.error { color: #b91c1c; }
 
-  /* Results Section */
   .results-section {
     margin-top: 3rem;
   }
@@ -314,7 +312,6 @@ import Layout from '../layouts/BaseLayout.astro';
     "Pelvic floor"
   ];
 
-  // Build zone inputs
   const container = document.getElementById('zones-container');
   ZONE_NAMES.forEach((name, i) => {
     const id = i + 1;
@@ -343,7 +340,8 @@ import Layout from '../layouts/BaseLayout.astro';
     `;
   });
 
-  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
+  // No Function key – endpoint is now anonymous
+  const FUNCTION_URL = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate";
 
   let lastResult = null;
 
@@ -400,7 +398,6 @@ import Layout from '../layouts/BaseLayout.astro';
       status.className = 'status success';
       status.textContent = 'Calculation complete and securely stored';
 
-      // Summary cards
       summary.innerHTML = `
         <div class="summary-item">
           <div class="label">Composite MPA</div>
@@ -420,7 +417,6 @@ import Layout from '../layouts/BaseLayout.astro';
         </div>
       `;
 
-      // Zone table
       zoneBody.innerHTML = data.zone_results.map(z => `
         <tr>
           <td><strong>${z.zone_id}. ${z.name}</strong></td>
