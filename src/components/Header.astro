@@ -1,377 +1,169 @@
 ---
-const publicItems = [
-  { href: "/", label: "Home" },
-  { href: "/research", label: "Research" },
-  { href: "/model", label: "Interactive Model" },
-  { href: "/publications", label: "Publications" },
-  { href: "/how-to-collaborate", label: "Collaborate" },
-];
-
-const moreItems = [
-  { href: "/education", label: "Education" },
-  { href: "/people", label: "People" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/support", label: "Support" },
-  { href: "/newsletter", label: "Newsletter" },
-  { href: "/sponsors", label: "Sponsors" },
-  { href: "/contact", label: "Contact" },
-  { href: "/transparency", label: "Transparency" },
-  { href: "/irb-faq", label: "IRB FAQ" },
-];
-
-const collaboratorItems = [
-  { href: "/intake", label: "Data Intake" },
-  { href: "/results", label: "Results Dashboard" },
-];
+const pathname = Astro.url.pathname;
 ---
-
 <header class="site-header">
   <div class="header-inner">
-    <!-- Logo / Brand -->
     <a href="/" class="brand">
-      <img src="/logo.png" alt="Rex Autistikōn Labs" class="brand-logo" />
+      <img src="/logo.png" alt="Rex Autistikōn Labs" class="brand-logo" width="44" height="44" />
       <span class="brand-text">
-        <strong>Rex Autistikōn Labs</strong>
-        <small>Research Foundation</small>
+        <span class="brand-name">Rex Autistikōn Labs</span>
+        <span class="brand-sub">Research Foundation</span>
       </span>
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="nav-desktop" aria-label="Main">
-      <ul class="nav-list">
-        {publicItems.map(item => (
-          <li>
-            <a href={item.href} class="nav-link">{item.label}</a>
-          </li>
-        ))}
+    <nav class="nav" aria-label="Main">
+      <a href="/" class:list={["nav-link", { active: pathname === "/" }]}>Home</a>
+      <a href="/research" class:list={["nav-link", { active: pathname.startsWith("/research") }]}>Research</a>
+      <a href="/model" class:list={["nav-link", { active: pathname.startsWith("/model") }]}>Interactive Model</a>
+      <a href="/publications" class:list={["nav-link", { active: pathname.startsWith("/publications") }]}>Publications</a>
+      <a href="/collaborate" class:list={["nav-link", { active: pathname.startsWith("/collaborate") }]}>Collaborate</a>
 
-        <!-- More dropdown -->
-        <li class="dropdown">
-          <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-            More
-            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <ul class="dropdown-menu">
-            {moreItems.map(item => (
-              <li>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        <!-- Collaborator Portal -->
-        <li class="dropdown">
-          <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-            Collaborator Portal
-            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <ul class="dropdown-menu">
-            {collaboratorItems.map(item => (
-              <li>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        <!-- Admin (foundation only) -->
-        <li>
-          <a href="/admin/collaborators" class="nav-link nav-admin">Admin</a>
-        </li>
-      </ul>
-
-      <!-- Auth -->
-      <div class="auth-area">
-        <a href="/.auth/login/aad?post_login_redirect_uri=/results" class="btn-login">Sign in</a>
-        <a href="/.auth/logout" class="btn-logout">Sign out</a>
+      <div class="dropdown">
+        <button type="button" class="nav-link dropdown-toggle" aria-expanded="false">More</button>
+        <div class="dropdown-menu">
+          <a href="/education">Education</a>
+          <a href="/people">People</a>
+          <a href="/roadmap">Roadmap</a>
+          <a href="/sponsors">Sponsors</a>
+          <a href="/support">Support</a>
+          <a href="/contact">Contact</a>
+          <a href="/transparency">Transparency</a>
+        </div>
       </div>
+
+      <div class="dropdown">
+        <button type="button" class="nav-link dropdown-toggle" aria-expanded="false">Collaborator Portal</button>
+        <div class="dropdown-menu">
+          <a href="/how-to-collaborate">How to Collaborate</a>
+          <a href="/intake">Data Intake</a>
+          <a href="/results">Results Dashboard</a>
+        </div>
+      </div>
+
+      <a href="/admin/collaborators" class:list={["nav-link", { active: pathname.startsWith("/admin") }]}>Admin</a>
     </nav>
 
-    <!-- Mobile toggle -->
-    <button class="mobile-toggle" aria-label="Open menu" id="mobileToggle">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="auth-actions">
+      <a href="/.auth/login/aad" class="btn-sign-in">Sign in</a>
+      <a href="/.auth/logout" class="btn-sign-out">Sign out</a>
+    </div>
   </div>
-
-  <!-- Mobile menu -->
-  <nav class="nav-mobile" id="mobileNav" hidden>
-    <ul>
-      {publicItems.map(item => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-      <li class="mobile-section">More</li>
-      {moreItems.map(item => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-      <li class="mobile-section">Collaborator Portal</li>
-      {collaboratorItems.map(item => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-      <li class="mobile-section">Foundation</li>
-      <li><a href="/admin/collaborators">Admin</a></li>
-      <li><a href="/.auth/login/aad?post_login_redirect_uri=/results">Sign in</a></li>
-      <li><a href="/.auth/logout">Sign out</a></li>
-    </ul>
-  </nav>
 </header>
 
 <style>
   .site-header {
-    background: #0f172a;
-    color: white;
+    background: #0b1220;
+    color: #e2e8f0;
     position: sticky;
     top: 0;
     z-index: 50;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
   }
-
   .header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.85rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-    color: white;
-  }
-
-  .brand-logo {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-  }
-
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-  }
-
-  .brand-text strong {
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  .brand-text small {
-    font-size: 0.7rem;
-    opacity: 0.7;
-  }
-
-  .nav-desktop {
+    padding: 0.65rem 1.25rem;
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    flex-wrap: wrap;
   }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+  }
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #134e4a;
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand-name { font-weight: 700; font-size: 0.95rem; color: #f8fafc; }
+  .brand-sub { font-size: 0.68rem; color: #94a3b8; }
 
-  .nav-list {
+  .nav {
     display: flex;
     align-items: center;
     gap: 0.15rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    flex: 1;
+    flex-wrap: wrap;
   }
-
   .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.5rem 0.75rem;
-    color: rgba(255,255,255,0.85);
+    color: #cbd5e1;
     text-decoration: none;
     font-size: 0.88rem;
     font-weight: 500;
+    padding: 0.4rem 0.65rem;
     border-radius: 6px;
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
+    font-family: inherit;
   }
+  .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.08); }
 
-  .nav-link:hover {
-    background: rgba(255,255,255,0.1);
-    color: white;
-  }
-
-  .nav-admin {
-    opacity: 0.65;
-    font-size: 0.82rem;
-  }
-
-  /* Dropdown */
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-toggle .chevron {
-    transition: transform 0.15s;
-  }
-
-  .dropdown:hover .chevron,
-  .dropdown:focus-within .chevron {
-    transform: rotate(180deg);
-  }
-
+  .dropdown { position: relative; }
   .dropdown-menu {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     min-width: 200px;
-    background: white;
+    background: #111827;
+    border: 1px solid rgba(148,163,184,0.2);
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    list-style: none;
-    margin: 0.35rem 0 0;
     padding: 0.4rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
-    transition: all 0.15s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     z-index: 60;
   }
-
   .dropdown:hover .dropdown-menu,
-  .dropdown:focus-within .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
+  .dropdown:focus-within .dropdown-menu { display: block; }
   .dropdown-menu a {
     display: block;
-    padding: 0.6rem 0.9rem;
-    color: #0f172a;
+    color: #e2e8f0;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.7rem;
     border-radius: 6px;
   }
+  .dropdown-menu a:hover { background: rgba(15,118,110,0.35); }
 
-  .dropdown-menu a:hover {
-    background: #f0fdfa;
-    color: #0f766e;
-  }
-
-  /* Auth */
-  .auth-area {
+  .auth-actions {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
+    margin-left: auto;
   }
-
-  .btn-login, .btn-logout {
-    padding: 0.4rem 0.85rem;
-    border-radius: 6px;
+  .btn-sign-in {
+    background: #0f766e;
+    color: #fff;
+    text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
-    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
   }
-
-  .btn-login {
-    background: #0f766e;
-    color: white;
-  }
-
-  .btn-login:hover {
-    background: #0d9488;
-  }
-
-  .btn-logout {
+  .btn-sign-in:hover { background: #0d9488; }
+  .btn-sign-out {
     background: transparent;
-    color: rgba(255,255,255,0.7);
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-
-  .btn-logout:hover {
-    color: white;
-    border-color: rgba(255,255,255,0.4);
-  }
-
-  /* Mobile */
-  .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.4rem;
-  }
-
-  .mobile-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: white;
-    border-radius: 1px;
-  }
-
-  .nav-mobile {
-    background: #0f172a;
-    padding: 1rem 1.5rem 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .nav-mobile ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-mobile a {
-    display: block;
-    padding: 0.75rem 0;
-    color: rgba(255,255,255,0.9);
+    color: #cbd5e1;
     text-decoration: none;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .mobile-section {
-    padding: 1rem 0 0.4rem;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #94a3b8;
+    font-size: 0.85rem;
     font-weight: 600;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(148,163,184,0.35);
   }
+  .btn-sign-out:hover { color: #fff; border-color: #94a3b8; }
 
-  @media (max-width: 980px) {
-    .nav-desktop { display: none; }
-    .mobile-toggle { display: flex; }
-  }
-
-  @media (min-width: 981px) {
-    .nav-mobile { display: none !important; }
+  @media (max-width: 900px) {
+    .nav { width: 100%; order: 3; }
+    .auth-actions { margin-left: 0; }
   }
 </style>
-
-<script>
-  const toggle = document.getElementById('mobileToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  toggle?.addEventListener('click', () => {
-    const isHidden = mobileNav.hasAttribute('hidden');
-    if (isHidden) {
-      mobileNav.removeAttribute('hidden');
-      toggle.setAttribute('aria-label', 'Close menu');
-    } else {
-      mobileNav.setAttribute('hidden', '');
-      toggle.setAttribute('aria-label', 'Open menu');
-    }
-  });
-</script>
