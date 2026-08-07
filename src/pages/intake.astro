@@ -107,7 +107,10 @@ import Layout from '../layouts/BaseLayout.astro';
           </div>
           <div class="field">
             <label for="collaborator">Collaborator / Lab ID</label>
-            <input type="text" id="collaborator" placeholder="e.g. mayo-clinic-lab">
+            <input type="text" id="collaborator" readonly placeholder="Loading your identity…">
+            <p style="font-size:0.8rem;color:#64748b;margin-top:0.3rem;">
+              Automatically set from your Microsoft login
+            </p>
           </div>
           <div class="field">
             <label for="session">Session number</label>
@@ -233,6 +236,7 @@ import Layout from '../layouts/BaseLayout.astro';
   .field input:focus, .field select:focus, .field textarea:focus {
     outline: none; border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
   }
+  .field input[readonly] { background: #f8fafc; color: #334155; }
   .field.full { grid-column: 1 / -1; }
   .checkboxes { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 0.4rem; }
   .checkbox-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #334155; cursor: pointer; }
@@ -295,6 +299,35 @@ import Layout from '../layouts/BaseLayout.astro';
         </div>
       </div>`;
   });
+
+  // Auto-fill collaborator_id from Microsoft login
+  async function setCollaboratorFromAuth() {
+    const input = document.getElementById('collaborator');
+    try {
+      const res = await fetch('/.auth/me');
+      const data = await res.json();
+      let email = null;
+      if (data?.length > 0) {
+        if (data[0].user_id) email = data[0].user_id;
+        else {
+          const claims = data[0].user_claims || [];
+          const emailClaim = claims.find(c =>
+            c.typ?.includes('emailaddress') || c.typ?.includes('upn') || c.typ?.endsWith('/email')
+          );
+          if (emailClaim) email = emailClaim.val;
+        }
+      }
+      if (email) {
+        input.value = email;
+      } else {
+        input.value = '';
+        input.placeholder = 'Sign in required';
+      }
+    } catch (e) {
+      input.placeholder = 'Could not read login';
+    }
+  }
+  setCollaboratorFromAuth();
 
   // Show/hide neurodivergence detail
   const groupSelect = document.getElementById('group');
