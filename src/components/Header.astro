@@ -16,7 +16,7 @@ const collaboratorItems = [
   <div class="header-inner">
     <!-- Logo / Brand -->
     <a href="/" class="brand">
-      <span class="brand-mark">R</span>
+      <img src="/logo.png" alt="Rex Autistikōn Labs" class="brand-logo" />
       <span class="brand-text">
         <strong>Rex Autistikōn Labs</strong>
         <small>Research Foundation</small>
@@ -114,16 +114,13 @@ const collaboratorItems = [
     color: white;
   }
 
-  .brand-mark {
-    width: 36px;
-    height: 36px;
-    background: #0f766e;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.1rem;
+  .brand-logo {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
   }
 
   .brand-text {
@@ -212,6 +209,7 @@ const collaboratorItems = [
     visibility: hidden;
     transform: translateY(-4px);
     transition: all 0.15s;
+    z-index: 60;
   }
 
   .dropdown:hover .dropdown-menu,
