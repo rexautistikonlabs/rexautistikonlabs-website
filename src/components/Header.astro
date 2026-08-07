@@ -16,7 +16,6 @@ const pathname = Astro.url.pathname;
       <a href="/research" class:list={["nav-link", { active: pathname.startsWith("/research") }]}>Research</a>
       <a href="/model" class:list={["nav-link", { active: pathname.startsWith("/model") }]}>Interactive Model</a>
       <a href="/publications" class:list={["nav-link", { active: pathname.startsWith("/publications") }]}>Publications</a>
-      <a href="/collaborate" class:list={["nav-link", { active: pathname.startsWith("/collaborate") }]}>Collaborate</a>
 
       <div class="dropdown">
         <button type="button" class="nav-link dropdown-toggle" aria-expanded="false">More</button>
@@ -28,6 +27,7 @@ const pathname = Astro.url.pathname;
           <a href="/support">Support</a>
           <a href="/contact">Contact</a>
           <a href="/transparency">Transparency</a>
+          <a href="/admin/collaborators">Admin</a>
         </div>
       </div>
 
@@ -35,12 +35,11 @@ const pathname = Astro.url.pathname;
         <button type="button" class="nav-link dropdown-toggle" aria-expanded="false">Collaborator Portal</button>
         <div class="dropdown-menu">
           <a href="/how-to-collaborate">How to Collaborate</a>
+          <a href="/collaborate">Request Access</a>
           <a href="/intake">Data Intake</a>
           <a href="/results">Results Dashboard</a>
         </div>
       </div>
-
-      <a href="/admin/collaborators" class:list={["nav-link", { active: pathname.startsWith("/admin") }]}>Admin</a>
     </nav>
 
     <div class="auth-actions">
@@ -114,7 +113,7 @@ const pathname = Astro.url.pathname;
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 200px;
+    min-width: 210px;
     background: #111827;
     border: 1px solid rgba(148,163,184,0.2);
     border-radius: 8px;
