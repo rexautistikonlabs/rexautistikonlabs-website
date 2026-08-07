@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="How to Collaborate | Rex Autistikōn Labs"
+  description="Process for research partners to request access to the Rex Autistikōn Labs secure data intake and calculation platform."
+>
+  <main class="guide-page">
+    <section class="hero">
+      <h1>How to Collaborate</h1>
+      <p class="subtitle">
+        Rex Autistikōn Labs operates a controlled research environment for sensor-rich myofascial zone measurements and free-energy calculations.
+      </p>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <h2>1. Submit an Access Request</h2>
+        <p>
+          Complete the formal <a href="/collaborate">Collaborator Access Request</a> form. 
+          You will be asked for institutional affiliation, intended use of the platform, and IRB/ethics status.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>2. Review by the Foundation</h2>
+        <p>
+          All requests are reviewed by Rex Autistikōn Labs. 
+          You will receive a decision at the institutional email address you provided (typically within 3–5 business days).
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>3. Approved Collaborators</h2>
+        <p>
+          Once approved, you will receive secure access instructions. 
+          Approved collaborators can then use the protected <a href="/intake">Data Intake</a> portal to submit 8-zone measurements for server-side Kelvin-Voigt and free-energy calculations.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>4. Data Handling</h2>
+        <p>
+          All submitted data is stored in a secure Azure environment controlled by Rex Autistikon Research Foundation. 
+          Data is not shared outside approved research collaborators without explicit written agreement.
+        </p>
+      </div>
+
+      <div class="cta">
+        <a href="/collaborate" class="btn-primary">Request Access →</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    background: #f8fafc;
+    min-height: 80vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: white;
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+  }
+
+  .card p {
+    color: #475569;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .card a {
+    color: #0f766e;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: #0f766e;
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #0d9488;
+  }
+</style>
