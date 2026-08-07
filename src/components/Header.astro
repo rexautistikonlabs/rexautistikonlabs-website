@@ -1,167 +1,345 @@
 ---
-const currentPath = Astro.url.pathname;
-
-const primaryItems = [
+const publicItems = [
   { href: "/", label: "Home" },
   { href: "/research", label: "Research" },
-  { href: "/model", label: "Interactive Model" },
-  { href: "/publications", label: "Publications" },
-  { href: "/intake", label: "Data Intake" },
-  { href: "/results", label: "Results" },
-  { href: "/collaborate", label: "Collaborate" },
+  { href: "/how-to-collaborate", label: "How to Collaborate" },
+  { href: "/collaborate", label: "Request Access" },
 ];
 
-const moreItems = [
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/education", label: "Education" },
-  { href: "/people", label: "People" },
-  { href: "/support", label: "Support" },
-  { href: "/newsletter", label: "Newsletter" },
-  { href: "/sponsors", label: "Sponsors" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-  { href: "/admin/collaborators", label: "Admin" },   // ← added
-  { href: "/how-to-collaborate", label: "How to Collaborate" },
+const collaboratorItems = [
+  { href: "/intake", label: "Data Intake" },
+  { href: "/results", label: "Results Dashboard" },
 ];
 ---
 
-<header class="border-b border-slate-200 bg-white sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo / Brand -->
+    <a href="/" class="brand">
+      <span class="brand-mark">R</span>
+      <span class="brand-text">
+        <strong>Rex Autistikōn Labs</strong>
+        <small>Research Foundation</small>
+      </span>
+    </a>
 
-      <!-- Logo + Name -->
-      <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-3">
-          <img 
-            src="/logo.png" 
-            alt="Rex Autistikōn Labs" 
-            class="h-9 w-9 object-contain"
-          />
-          <div class="flex flex-col">
-            <span class="text-base font-semibold text-slate-900 tracking-tight leading-tight">
-              Rex Autistikōn Labs
-            </span>
-            <span class="text-xs text-slate-500 leading-tight">
-              Research Foundation
-            </span>
-          </div>
-        </a>
-      </div>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center gap-6">
-        {primaryItems.map((item) => (
-          <a
-            href={item.href}
-            class={`text-sm font-medium transition-colors ${
-              currentPath === item.href
-                ? "text-teal-700"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            {item.label}
-          </a>
+    <!-- Desktop Navigation -->
+    <nav class="nav-desktop" aria-label="Main">
+      <ul class="nav-list">
+        {publicItems.map(item => (
+          <li>
+            <a href={item.href} class="nav-link">{item.label}</a>
+          </li>
         ))}
 
-        <!-- More dropdown -->
-        <div class="relative" id="more-menu">
-          <button
-            id="more-button"
-            type="button"
-            class="inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            aria-expanded="false"
-            aria-haspopup="true"
-          >
-            More
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        <!-- Collaborator Portal Dropdown -->
+        <li class="dropdown">
+          <button class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Collaborator Portal
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </button>
+          <ul class="dropdown-menu">
+            {collaboratorItems.map(item => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
 
-          <div
-            id="more-dropdown"
-            class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50"
-          >
-            <div class="py-1">
-              {moreItems.map((item) => (
-                <a
-                  href={item.href}
-                  class={`block px-4 py-2 text-sm ${
-                    currentPath === item.href
-                      ? "bg-teal-50 text-teal-800"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
+        <!-- Admin (foundation personnel only) -->
+        <li>
+          <a href="/admin/collaborators" class="nav-link nav-admin">Admin</a>
+        </li>
+      </ul>
 
-      <!-- Mobile menu button -->
-      <div class="lg:hidden">
-        <button
-          id="mobile-menu-button"
-          type="button"
-          class="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
+      <!-- Auth -->
+      <div class="auth-area">
+        <a href="/.auth/login/aad?post_login_redirect_uri=/results" class="btn-login">Sign in</a>
+        <a href="/.auth/logout" class="btn-logout">Sign out</a>
       </div>
-    </div>
+    </nav>
+
+    <!-- Mobile toggle -->
+    <button class="mobile-toggle" aria-label="Open menu" id="mobileToggle">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 
-  <!-- Mobile Navigation -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white">
-    <div class="px-4 pt-2 pb-4 space-y-1">
-      {[...primaryItems, ...moreItems].map((item) => (
-        <a
-          href={item.href}
-          class={`block px-3 py-2 rounded-md text-base font-medium ${
-            currentPath === item.href
-              ? "bg-teal-50 text-teal-800"
-              : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-          }`}
-        >
-          {item.label}
-        </a>
+  <!-- Mobile menu -->
+  <nav class="nav-mobile" id="mobileNav" hidden>
+    <ul>
+      {publicItems.map(item => (
+        <li><a href={item.href}>{item.label}</a></li>
       ))}
-    </div>
-  </div>
+      <li class="mobile-section">Collaborator Portal</li>
+      {collaboratorItems.map(item => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+      <li class="mobile-section">Foundation</li>
+      <li><a href="/admin/collaborators">Admin</a></li>
+      <li><a href="/.auth/login/aad?post_login_redirect_uri=/results">Sign in</a></li>
+      <li><a href="/.auth/logout">Sign out</a></li>
+    </ul>
+  </nav>
 </header>
 
+<style>
+  .site-header {
+    background: #0f172a;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: white;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    background: #0f766e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .brand-text strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .brand-text small {
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.85rem;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .nav-link:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  .nav-admin {
+    opacity: 0.7;
+    font-size: 0.85rem;
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle .chevron {
+    transition: transform 0.15s;
+  }
+
+  .dropdown:hover .chevron,
+  .dropdown:focus-within .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    list-style: none;
+    margin: 0.35rem 0 0;
+    padding: 0.4rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: all 0.15s;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 0.6rem 0.9rem;
+    color: #0f172a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .dropdown-menu a:hover {
+    background: #f0fdfa;
+    color: #0f766e;
+  }
+
+  /* Auth buttons */
+  .auth-area {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-login, .btn-logout {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-login {
+    background: #0f766e;
+    color: white;
+  }
+
+  .btn-login:hover {
+    background: #0d9488;
+  }
+
+  .btn-logout {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .btn-logout:hover {
+    color: white;
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  /* Mobile */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+  }
+
+  .nav-mobile {
+    background: #0f172a;
+    padding: 1rem 1.5rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-mobile ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-mobile a {
+    display: block;
+    padding: 0.75rem 0;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .mobile-section {
+    padding: 1rem 0 0.4rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .nav-desktop { display: none; }
+    .mobile-toggle { display: flex; }
+  }
+
+  @media (min-width: 901px) {
+    .nav-mobile { display: none !important; }
+  }
+</style>
+
 <script>
-  // Desktop "More" dropdown
-  const moreButton = document.getElementById('more-button');
-  const moreDropdown = document.getElementById('more-dropdown');
-
-  moreButton?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = moreButton.getAttribute('aria-expanded') === 'true';
-    moreButton.setAttribute('aria-expanded', String(!isOpen));
-    moreDropdown?.classList.toggle('hidden');
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', () => {
-    moreButton?.setAttribute('aria-expanded', 'false');
-    moreDropdown?.classList.add('hidden');
-  });
-
   // Mobile menu toggle
-  const mobileButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  mobileButton?.addEventListener('click', () => {
-    const expanded = mobileButton.getAttribute('aria-expanded') === 'true';
-    mobileButton.setAttribute('aria-expanded', String(!expanded));
-    mobileMenu?.classList.toggle('hidden');
+  const toggle = document.getElementById('mobileToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  toggle?.addEventListener('click', () => {
+    const isHidden = mobileNav.hasAttribute('hidden');
+    if (isHidden) {
+      mobileNav.removeAttribute('hidden');
+      toggle.setAttribute('aria-label', 'Close menu');
+    } else {
+      mobileNav.setAttribute('hidden', '');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
   });
 </script>
