@@ -7,15 +7,15 @@ import Layout from '../layouts/BaseLayout.astro';
     <section class="hero">
       <h1>Results Dashboard</h1>
       <p class="subtitle">
-        Personal calculation history and de-identified collective overview of the<br />
-        8-zone Kelvin-Voigt free-energy model.
+        Personal history and interactive collective analysis of the 8-zone<br />
+        Kelvin–Voigt free-energy model — layer groups, select zones, compare metrics.
       </p>
     </section>
 
     <section class="tabs-section">
       <div class="tabs">
         <button class="tab active" data-tab="my">My Results</button>
-        <button class="tab" data-tab="collective">Collective Overview</button>
+        <button class="tab" data-tab="collective">Collective Laboratory</button>
       </div>
 
       <!-- ==================== MY RESULTS ==================== -->
@@ -28,56 +28,98 @@ import Layout from '../layouts/BaseLayout.astro';
         <div id="my-detail" style="display:none;"></div>
       </div>
 
-      <!-- ==================== COLLECTIVE ==================== -->
+      <!-- ==================== COLLECTIVE LAB ==================== -->
       <div id="panel-collective" class="panel">
         <div id="agg-loading" class="loading">Loading collective overview…</div>
         <div id="agg-content" style="display:none;">
 
-          <!-- Top summary -->
           <div class="summary-grid" id="agg-summary"></div>
 
-          <!-- Zone free-energy landscape -->
+          <!-- Controls -->
+          <div class="card controls-card">
+            <div class="controls-grid">
+              <div>
+                <label class="ctrl-label">Metric</label>
+                <select id="metricSelect" class="ctrl-select">
+                  <option value="free_energy_F">Free energy F</option>
+                  <option value="fidelity">Fidelity</option>
+                  <option value="pi_eff">π_eff</option>
+                  <option value="mpa">MPA score</option>
+                </select>
+              </div>
+              <div>
+                <label class="ctrl-label">Zones</label>
+                <div class="zone-toggles" id="zoneToggles"></div>
+                <div class="zone-actions">
+                  <button type="button" class="link-btn" id="zonesAll">All</button>
+                  <button type="button" class="link-btn" id="zonesNone">None</button>
+                </div>
+              </div>
+              <div>
+                <label class="ctrl-label">Layer groups (overlay)</label>
+                <div class="group-toggles" id="groupToggles"></div>
+                <p class="ctrl-hint">Overall mean is always shown. Toggle groups to layer averages by neurodivergence label.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Radar + legend -->
           <div class="card">
             <div class="card-header">
-              <h2>Zone Free-Energy Landscape</h2>
-              <span class="card-sub">Mean free energy F across all sessions (higher = greater prediction-error burden)</span>
+              <h2>Zone profile (layered radar)</h2>
+              <span class="card-sub">Each axis is a zone. Layers are group means for the selected metric. Use controls above to show/hide zones and groups.</span>
+            </div>
+            <div class="radar-wrap">
+              <svg id="radarSvg" viewBox="0 0 420 420" role="img" aria-label="Radar chart of zone metrics by group"></svg>
+              <div id="radarLegend" class="radar-legend"></div>
+            </div>
+          </div>
+
+          <!-- Grouped bars for selected zones -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Selected zones — group comparison</h2>
+              <span class="card-sub">Bars show mean metric per group for each selected zone (n = session count contributing to that cell when available).</span>
+            </div>
+            <div id="groupZoneBars" class="chart-area"></div>
+          </div>
+
+          <!-- Overall zone landscape -->
+          <div class="card">
+            <div class="card-header">
+              <h2>All-sessions zone landscape</h2>
+              <span class="card-sub">Mean across every stored session (not stratified).</span>
             </div>
             <div id="agg-zone" class="chart-area"></div>
           </div>
 
-          <!-- Two-column: Region + Group -->
           <div class="two-col">
             <div class="card">
               <div class="card-header">
-                <h2>By World Region</h2>
-                <span class="card-sub">Session count & mean free energy</span>
+                <h2>By world region</h2>
+                <span class="card-sub">Session count and mean free energy</span>
               </div>
               <div id="agg-region" class="chart-area"></div>
             </div>
             <div class="card">
               <div class="card-header">
-                <h2>By Group</h2>
-                <span class="card-sub">Neurotypical vs neurodivergence</span>
+                <h2>By group (session totals)</h2>
+                <span class="card-sub">Neurodivergence labels as submitted</span>
               </div>
               <div id="agg-group" class="chart-area"></div>
             </div>
           </div>
 
-          <!-- Zone fidelity table -->
           <div class="card">
             <div class="card-header">
-              <h2>Zone Summary Table</h2>
-              <span class="card-sub">Mean fidelity, π_eff and free energy per zone</span>
+              <h2>Zone summary table</h2>
+              <span class="card-sub">Overall means</span>
             </div>
             <div class="table-scroll">
               <table id="agg-zone-table">
                 <thead>
                   <tr>
-                    <th>Zone</th>
-                    <th>n</th>
-                    <th>Mean Fidelity</th>
-                    <th>Mean π_eff</th>
-                    <th>Mean Free Energy F</th>
+                    <th>Zone</th><th>n</th><th>Mean Fidelity</th><th>Mean π_eff</th><th>Mean Free Energy F</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -85,6 +127,11 @@ import Layout from '../layouts/BaseLayout.astro';
             </div>
           </div>
 
+          <p class="lab-note">
+            Group layers use collaborator-supplied labels (neurotypical, autistic, ADHD, etc.).
+            Cell means require sufficient sessions per group×zone; sparse cells are omitted.
+            This is exploratory instrumentation, not a clinical comparison tool.
+          </p>
         </div>
       </div>
     </section>
@@ -101,7 +148,7 @@ import Layout from '../layouts/BaseLayout.astro';
   .subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 640px; margin: 0 auto; line-height: 1.55; }
 
   .tabs-section { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-  .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.75rem; }
+  .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
   .tab {
     background: #e2e8f0; border: none; padding: 0.65rem 1.5rem;
     border-radius: 8px; font-weight: 600; cursor: pointer; color: #475569; font-size: 0.95rem;
@@ -137,40 +184,49 @@ import Layout from '../layouts/BaseLayout.astro';
   }
   .summary-item .value { font-size: 1.45rem; font-weight: 700; color: #0f172a; }
 
-  .two-col {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-  }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* Charts */
-  .chart-area { }
-  .bar-row {
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 0.7rem;
+  .controls-grid {
+    display: grid; grid-template-columns: 180px 1fr 1fr; gap: 1.5rem;
   }
-  .bar-label {
-    width: 170px; font-size: 0.82rem; color: #334155;
-    flex-shrink: 0; line-height: 1.3;
+  @media (max-width: 900px) { .controls-grid { grid-template-columns: 1fr; } }
+  .ctrl-label { display: block; font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  .ctrl-select {
+    width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem;
   }
-  .bar-track {
-    flex: 1; background: #f1f5f9; border-radius: 5px;
-    height: 20px; overflow: hidden; position: relative;
+  .ctrl-hint { font-size: 0.75rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.4; }
+  .zone-toggles, .group-toggles { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid #cbd5e1;
+    font-size: 0.8rem; cursor: pointer; background: #f8fafc; color: #334155; user-select: none;
   }
-  .bar-fill {
-    height: 100%; border-radius: 5px;
-    background: linear-gradient(90deg, #0f766e, #14b8a6);
-    transition: width 0.4s ease;
-  }
-  .bar-fill.alt { background: linear-gradient(90deg, #0369a1, #0ea5e9); }
-  .bar-value {
-    width: 90px; text-align: right; font-size: 0.82rem;
-    font-weight: 600; color: #0f172a; flex-shrink: 0;
-  }
-  .bar-n {
-    font-size: 0.75rem; color: #94a3b8; font-weight: 400;
+  .chip input { accent-color: #0f766e; }
+  .chip.on { background: #ecfdf5; border-color: #99f6e4; color: #0f766e; }
+  .zone-actions { margin-top: 0.4rem; }
+  .link-btn {
+    background: none; border: none; color: #0f766e; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; padding: 0; margin-right: 0.75rem;
   }
 
-  /* My results list */
+  .radar-wrap { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; }
+  #radarSvg { width: min(420px, 100%); height: auto; }
+  .radar-legend { flex: 1; min-width: 160px; font-size: 0.85rem; }
+  .legend-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+  .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+  .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
+  .bar-label { width: 170px; font-size: 0.82rem; color: #334155; flex-shrink: 0; line-height: 1.3; }
+  .bar-track { flex: 1; background: #f1f5f9; border-radius: 5px; height: 20px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, #0f766e, #14b8a6); }
+  .bar-fill.alt { background: linear-gradient(90deg, #0369a1, #0ea5e9); }
+  .bar-value { width: 100px; text-align: right; font-size: 0.82rem; font-weight: 600; color: #0f172a; flex-shrink: 0; }
+  .bar-n { font-size: 0.75rem; color: #94a3b8; font-weight: 400; }
+
+  .cluster { margin-bottom: 1.25rem; }
+  .cluster-title { font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-bottom: 0.5rem; }
+
   .result-row {
     display: flex; justify-content: space-between; align-items: center;
     padding: 1.1rem 0; border-bottom: 1px solid #f1f5f9; gap: 1rem; flex-wrap: wrap;
@@ -194,18 +250,43 @@ import Layout from '../layouts/BaseLayout.astro';
   table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   th {
     text-align: left; padding: 0.7rem 0.9rem; background: #f8fafc;
-    color: #334155; font-weight: 600; border-bottom: 2px solid #e2e8f0;
-    white-space: nowrap;
+    color: #334155; font-weight: 600; border-bottom: 2px solid #e2e8f0; white-space: nowrap;
   }
   td { padding: 0.7rem 0.9rem; border-bottom: 1px solid #f1f5f9; }
   tr:hover td { background: #f8fafc; }
   .num { font-variant-numeric: tabular-nums; text-align: right; }
+
+  .lab-note {
+    font-size: 0.8rem; color: #64748b; line-height: 1.5; margin-top: 0.5rem;
+  }
 </style>
 
 <script>
   const BASE = "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api";
+  const ZONE_SHORT = [
+    "Extraocular", "Middle ear", "Nasal", "Tongue",
+    "Pharynx/larynx", "Suboccipital", "Visceral/diaphragm", "Pelvic floor"
+  ];
+  const GROUP_COLORS = {
+    overall: "#0f766e",
+    neurotypical: "#0369a1",
+    autistic: "#b45309",
+    adhd: "#7c3aed",
+    autistic_adhd: "#be123c",
+    other: "#64748b",
+    prefer_not: "#94a3b8",
+    unknown: "#cbd5e1"
+  };
+  function groupColor(key) {
+    return GROUP_COLORS[key] || "#64748b";
+  }
+
   let currentUserEmail = null;
   let myResultsCache = [];
+  let aggData = null;
+  let selectedZones = new Set([1,2,3,4,5,6,7,8]);
+  let selectedGroups = new Set(); // filled after load
+  let currentMetric = "free_energy_F";
 
   // ---------- Auth ----------
   async function getLoggedInEmail() {
@@ -220,9 +301,7 @@ import Layout from '../layouts/BaseLayout.astro';
         );
         if (emailClaim) return emailClaim.val;
       }
-    } catch (e) {
-      console.warn("Auth identity unavailable", e);
-    }
+    } catch (e) {}
     return null;
   }
 
@@ -239,44 +318,251 @@ import Layout from '../layouts/BaseLayout.astro';
     });
   });
 
-  // ---------- Helpers ----------
   function bar(label, value, max, n, alt = false) {
     const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0;
     return `
       <div class="bar-row">
         <div class="bar-label">${label}</div>
-        <div class="bar-track">
-          <div class="bar-fill ${alt ? "alt" : ""}" style="width:${pct}%"></div>
-        </div>
-        <div class="bar-value">${value.toFixed(3)} <span class="bar-n">n=${n}</span></div>
+        <div class="bar-track"><div class="bar-fill ${alt ? "alt" : ""}" style="width:${pct}%"></div></div>
+        <div class="bar-value">${Number(value).toFixed(3)} <span class="bar-n">n=${n}</span></div>
       </div>`;
   }
 
-  // ---------- My Results ----------
+  // ---------- Metric helpers ----------
+  function metricFromZone(z, metric) {
+    if (!z) return null;
+    if (metric === "free_energy_F") return z.mean_free_energy_F ?? z.free_energy_F ?? null;
+    if (metric === "fidelity") return z.mean_fidelity ?? z.fidelity ?? null;
+    if (metric === "pi_eff") return z.mean_pi_eff ?? z.pi_eff ?? null;
+    if (metric === "mpa") return z.mean_mpa ?? z.mpa_score ?? null;
+    return null;
+  }
+
+  function overallZoneSeries(metric) {
+    const zones = aggData?.by_zone || [];
+    return [1,2,3,4,5,6,7,8].map(id => {
+      const z = zones.find(x => x.zone_id === id);
+      return metricFromZone(z, metric);
+    });
+  }
+
+  function groupZoneSeries(groupKey, metric) {
+    const g = aggData?.by_group?.[groupKey];
+    if (!g) return null;
+    // Preferred: per-zone means under group
+    if (Array.isArray(g.by_zone) && g.by_zone.length) {
+      return [1,2,3,4,5,6,7,8].map(id => {
+        const z = g.by_zone.find(x => x.zone_id === id);
+        return metricFromZone(z, metric);
+      });
+    }
+    // Fallback: only session-level totals exist — no per-zone layer
+    return null;
+  }
+
+  // ---------- Radar ----------
+  function drawRadar() {
+    const svg = document.getElementById("radarSvg");
+    const legend = document.getElementById("radarLegend");
+    if (!svg) return;
+    const cx = 210, cy = 210, R = 150;
+    const n = 8;
+    const angle = (i) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
+
+    const layers = [];
+    // Overall
+    layers.push({ key: "overall", label: "All sessions", color: groupColor("overall"), values: overallZoneSeries(currentMetric) });
+    // Selected groups with zone series
+    for (const g of selectedGroups) {
+      const vals = groupZoneSeries(g, currentMetric);
+      if (vals) layers.push({ key: g, label: g.replace(/_/g, " "), color: groupColor(g), values: vals });
+    }
+
+    // Scale
+    let maxV = 0.001;
+    layers.forEach(L => L.values.forEach((v, i) => {
+      if (selectedZones.has(i + 1) && v != null && isFinite(v)) maxV = Math.max(maxV, v);
+    }));
+
+    const pt = (i, v) => {
+      const a = angle(i);
+      const r = maxV > 0 ? (Math.max(0, v) / maxV) * R : 0;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    };
+
+    let html = "";
+    // grid rings
+    [0.25, 0.5, 0.75, 1].forEach(f => {
+      const pts = [];
+      for (let i = 0; i < n; i++) {
+        const a = angle(i);
+        pts.push(`${cx + f * R * Math.cos(a)},${cy + f * R * Math.sin(a)}`);
+      }
+      html += `<polygon points="${pts.join(" ")}" fill="none" stroke="#e2e8f0" stroke-width="1"/>`;
+    });
+    // axes + labels
+    for (let i = 0; i < n; i++) {
+      const a = angle(i);
+      const x2 = cx + R * Math.cos(a), y2 = cy + R * Math.sin(a);
+      html += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#e2e8f0" stroke-width="1"/>`;
+      const lx = cx + (R + 22) * Math.cos(a), ly = cy + (R + 22) * Math.sin(a);
+      const on = selectedZones.has(i + 1);
+      html += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="${on ? "#0f172a" : "#cbd5e1"}" font-weight="${on ? 600 : 400}">${i + 1}</text>`;
+    }
+
+    // polygons
+    layers.forEach(L => {
+      const pts = [];
+      for (let i = 0; i < n; i++) {
+        if (!selectedZones.has(i + 1)) {
+          // pull to center for hidden zones so shape only spans selected
+          pts.push(`${cx},${cy}`);
+          continue;
+        }
+        const v = L.values[i];
+        if (v == null || !isFinite(v)) { pts.push(`${cx},${cy}`); continue; }
+        const [x, y] = pt(i, v);
+        pts.push(`${x},${y}`);
+      }
+      html += `<polygon points="${pts.join(" ")}" fill="${L.color}22" stroke="${L.color}" stroke-width="2"/>`;
+      for (let i = 0; i < n; i++) {
+        if (!selectedZones.has(i + 1)) continue;
+        const v = L.values[i];
+        if (v == null || !isFinite(v)) continue;
+        const [x, y] = pt(i, v);
+        html += `<circle cx="${x}" cy="${y}" r="3.5" fill="${L.color}"/>`;
+      }
+    });
+
+    // center label
+    html += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-size="11" fill="#64748b">${currentMetric.replace(/_/g, " ")}</text>`;
+
+    svg.innerHTML = html;
+
+    legend.innerHTML = layers.map(L =>
+      `<div class="legend-row"><span class="legend-swatch" style="background:${L.color}"></span>${L.label}</div>`
+    ).join("") + `<p style="margin-top:0.75rem;font-size:0.75rem;color:#94a3b8;">Axes 1–8 = zones. Hidden zones collapse to center.</p>`;
+  }
+
+  function drawGroupZoneBars() {
+    const el = document.getElementById("groupZoneBars");
+    if (!el || !aggData) return;
+    const metric = currentMetric;
+    const groups = [...selectedGroups];
+    if (!groups.length) {
+      el.innerHTML = `<p style="color:#94a3b8;font-size:0.9rem;">Select one or more groups above to compare zone means.</p>`;
+      return;
+    }
+    let html = "";
+    for (const id of [1,2,3,4,5,6,7,8]) {
+      if (!selectedZones.has(id)) continue;
+      const rows = [];
+      let maxV = 0.001;
+      for (const g of groups) {
+        const series = groupZoneSeries(g, metric);
+        const v = series ? series[id - 1] : null;
+        if (v != null && isFinite(v)) {
+          maxV = Math.max(maxV, v);
+          const gz = aggData.by_group[g]?.by_zone?.find(z => z.zone_id === id);
+          rows.push({ g, v, n: gz?.sample_count ?? aggData.by_group[g]?.count ?? "?" });
+        }
+      }
+      if (!rows.length) continue;
+      html += `<div class="cluster"><div class="cluster-title">Zone ${id}: ${ZONE_SHORT[id - 1]}</div>`;
+      rows.forEach(r => {
+        const pct = (r.v / maxV) * 100;
+        html += `
+          <div class="bar-row">
+            <div class="bar-label">${r.g.replace(/_/g, " ")}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${groupColor(r.g)}"></div></div>
+            <div class="bar-value">${r.v.toFixed(3)} <span class="bar-n">n=${r.n}</span></div>
+          </div>`;
+      });
+      html += `</div>`;
+    }
+    el.innerHTML = html || `<p style="color:#94a3b8;font-size:0.9rem;">No per-zone group means available yet. Overall landscape still works; backend must return by_group[g].by_zone for layers.</p>`;
+  }
+
+  function rebuildLabVisuals() {
+    drawRadar();
+    drawGroupZoneBars();
+  }
+
+  function buildControls() {
+    const zt = document.getElementById("zoneToggles");
+    zt.innerHTML = ZONE_SHORT.map((name, i) => {
+      const id = i + 1;
+      return `<label class="chip ${selectedZones.has(id) ? "on" : ""}"><input type="checkbox" data-zone="${id}" ${selectedZones.has(id) ? "checked" : ""}/> ${id}. ${name}</label>`;
+    }).join("");
+    zt.querySelectorAll("input").forEach(inp => {
+      inp.addEventListener("change", () => {
+        const id = parseInt(inp.dataset.zone, 10);
+        if (inp.checked) selectedZones.add(id); else selectedZones.delete(id);
+        inp.closest(".chip").classList.toggle("on", inp.checked);
+        rebuildLabVisuals();
+      });
+    });
+    document.getElementById("zonesAll").onclick = () => {
+      selectedZones = new Set([1,2,3,4,5,6,7,8]);
+      buildControls(); rebuildLabVisuals();
+    };
+    document.getElementById("zonesNone").onclick = () => {
+      selectedZones = new Set();
+      buildControls(); rebuildLabVisuals();
+    };
+
+    const groupKeys = Object.keys(aggData?.by_group || {});
+    const gt = document.getElementById("groupToggles");
+    if (!groupKeys.length) {
+      gt.innerHTML = `<span style="font-size:0.85rem;color:#94a3b8;">No group labels in stored sessions yet.</span>`;
+    } else {
+      // default: select all groups that have by_zone
+      if (selectedGroups.size === 0) {
+        groupKeys.forEach(g => {
+          if (aggData.by_group[g]?.by_zone?.length) selectedGroups.add(g);
+        });
+        // if none have by_zone, still list them but none selected
+      }
+      gt.innerHTML = groupKeys.map(g => {
+        const hasZones = !!aggData.by_group[g]?.by_zone?.length;
+        return `<label class="chip ${selectedGroups.has(g) ? "on" : ""}" title="${hasZones ? "Per-zone means available" : "Session totals only — enable backend by_zone for radar layer"}">
+          <input type="checkbox" data-group="${g}" ${selectedGroups.has(g) ? "checked" : ""} ${hasZones ? "" : ""}/>
+          ${g.replace(/_/g, " ")}${hasZones ? "" : " *"}
+        </label>`;
+      }).join("");
+      gt.querySelectorAll("input").forEach(inp => {
+        inp.addEventListener("change", () => {
+          const g = inp.dataset.group;
+          if (inp.checked) selectedGroups.add(g); else selectedGroups.delete(g);
+          inp.closest(".chip").classList.toggle("on", inp.checked);
+          rebuildLabVisuals();
+        });
+      });
+    }
+
+    document.getElementById("metricSelect").onchange = (e) => {
+      currentMetric = e.target.value;
+      rebuildLabVisuals();
+    };
+  }
+
+  // ---------- My Results (unchanged core) ----------
   async function loadMyResults() {
     const loading = document.getElementById("my-loading");
     const empty = document.getElementById("my-empty");
     const list = document.getElementById("my-list");
-
     currentUserEmail = await getLoggedInEmail();
     if (!currentUserEmail) {
       loading.textContent = "Please sign in to view your results.";
       return;
     }
-
     try {
       const res = await fetch(`${BASE}/list-my-results?collaborator_id=${encodeURIComponent(currentUserEmail)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to load");
-
       loading.style.display = "none";
       myResultsCache = data.results || [];
-
-      if (myResultsCache.length === 0) {
-        empty.style.display = "block";
-        return;
-      }
-
+      if (myResultsCache.length === 0) { empty.style.display = "block"; return; }
       list.innerHTML = myResultsCache.map((r, idx) => {
         const date = r.timestamp_utc ? new Date(r.timestamp_utc).toLocaleString() : "—";
         return `
@@ -303,58 +589,30 @@ import Layout from '../layouts/BaseLayout.astro';
     document.getElementById("my-list").style.display = "none";
     const detail = document.getElementById("my-detail");
     detail.style.display = "block";
-
     const maxF = Math.max(...(r.zone_results || []).map(z => z.free_energy_F), 0.01);
-
     detail.innerHTML = `
       <button class="btn-back" onclick="backToList()">← Back to list</button>
-
       <div class="summary-grid">
         <div class="summary-item"><div class="label">Composite MPA</div><div class="value">${r.composite_mpa}</div></div>
         <div class="summary-item"><div class="label">Mean Fidelity</div><div class="value">${r.mean_fidelity}</div></div>
         <div class="summary-item"><div class="label">Mean π_eff</div><div class="value">${r.mean_pi_eff}</div></div>
         <div class="summary-item"><div class="label">Total Free Energy</div><div class="value">${r.total_free_energy}</div></div>
       </div>
-
       <div class="card">
-        <div class="card-header">
-          <h2>Zone Free-Energy Profile</h2>
-          <span class="card-sub">Higher free energy indicates greater prediction-error burden in that zone</span>
-        </div>
-        <div class="chart-area">
-          ${(r.zone_results || []).map(z =>
-            bar(`${z.zone_id}. ${z.name}`, z.free_energy_F, maxF, 1)
-          ).join("")}
-        </div>
+        <div class="card-header"><h2>Zone free-energy profile</h2>
+        <span class="card-sub">Higher F = greater prediction-error burden</span></div>
+        <div class="chart-area">${(r.zone_results || []).map(z => bar(`${z.zone_id}. ${z.name}`, z.free_energy_F, maxF, 1)).join("")}</div>
       </div>
-
       <div class="card">
-        <div class="card-header"><h2>Zone Detail Table</h2></div>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Zone</th><th>Fidelity</th><th>π_eff</th>
-                <th>Pred. Error</th><th>Free Energy F</th><th>MPA</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${(r.zone_results || []).map(z => `
-                <tr>
-                  <td>${z.zone_id}. ${z.name}</td>
-                  <td class="num">${z.fidelity}</td>
-                  <td class="num">${z.pi_eff}</td>
-                  <td class="num">${z.prediction_error}</td>
-                  <td class="num">${z.free_energy_F}</td>
-                  <td class="num">${z.mpa_score}</td>
-                </tr>`).join("")}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <button class="btn-view" onclick='downloadOne(${JSON.stringify(JSON.stringify(r))})'>Download JSON</button>
+        <div class="card-header"><h2>Zone detail</h2></div>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Zone</th><th>Fidelity</th><th>π_eff</th><th>Pred. Error</th><th>F</th><th>MPA</th></tr></thead>
+          <tbody>${(r.zone_results || []).map(z => `
+            <tr><td>${z.zone_id}. ${z.name}</td>
+            <td class="num">${z.fidelity}</td><td class="num">${z.pi_eff}</td>
+            <td class="num">${z.prediction_error}</td><td class="num">${z.free_energy_F}</td>
+            <td class="num">${z.mpa_score}</td></tr>`).join("")}</tbody>
+        </table></div>
       </div>`;
   };
 
@@ -363,63 +621,45 @@ import Layout from '../layouts/BaseLayout.astro';
     document.getElementById("my-list").style.display = "block";
   };
 
-  window.downloadOne = function(jsonStr) {
-    const data = JSON.parse(jsonStr);
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `rex-calc-${data.submission_id || "result"}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  // ---------- Collective Overview ----------
+  // ---------- Aggregate ----------
   async function loadAggregate() {
     const loading = document.getElementById("agg-loading");
     const content = document.getElementById("agg-content");
-
     try {
       const res = await fetch(`${BASE}/list-aggregate-results`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed");
-
+      aggData = data;
       loading.style.display = "none";
       content.style.display = "block";
       content.dataset.loaded = "1";
 
-      // Summary cards
       document.getElementById("agg-summary").innerHTML = `
         <div class="summary-item"><div class="label">Total Sessions</div><div class="value">${data.count}</div></div>
         <div class="summary-item"><div class="label">World Regions</div><div class="value">${Object.keys(data.by_region || {}).length}</div></div>
         <div class="summary-item"><div class="label">Groups</div><div class="value">${Object.keys(data.by_group || {}).length}</div></div>
-        <div class="summary-item"><div class="label">Zones Tracked</div><div class="value">8</div></div>
+        <div class="summary-item"><div class="label">Zones</div><div class="value">8</div></div>
       `;
 
-      // Zone free-energy (main scientific view)
       const zones = data.by_zone || [];
-      const maxZoneF = Math.max(...zones.map(z => z.mean_free_energy_F), 0.01);
+      const maxZoneF = Math.max(...zones.map(z => z.mean_free_energy_F || 0), 0.01);
       document.getElementById("agg-zone").innerHTML = zones
         .map(z => bar(`${z.zone_id}. ${z.name}`, z.mean_free_energy_F, maxZoneF, z.sample_count))
         .join("") || "<p>No data yet</p>";
 
-      // Region
       const regions = Object.entries(data.by_region || {});
-      const maxRegionF = Math.max(...regions.map(([, v]) => v.total_free_energy), 0.01);
+      const maxRegionF = Math.max(...regions.map(([, v]) => v.total_free_energy || v.mean_free_energy || 0), 0.01);
       document.getElementById("agg-region").innerHTML = regions
-        .map(([k, v]) => bar(k.replace(/_/g, " "), v.total_free_energy, maxRegionF, v.count, true))
+        .map(([k, v]) => bar(k.replace(/_/g, " "), v.total_free_energy ?? v.mean_free_energy ?? 0, maxRegionF, v.count, true))
         .join("") || "<p>No data yet</p>";
 
-      // Group
       const groups = Object.entries(data.by_group || {});
-      const maxGroupF = Math.max(...groups.map(([, v]) => v.total_free_energy), 0.01);
+      const maxGroupF = Math.max(...groups.map(([, v]) => v.total_free_energy ?? v.mean_free_energy ?? 0), 0.01);
       document.getElementById("agg-group").innerHTML = groups
-        .map(([k, v]) => bar(k.replace(/_/g, " "), v.total_free_energy, maxGroupF, v.count, true))
+        .map(([k, v]) => bar(k.replace(/_/g, " "), v.total_free_energy ?? v.mean_free_energy ?? 0, maxGroupF, v.count, true))
         .join("") || "<p>No data yet</p>";
 
-      // Zone table
-      const tbody = document.querySelector("#agg-zone-table tbody");
-      tbody.innerHTML = zones.map(z => `
+      document.querySelector("#agg-zone-table tbody").innerHTML = zones.map(z => `
         <tr>
           <td>${z.zone_id}. ${z.name}</td>
           <td class="num">${z.sample_count}</td>
@@ -428,11 +668,12 @@ import Layout from '../layouts/BaseLayout.astro';
           <td class="num">${z.mean_free_energy_F}</td>
         </tr>`).join("");
 
+      buildControls();
+      rebuildLabVisuals();
     } catch (err) {
       loading.textContent = "Error: " + err.message;
     }
   }
 
-  // ---------- Init ----------
   loadMyResults();
 </script>
