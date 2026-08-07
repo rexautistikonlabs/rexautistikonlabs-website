@@ -13,7 +13,6 @@ import Layout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="form-section">
-      <!-- Participant & protocol -->
       <div class="card">
         <h2>Participant &amp; Protocol</h2>
         <div class="grid-2">
@@ -23,8 +22,8 @@ import Layout from '../layouts/BaseLayout.astro';
           </div>
           <div class="field">
             <label for="collaborator">Collaborator / Lab ID</label>
-            <input type="text" id="collaborator" value="" placeholder="Sign in required" readonly />
-            <p class="hint">Automatically set from your Microsoft login</p>
+            <input type="text" id="collaborator" value="" placeholder="Sign in or type your email" />
+            <p class="hint">Auto-filled from Microsoft login when available; you may also type it.</p>
           </div>
           <div class="field">
             <label for="world_region">World Region <span class="req">*</span></label>
@@ -61,7 +60,6 @@ import Layout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Group / neurodivergence (when needed) -->
       <div class="card">
         <h2>Group label</h2>
         <p class="section-hint">Used only for de-identified aggregate analysis. Not diagnostic.</p>
@@ -130,7 +128,6 @@ import Layout from '../layouts/BaseLayout.astro';
         </details>
       </div>
 
-      <!-- Eight zones -->
       <div class="card">
         <h2>Eight Sensor-Rich Zones</h2>
         <p class="section-hint">
@@ -192,7 +189,6 @@ import Layout from '../layouts/BaseLayout.astro';
   .field input:focus, .field select:focus {
     outline: none; border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15,118,110,0.15);
   }
-  .field input[readonly] { background: #f8fafc; color: #64748b; }
   .hint { font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem; }
 
   .more-fields { margin-top: 1rem; }
@@ -254,7 +250,6 @@ import Layout from '../layouts/BaseLayout.astro';
 </style>
 
 <script is:inline>
-  // Calculate endpoint (Function key — do not share publicly outside approved collaborators)
   const FUNCTION_URL =
     "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/calculate?code=SRCwgB8NnpyVy4XKI67WyLa0WyPZbze1tqDXQM4bMEQLAzFuJ2cNJQ==";
 
@@ -303,30 +298,40 @@ import Layout from '../layouts/BaseLayout.astro';
     try {
       const res = await fetch("/.auth/me");
       const data = await res.json();
-      if (!Array.isArray(data) || data.length === 0) {
-        input.value = "";
-        input.placeholder = "Sign in required";
-        return;
+
+      // Modern SWA shape: { clientPrincipal: { userDetails, userId, ... } }
+      if (data && data.clientPrincipal) {
+        const cp = data.clientPrincipal;
+        const email = cp.userDetails || cp.userId || "";
+        if (email) {
+          input.value = email;
+          input.placeholder = "";
+          return;
+        }
       }
-      const client = data[0] || {};
-      let email = client.user_id || client.userId || "";
-      const claims = client.user_claims || client.claims || [];
-      const emailClaim = claims.find(c => {
-        const t = (c.typ || c.type || "").toLowerCase();
-        return t.includes("emailaddress") || t.endsWith("/email") || t.includes("upn") || t === "emails";
-      });
-      if (emailClaim && (emailClaim.val || emailClaim.value)) {
-        email = emailClaim.val || emailClaim.value;
+
+      // Older array shape
+      if (Array.isArray(data) && data.length > 0) {
+        const client = data[0] || {};
+        let email = client.userDetails || client.user_id || client.userId || "";
+        const claims = client.user_claims || client.claims || [];
+        const emailClaim = claims.find(c => {
+          const t = (c.typ || c.type || "").toLowerCase();
+          return t.includes("emailaddress") || t.endsWith("/email") || t.includes("upn");
+        });
+        if (emailClaim && (emailClaim.val || emailClaim.value)) {
+          email = emailClaim.val || emailClaim.value;
+        }
+        if (email) {
+          input.value = email;
+          input.placeholder = "";
+          return;
+        }
       }
-      if (!email && client.userDetails) email = client.userDetails;
-      if (email) {
-        input.value = email;
-        input.placeholder = "";
-      } else {
-        input.placeholder = "Sign in required";
-      }
+
+      input.placeholder = "Sign in or type your email";
     } catch (e) {
-      input.placeholder = "Sign in required";
+      input.placeholder = "Sign in or type your email";
     }
   }
 
@@ -339,9 +344,10 @@ import Layout from '../layouts/BaseLayout.astro';
 
     const collaborator = document.getElementById("collaborator").value.trim();
     const worldRegion = document.getElementById("world_region").value;
+
     if (!collaborator) {
       status.className = "status error";
-      status.textContent = "Sign in required — Collaborator / Lab ID is empty.";
+      status.textContent = "Enter Collaborator / Lab ID (or sign in so it auto-fills).";
       return;
     }
     if (!worldRegion) {
@@ -398,16 +404,24 @@ import Layout from '../layouts/BaseLayout.astro';
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error("HTTP " + res.status + " (non-JSON response)");
+
+      const text = await res.text();
+      let data = null;
+      if (text && text.trim()) {
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          throw new Error("HTTP " + res.status + " — non-JSON response: " + text.slice(0, 180));
+        }
       }
+
       if (!res.ok) {
-        const msg = (data && (data.error || data.message)) || ("HTTP " + res.status);
+        const msg =
+          (data && (data.error || data.message)) ||
+          ("HTTP " + res.status + (text ? "" : " (empty response — often 401 bad key or CORS)"));
         throw new Error(typeof msg === "string" ? msg : JSON.stringify(msg));
       }
+
       status.className = "status success";
       status.textContent = "Calculation complete";
       summary.innerHTML = `
