@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="IRB & Ethics FAQ | Rex Autistikōn Labs"
+  description="Information for institutional review boards and ethics committees regarding data handling on the Rex Autistikōn Labs research platform."
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">IRB &amp; Ethics FAQ</h1>
+      <p class="text-lg text-slate-600 leading-relaxed mb-10">
+        Information for institutional review boards, ethics committees, and site investigators
+        evaluating use of the Rex Autistikōn Labs research platform.
+      </p>
+
+      <div class="space-y-8">
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">What is the platform?</h2>
+          <p class="text-slate-600 leading-relaxed">
+            A secure research tool operated by Rex Autistikon Research Foundation, Inc., a U.S. 501(c)(3)
+            public charity. Approved collaborators submit coded measurement data for server-side
+            Kelvin–Voigt and free-energy calculations. The platform is not a diagnostic device and is
+            not a clinical service.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">What data are stored?</h2>
+          <ul class="list-disc list-inside text-slate-600 space-y-2">
+            <li>Collaborator identity (institutional email / lab ID via Microsoft Entra sign-in)</li>
+            <li>Optional study or protocol ID and session number</li>
+            <li>Participant pseudonym (direct identifiers are not required by the platform)</li>
+            <li>Research classification fields as provided by the collaborator (e.g., group, age, region)</li>
+            <li>Zone measurement parameters and computed outputs (fidelity, π_eff, free energy, MPA)</li>
+          </ul>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">Who can see individual records?</h2>
+          <ul class="list-disc list-inside text-slate-600 space-y-2">
+            <li>The submitting collaborator sees full detail of their own results.</li>
+            <li>Foundation administrators may access records for system integrity and approved operations.</li>
+            <li>Other collaborators see only de-identified aggregates (no individual lab identity; no single-source raw data from other sites).</li>
+          </ul>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">Where are data stored?</h2>
+          <p class="text-slate-600 leading-relaxed">
+            Microsoft Azure (United States region). Authentication uses Microsoft Entra ID.
+            Intake and results pages require sign-in. Data are stored in Azure Cosmos DB under the
+            Foundation’s subscription.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">Who is responsible for ethics approval?</h2>
+          <p class="text-slate-600 leading-relaxed">
+            The collaborating institution. Local IRB or ethics approval and informed consent
+            (where required) remain the responsibility of the site investigator. The Foundation
+            does not replace institutional review and does not claim oversight of local human-subjects protocols.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">Is data shared externally?</h2>
+          <p class="text-slate-600 leading-relaxed">
+            Not without explicit written agreement. Aggregate, de-identified summaries may be used
+            for scientific reporting consistent with the access model above.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-6 bg-white">
+          <h2 class="text-lg font-semibold text-slate-900 mb-2">Contact</h2>
+          <p class="text-slate-600 leading-relaxed">
+            Technical or data-security questions:
+            <a href="mailto:info@rexautistikonlabs.org" class="text-teal-700 font-medium hover:text-teal-800">
+              info@rexautistikonlabs.org
+            </a><br />
+            <a href="https://rexautistikonlabs.org" class="text-teal-700 font-medium hover:text-teal-800">
+              rexautistikonlabs.org
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <p class="text-sm text-slate-500 border-t border-slate-200 pt-6 mt-10">
+        This FAQ is informational and does not constitute legal advice. Institutions should apply
+        their own policies and counsel as appropriate.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

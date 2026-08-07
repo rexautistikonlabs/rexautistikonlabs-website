@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Protected research tools — optional to disallow if you prefer not to index them
+# Disallow: /intake
+# Disallow: /results
+# Disallow: /admin
+
 Sitemap: https://rexautistikonlabs.org/sitemap.xml
