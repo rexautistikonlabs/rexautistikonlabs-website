@@ -1,51 +1,145 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Research" description="Biotensegrity-informed research into sensor-rich myofascial and visceral interfaces and afferent signaling.">
-  <section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">Research</h1>
-
-      <p class="text-lg text-slate-600 leading-relaxed mb-10">
-        Rex Autistikōn Labs investigates the hypothesis that chronic mechanical restriction within specific sensor-rich myofascial and visceral interfaces contributes to altered afferent signaling in neurodevelopmental conditions, particularly autism spectrum disorder and related presentations that include hypermobility or dysmorphic features.
+<Layout title="Research | Rex Autistikōn Labs">
+  <main class="research-page">
+    <section class="hero">
+      <p class="kicker">Research</p>
+      <h1>Sensor-rich interfaces, measurable mechanics, and afferent prediction</h1>
+      <p class="subtitle">
+        An independent research program testing whether measurable mechanical conditions at
+        eight defined interfaces form a reproducible latent state that predicts physiological
+        outcomes—without treating “restriction” as a directly observed scalar.
       </p>
-
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Core Claim</h2>
-      <p class="text-lg text-slate-600 leading-relaxed mb-10">
-        Eight anatomically defined zones with high mechanoreceptor density act as critical information gateways. Sustained elevation of local stiffness and viscosity within these zones can attenuate or distort proprioceptive and interoceptive signals traveling to brainstem and autonomic centers through a combination of neural, fluid-mediated, and mechanotransductive mechanisms.
+      <p class="hero-link">
+        <a href="/research-framework">Read the full Research Framework →</a>
       </p>
+    </section>
 
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">The Eight Sensor-Rich Zones</h2>
-      <ol class="list-decimal list-inside space-y-2 text-lg text-slate-600 mb-10">
-        <li>Extraocular muscles and orbital fascia</li>
-        <li>Tensor tympani and stapedius (middle ear)</li>
-        <li>Nasal musculature and paranasal fascia</li>
-        <li>Tongue and floor of mouth</li>
-        <li>Pharyngeal and laryngeal structures</li>
-        <li>Suboccipital complex</li>
-        <li>Visceral fascia and diaphragm</li>
-        <li>Pelvic floor and perineum</li>
-      </ol>
+    <section class="block">
+      <h2>Research question</h2>
+      <p>
+        Why do differences in sensory processing, proprioception, interoception, and related
+        motor–autonomic features often co-occur in some neurodevelopmental presentations, and
+        can part of that covariance be linked to <strong>independently measurable mechanical
+        conditions</strong> at specific peripheral interfaces?
+      </p>
+    </section>
 
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Mechanistic Layers</h2>
-      <div class="space-y-6 text-lg text-slate-600 mb-10">
-        <p><strong class="text-slate-900">Developmental</strong> — Minor physical anomalies as potential surface proxies of underlying connective tissue variation.</p>
-        <p><strong class="text-slate-900">Microscopic</strong> — Irregular collagen architecture and disrupted crimp patterns that alter local tissue mechanics.</p>
-        <p><strong class="text-slate-900">Molecular</strong> — Piezo1/2–Ca²⁺–YAP/TAZ signaling loops and potential intersections with autism-associated genes involved in extracellular matrix regulation.</p>
-        <p><strong class="text-slate-900">Biophysical</strong> — Increased storage and loss moduli that preferentially attenuate higher-frequency mechanical signals.</p>
-        <p><strong class="text-slate-900">Computational</strong> — Noisy or attenuated peripheral input that may force maladaptive precision weighting within predictive coding frameworks.</p>
+    <section class="block">
+      <h2>Working hypothesis</h2>
+      <div class="callout">
+        <p>
+          Chronic differences in local tissue mechanics at specific anatomical zones densely
+          invested with mechanoreceptors and interoceptors can alter the statistics of ascending
+          afferent signals. “Mechanical restriction” names this <strong>hypothesis-level latent
+          construct</strong>. It is not a primary instrument reading.
+        </p>
       </div>
-
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Proposed Experimental Path</h2>
-      <p class="text-lg text-slate-600 leading-relaxed mb-10">
-        Shear-wave elastography of the target zones combined with interoceptive accuracy tasks and heartbeat-evoked potential measurements, performed before and after targeted fascial interventions in autistic adults with hypermobility features. Primary interest lies in the correlation between reduced local stiffness/viscosity and improved interoceptive markers.
+      <p>
+        Empirical work proceeds:
+        <strong>measurement → mechanical representation → transmission prediction → independent physiological test</strong>.
+        The computational layer never defines the independent variable retrospectively.
       </p>
+    </section>
 
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Open Science</h2>
-      <p class="text-lg text-slate-600 leading-relaxed">
-        All primary theoretical work is published with an open DOI. Future experimental protocols, data, and computational models will be shared under open licenses whenever possible.
+    <section class="block">
+      <h2>Three layers (kept separate)</h2>
+      <ol class="layers">
+        <li><strong>Measurement</strong> — directly observed mechanical quantities from characterized instruments and protocols (zone-specific).</li>
+        <li><strong>Mechanical representation</strong> — derived parameters such as \(G'\), \(G''\), strain under load, hysteresis, relaxation time, displacement/excursion, force–displacement relationships, as applicable.</li>
+        <li><strong>Computational transmission</strong> — predicted fidelity-like, precision-proxy, and free-energy-style quantities only after representation is specified.</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>Eight research interfaces</h2>
+      <p>
+        The analytical framework is shared; physical measurement techniques are not assumed identical across zones.
       </p>
-    </div>
-  </section>
-</BaseLayout>
+      <ol class="zones">
+        <li>Extraocular / Orbital</li>
+        <li>Middle-ear</li>
+        <li>Nasal</li>
+        <li>Tongue</li>
+        <li>Pharyngeal / Laryngeal</li>
+        <li>Suboccipital</li>
+        <li>Visceral fascia / Diaphragm</li>
+        <li>Pelvic floor</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>Methods direction</h2>
+      <p>
+        Candidate approaches include zone-appropriate mechanical characterization (for example
+        shear-wave elastography where anatomy permits) paired with independently collected
+        interoceptive or sensory markers under partner ethics oversight. Observational scores
+        such as MPA are secondary until preregistered validity analyses support otherwise.
+      </p>
+      <p>
+        Any future composite “restriction index” must be locked prospectively (components, units,
+        normalization, weighting, missing-data rules, reliability thresholds, zone procedures,
+        mapping to model inputs)—with no post-hoc adjustment based on outcome fit.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Falsification</h2>
+      <p>The restriction construct is unsupported if:</p>
+      <ul>
+        <li>proposed mechanical measurements fail adequate reliability;</li>
+        <li>candidate measures show no reproducible relationship where a common construct is claimed; or</li>
+        <li>measured mechanical state fails to predict independent physiological outcomes under preregistered analyses.</li>
+      </ul>
+    </section>
+
+    <section class="block cta">
+      <h2>Program structure</h2>
+      <p>
+        Full layered definitions, evidence matrix, experimental phases, and platform links:
+        <a href="/research-framework">Research Framework</a>.
+        Collaborator expectations:
+        <a href="/collaborator-handbook">Collaborator Handbook</a>.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .research-page { background: #f8fafc; color: #0f172a; }
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: #fff; padding: 3rem 1.25rem 2.5rem; text-align: center;
+  }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;
+    opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .hero h1 {
+    font-size: clamp(1.45rem, 3vw, 2.1rem); font-weight: 700;
+    max-width: 720px; margin: 0 auto 0.75rem; line-height: 1.25;
+  }
+  .subtitle {
+    max-width: 680px; margin: 0 auto 1rem; line-height: 1.6; opacity: 0.92;
+  }
+  .hero-link a { color: #ccfbf1; font-weight: 600; }
+  .block {
+    max-width: 800px; margin: 0 auto; padding: 2rem 1.25rem 0.25rem;
+  }
+  .block h2 {
+    font-size: 1.25rem; margin: 0 0 0.75rem; color: #0f172a;
+    padding-bottom: 0.35rem; border-bottom: 2px solid #ccfbf1;
+  }
+  .block p, .block li { line-height: 1.65; color: #334155; }
+  .callout {
+    background: #fff; border: 1px solid #99f6e4; border-left: 4px solid #0f766e;
+    border-radius: 10px; padding: 1rem 1.15rem; margin: 0 0 1rem;
+  }
+  .callout p { margin: 0; color: #0f172a; }
+  .layers, .zones { padding-left: 1.2rem; }
+  .layers li, .zones li { margin-bottom: 0.45rem; }
+  .cta { padding-bottom: 3.5rem; }
+  .cta a { color: #0f766e; font-weight: 600; }
+</style>

@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+---
+
+<Layout title="Collaborator Handbook | Rex Autistikōn Labs">
+  <main class="hb-page">
+    <section class="hero">
+      <p class="kicker">Collaborator Handbook</p>
+      <h1>Pilot study expectations</h1>
+      <p class="subtitle">
+        How partners work with Rex Autistikon Research Foundation without circular definition
+        of the independent variable.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>1. Purpose of collaboration</h2>
+      <p>
+        Partners collect <strong>zone-appropriate mechanical measurements</strong> (and, where
+        approved, physiological outcomes). RAL provides governed intake, versioned computation
+        of transmission predictions, and de-identified aggregation tools. Partners retain
+        responsibility for ethics, local protocol validity, and human-subjects compliance.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>2. Independent variable policy</h2>
+      <div class="callout">
+        <p>
+          Do <strong>not</strong> treat “restriction <em>r</em>” as a field you simply “know.”
+          Primary experimental emphasis:
+          <strong>measured mechanical quantities → documented representation → optional model predictions → independent physiological tests</strong>.
+        </p>
+      </div>
+      <p>
+        “Mechanical restriction” is a hypothesis-level latent construct. The computational model
+        must never define restriction retrospectively. No post-hoc composite index adjustment
+        based on outcome fit is permitted.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>3. Three layers</h2>
+      <ol>
+        <li><strong>Measurement</strong> — instrumented observables, zone-specific.</li>
+        <li><strong>Mechanical representation</strong> — derived parameters with units and transforms specified in advance.</li>
+        <li><strong>Computational transmission</strong> — predicted metrics from a stated representation; version-stamped.</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>4. Zone dossiers (required)</h2>
+      <p>For each of the eight zones, document:</p>
+      <ol>
+        <li>Anatomical target</li>
+        <li>Measurable mechanical properties (candidates)</li>
+        <li>Acquisition method / instrument class</li>
+        <li>Calibration and quality-control procedures</li>
+        <li>Expected measurement range</li>
+        <li>Test–retest requirements</li>
+        <li>Permitted transforms into the common computational representation</li>
+        <li>Measurements unavailable or inappropriate for that zone</li>
+      </ol>
+      <p class="note">
+        The common element is the analytical framework, not a single physical technique for all zones.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>5. MPA and observational scores</h2>
+      <p>
+        Record if useful for secondary, preregistered analyses. Do not use as the primary
+        computational stand-in for mechanical state unless validation criteria agreed in advance are met.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>6. Composite restriction index (if ever used)</h2>
+      <p>Must be locked before outcome analysis:</p>
+      <ul>
+        <li>Components, units, normalization</li>
+        <li>Weighting / dimensional reduction</li>
+        <li>Missing-data rules</li>
+        <li>Reliability thresholds</li>
+        <li>Zone-specific procedures</li>
+        <li>Mapping to transmission-model inputs</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>7. Falsification</h2>
+      <p>The restriction construct is weakened or rejected for a zone/protocol if:</p>
+      <ul>
+        <li>measures are unreliable under pre-set criteria;</li>
+        <li>candidate measures do not cohere where a shared construct is claimed; or</li>
+        <li>mechanical state fails preregistered physiological prediction.</li>
+      </ul>
+      <p>Do not “fix” failures by adjusting the model or index after seeing outcomes.</p>
+    </section>
+
+    <section class="block">
+      <h2>8. Phase 1 software honesty</h2>
+      <p>
+        Current intake may still expose illustrative fields (including restriction-like and MPA
+        fields) so teams can exercise the pipeline. Label methods sections and exports accordingly:
+        <strong>illustrative / Phase-1 computational</strong>, pending measurement-layer protocols
+        in the zone dossiers. Stored runs include <code>model_version</code>.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>9. Platform links</h2>
+      <ul>
+        <li><a href="/research-framework">Research Framework</a></li>
+        <li><a href="/collaborate">Request access</a></li>
+        <li><a href="/intake">Data Intake</a></li>
+        <li><a href="/results">Results Dashboard</a></li>
+        <li><a href="/model">Interactive model</a> · <a href="/model-docs">Model documentation</a></li>
+      </ul>
+    </section>
+
+    <section class="block end">
+      <p class="closing">
+        Rex Autistikon Research Foundation, Inc. · 501(c)(3) · EIN 42-3220323 ·
+        <a href="/transparency">Transparency</a>
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .hb-page { background: #f8fafc; color: #0f172a; }
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: #fff; padding: 3rem 1.25rem 2.5rem; text-align: center;
+  }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;
+    opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .hero h1 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin: 0 auto 0.75rem; }
+  .subtitle { max-width: 640px; margin: 0 auto; line-height: 1.55; opacity: 0.92; }
+  .block { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.25rem 0.25rem; }
+  .block h2 {
+    font-size: 1.2rem; margin: 0 0 0.7rem; color: #0f172a;
+    border-bottom: 2px solid #ccfbf1; padding-bottom: 0.35rem;
+  }
+  .block p, .block li { line-height: 1.65; color: #334155; }
+  .callout {
+    background: #fff; border: 1px solid #99f6e4; border-left: 4px solid #0f766e;
+    border-radius: 10px; padding: 1rem 1.15rem; margin: 0 0 1rem;
+  }
+  .callout p { margin: 0; color: #0f172a; }
+  .note {
+    font-size: 0.88rem; color: #64748b; background: #f1f5f9;
+    border-radius: 8px; padding: 0.75rem 0.9rem; margin-top: 0.75rem;
+  }
+  .block a { color: #0f766e; font-weight: 600; }
+  code { font-size: 0.85em; background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; }
+  .closing { font-size: 0.9rem; color: #475569; }
+  .end { padding-bottom: 3.5rem; }
+</style>

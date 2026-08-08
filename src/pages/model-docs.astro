@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+---
+
+<Layout title="How the Model Is Computed | Rex Autistikōn Labs">
+  <main class="md-page">
+    <section class="hero">
+      <p class="kicker">Interactive Model · Documentation</p>
+      <h1>How the model is computed</h1>
+      <p class="subtitle">
+        Phase 1 didactic transmission layer. This page explains what the interactive model
+        does—and what it must not be mistaken for.
+      </p>
+    </section>
+
+    <section class="block">
+      <div class="banner">
+        <strong>Phase 1 — illustrative only.</strong>
+        Nothing on the interactive model page is a measurement. Adjustable controls
+        (including any restriction-like slider) stand in for a <em>hypothesis-level latent
+        mechanical state</em>, not an instrument reading.
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Place in the research hierarchy</h2>
+      <ol>
+        <li><strong>Measurement layer</strong> — observed mechanical quantities (zone-specific instruments/protocols).</li>
+        <li><strong>Mechanical representation layer</strong> — derived parameters (\(G'\), \(G''\), strain, hysteresis, relaxation, displacement, force–displacement, etc.).</li>
+        <li><strong>Computational transmission layer</strong> — <em>this model</em>: predicted transmission quantities.</li>
+        <li><strong>Physiological test layer</strong> — independent outcomes under preregistered analyses.</li>
+      </ol>
+      <p>
+        Full program language:
+        <a href="/research-framework">Research Framework</a>.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>What the interactive model does</h2>
+      <p>
+        Given a stated mechanical representation (for example stiffness- and viscosity-like
+        terms in a Kelvin–Voigt-style element), the model computes predicted quantities such as:
+      </p>
+      <ul>
+        <li>transmitted amplitude / fidelity-like proxies</li>
+        <li>effective precision proxies (π<sub>eff</sub>-style terms)</li>
+        <li>prediction-error terms</li>
+        <li>free-energy-style costs and illustrative gradients with respect to didactic controls</li>
+      </ul>
+      <p>
+        Exact equations and defaults are versioned with the calculation engine
+        (<code>model_version</code> on stored runs).
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>What “restriction” means in the UI</h2>
+      <p>
+        Any restriction-like control is a <strong>didactic latent variable</strong> used to
+        explore model sensitivity. In empirical work, latent mechanical state must be approached
+        through the measurement and representation layers. Sliding a control is not data acquisition.
+      </p>
+      <p>
+        MPA-style overlays, if shown, are observational—not validated mechanical gold standards
+        and not primary determinants of computational parameters until preregistered validity criteria are met.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Limitations</h2>
+      <ul>
+        <li>Low-dimensional; not full soft-tissue, fluid, or neural circuit physics.</li>
+        <li>Parameters and constitutive assumptions are provisional.</li>
+        <li>Zone anatomy differs; one illustrative control law does not imply one physical instrument for all eight interfaces.</li>
+        <li>Not for diagnosis, triage, or treatment decisions.</li>
+        <li>Empirical support for a latent “restriction” construct is to be tested, not presupposed by the interface.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>Falsification (scientific vs software)</h2>
+      <p>
+        Scientific falsification of the restriction construct is defined in the Research Framework
+        (reliability failure, construct failure, predictive failure). Internal UI sensitivity
+        (e.g. how predicted metrics move when an illustrative control changes) is
+        <strong>software quality assurance only</strong>.
+      </p>
+    </section>
+
+    <section class="block end">
+      <p>
+        <a href="/model">Open interactive model →</a>
+        ·
+        <a href="/research-framework">Research Framework →</a>
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .md-page { background: #f8fafc; color: #0f172a; }
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: #fff; padding: 3rem 1.25rem 2.5rem; text-align: center;
+  }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;
+    opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .hero h1 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin: 0 auto 0.75rem; }
+  .subtitle { max-width: 640px; margin: 0 auto; line-height: 1.55; opacity: 0.92; }
+  .block { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.25rem 0.25rem; }
+  .block h2 {
+    font-size: 1.2rem; margin: 0 0 0.7rem; color: #0f172a;
+    border-bottom: 2px solid #ccfbf1; padding-bottom: 0.35rem;
+  }
+  .block p, .block li { line-height: 1.65; color: #334155; }
+  .banner {
+    background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px;
+    padding: 1rem 1.15rem; color: #78350f; line-height: 1.55;
+  }
+  .block a { color: #0f766e; font-weight: 600; }
+  code { font-size: 0.85em; background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; }
+  .end { padding-bottom: 3.5rem; }
+</style>
