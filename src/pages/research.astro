@@ -17,6 +17,33 @@ import Layout from '../layouts/BaseLayout.astro';
       </p>
     </section>
 
+    <section class="status-block" aria-label="Current research status">
+      <h2>Current status</h2>
+      <ul>
+        <li>
+          <strong>Research architecture established</strong> — research question, layered method
+          (measurement → representation → transmission → physiological test), zone taxonomy,
+          falsification criteria (F1–F3), and collaboration governance.
+        </li>
+        <li>
+          <strong>Measurement protocols under development</strong> — zone-specific mechanical
+          acquisition, calibration/QC, and test–retest plans are being defined; they are not yet
+          locked as validated standard operating procedures.
+        </li>
+        <li>
+          <strong>Computational transmission layer currently illustrative</strong> — interactive
+          model and Phase 1 intake parameters (including restriction-like / didactic controls and
+          observational MPA-style scores) explore predicted transmission quantities. They are not
+          empirical tissue measurements.
+        </li>
+        <li>
+          <strong>Empirical validation pending</strong> — reliability of candidate mechanical
+          measures, coherence of any latent “restriction” construct, and preregistered prediction
+          of independent physiological outcomes have not yet been demonstrated.
+        </li>
+      </ul>
+    </section>
+
     <section class="block">
       <h2>Research question</h2>
       <p>
@@ -142,4 +169,38 @@ import Layout from '../layouts/BaseLayout.astro';
   .layers li, .zones li { margin-bottom: 0.45rem; }
   .cta { padding-bottom: 3.5rem; }
   .cta a { color: #0f766e; font-weight: 600; }
+
+  .status-block {
+    max-width: 800px;
+    margin: 1.75rem auto 0;
+    padding: 1.15rem 1.35rem;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+    color: #78350f;
+  }
+  .status-block h2 {
+    margin: 0 0 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #92400e;
+    border: none;
+    padding: 0;
+  }
+  .status-block ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .status-block li {
+    margin-bottom: 0.55rem;
+    line-height: 1.55;
+    font-size: 0.92rem;
+    color: #78350f;
+  }
+  .status-block li:last-child {
+    margin-bottom: 0;
+  }
+
 </style>
