@@ -6,80 +6,158 @@ import Layout from '../layouts/BaseLayout.astro';
   <main class="rf-page">
     <section class="hero">
       <p class="kicker">Research Framework</p>
-      <h1>From research question to falsifiable test</h1>
+      <h1>Measurement → mechanics → prediction → physiological test</h1>
       <p class="subtitle">
-        Rex Autistikōn Labs operates an independent research program on whether chronic mechanical
-        restriction in defined sensor-rich myofascial and visceral zones contributes to altered
-        afferent signaling relevant to sensory and interoceptive phenotypes. This page separates
-        established science, proposed mechanism, predictions, and experimental path.
+        Rex Autistikōn Labs operates an independent research program on whether measurable
+        mechanical conditions at eight sensor-rich interfaces form a reproducible latent state
+        that predicts physiological outcomes. “Mechanical restriction” is a
+        <strong>hypothesis-level construct</strong>, not a directly observed scalar.
       </p>
     </section>
 
     <nav class="toc" aria-label="On this page">
       <a href="#question">1. Research question</a>
       <a href="#hypothesis">2. Hypothesis</a>
-      <a href="#evidence">3. Evidence matrix</a>
-      <a href="#zones">4. Zone taxonomy</a>
-      <a href="#model">5. Computational model</a>
-      <a href="#testing">6. How we test it</a>
-      <a href="#falsify">7. Falsifiable predictions</a>
-      <a href="#limits">8. Scope and limits</a>
-      <a href="#platform">9. Research platform</a>
+      <a href="#layers">3. Three layers</a>
+      <a href="#restriction">4. Operational definition</a>
+      <a href="#mpa">5. Role of MPA</a>
+      <a href="#evidence">6. Evidence matrix</a>
+      <a href="#zones">7. Zone taxonomy &amp; dossiers</a>
+      <a href="#model">8. Computational layer</a>
+      <a href="#testing">9. How we test it</a>
+      <a href="#falsify">10. Falsification</a>
+      <a href="#limits">11. Scope and limits</a>
+      <a href="#platform">12. Platform</a>
     </nav>
 
-    <!-- 1 -->
     <section id="question" class="block">
       <h2>1. Research question</h2>
       <p class="lead">
         Why do differences in sensory processing, proprioception, interoception, and related
         motor–autonomic features often co-occur in some neurodevelopmental presentations, and
-        can part of that covariance be linked to measurable mechanical conditions in specific
-        peripheral interfaces?
+        can part of that covariance be linked to <strong>measurable mechanical conditions</strong>
+        at defined peripheral interfaces?
       </p>
       <p>
-        Conventional accounts emphasize central neural computation, genetics, and developmental
-        difference. Those accounts are necessary but may be incomplete if peripheral
-        mechanoreceptive and interoceptive interfaces systematically bias the afferent sample
-        available to central systems. The question is not whether the brain matters; it is
-        whether defined peripheral mechanical states are a tractable, measurable contributor
-        to afferent statistics.
+        Central neural, genetic, and developmental factors are necessary parts of any serious
+        account. The open question is whether <strong>independently measurable mechanical states</strong>
+        at specific sensor-rich interfaces form a tractable, reproducible contributor to afferent
+        statistics—and whether those states predict physiological outcomes under controlled study.
       </p>
     </section>
 
-    <!-- 2 -->
     <section id="hypothesis" class="block">
-      <h2>2. Hypothesis</h2>
+      <h2>2. Working hypothesis</h2>
       <div class="callout">
         <p>
-          <strong>Working hypothesis.</strong> Chronic mechanical restriction within specific
-          anatomical zones densely invested with mechanoreceptors and interoceptors can distort
-          afferent signaling (amplitude, timing, and effective precision of ascending input).
-          Over time, such distortion may contribute to sustained differences in sensory,
-          proprioceptive, and interoceptive regulation. The effect is proposed to be
-          zone-specific, cumulative, and quantifiable from tissue-level parameters.
+          <strong>Working hypothesis.</strong> Chronic differences in local tissue mechanics at
+          specific anatomical zones densely invested with mechanoreceptors and interoceptors can
+          alter the statistics of ascending afferent signals (amplitude, timing, and effective
+          precision). Over time, such altered afferent statistics may contribute to measurable
+          differences in sensory, proprioceptive, and interoceptive regulation.
         </p>
       </div>
       <p>
-        This is a <em>mechanistic research hypothesis</em>, not a claim that autism or any
-        neurodevelopmental condition is caused by fascia, reduced to peripheral tissue, or
-        cured by mechanical intervention. Neurodevelopmental phenotypes are heterogeneous;
-        peripheral mechanics, if relevant, would be one contributor among many.
+        “<strong>Mechanical restriction</strong>” names this hypothesized latent mechanical state.
+        It is <em>not</em> treated as a directly observed scalar. Experimental work first
+        characterizes each zone with independently measurable mechanical properties appropriate
+        to its anatomy. Only after measurement and representation layers are specified may a
+        computational transmission model map mechanical representations to predicted
+        afferent-transmission quantities.
       </p>
+      <p>
+        This is a mechanistic research hypothesis—not a claim that autism or any neurodevelopmental
+        condition is caused by fascia, reduced to peripheral tissue, or remediated by mechanical
+        intervention. Phenotypes are heterogeneous; peripheral mechanics, if relevant, would be
+        one contributor among many.
+      </p>
+
       <h3>Logical chain (explicit)</h3>
       <ol class="chain">
         <li><span>Established</span> Mechanoreceptors and interoceptors transduce tissue deformation and internal state into afferent signals.</li>
-        <li><span>Established / emerging</span> Fascia and soft tissue exhibit viscoelastic behavior; mechanical context can modulate receptor signaling.</li>
-        <li><span>RAL hypothesis</span> Zone-level restriction (operationalized as parameter <em>r</em> with stiffness <em>G</em> and viscosity <em>η</em>) systematically reduces effective transmitted afferent amplitude and raises prediction-error / free-energy style costs in a multi-zone model.</li>
-        <li><span>RAL prediction</span> Structured differences in zone parameters will produce reproducible metric patterns (fidelity, π<sub>eff</sub>, free energy, MPA summaries) that can be compared across sessions, groups, and regions without implying diagnosis.</li>
-        <li><span>Open</span> Whether those metric patterns track sensory/interoceptive behavioral measures is an empirical question for controlled studies.</li>
+        <li><span>Established</span> Soft tissues exhibit viscoelastic and related mechanical behavior; mechanical context can modulate receptor signaling.</li>
+        <li><span>Emerging</span> Selected cranio-cervical, oral, pharyngeal, visceral, and pelvic interfaces are plausible targets given sensory investment and mechanical roles (anatomy-dependent; provisional pending zone dossiers and citations).</li>
+        <li><span>RAL hypothesis</span> Zone-level mechanical state, once measured and represented, systematically relates to altered effective afferent transmission.</li>
+        <li><span>Computational construct</span> Given a mechanical representation, a transmission model can compute predicted quantities (fidelity-like amplitude proxies, precision-weight proxies, free-energy-style costs) for session comparison.</li>
+        <li><span>Open</span> Whether measured mechanical state (and model predictions derived from it) tracks independently collected physiological or behavioral measures.</li>
       </ol>
     </section>
 
-    <!-- 3 -->
-    <section id="evidence" class="block">
-      <h2>3. Evidence matrix</h2>
+    <section id="layers" class="block">
+      <h2>3. Three distinct layers</h2>
       <p>
-        The matrix below separates what is broadly established from what RAL treats as hypothesis.
+        The program keeps measurement, mechanical representation, and computational prediction
+        cleanly separated. Confusing them is the main circularity risk we refuse.
+      </p>
+      <div class="layer-grid">
+        <div class="layer-card">
+          <h3>1. Measurement layer</h3>
+          <p>
+            Directly observed mechanical quantities obtained with validated or appropriately
+            characterized instruments and protocols (zone-specific).
+          </p>
+          <p class="layer-not"><strong>Not:</strong> “restriction,” model output, or MPA-as-mechanics.</p>
+        </div>
+        <div class="layer-card">
+          <h3>2. Mechanical representation layer</h3>
+          <p>
+            Derived parameters such as storage modulus \(G'\), loss modulus \(G''\), strain under
+            standardized loading, hysteresis, relaxation time, tissue displacement/excursion,
+            force–displacement relationships—as applicable and justified per zone.
+          </p>
+          <p class="layer-not"><strong>Not yet:</strong> an afferent or physiological prediction.</p>
+        </div>
+        <div class="layer-card">
+          <h3>3. Computational transmission layer</h3>
+          <p>
+            Only after the above: predicted afferent-transmission quantities (fidelity proxies,
+            effective precision proxies, free-energy-style terms, etc.).
+          </p>
+          <p class="layer-not"><strong>Not:</strong> a definition of the independent variable.</p>
+        </div>
+      </div>
+      <p class="note">
+        Causal chain used throughout the program:
+        <strong>measurement → mechanical representation → transmission model → predicted physiological consequences → independent physiological test</strong>.
+      </p>
+    </section>
+
+    <section id="restriction" class="block">
+      <h2>4. Operational definition of mechanical restriction</h2>
+      <div class="callout">
+        <p>
+          In this program, <em>mechanical restriction</em> is a <strong>hypothesis-level construct</strong>:
+          a proposed latent mechanical state at a zone that may distort afferent signaling.
+          It is <strong>not</strong> a primary instrument reading.
+        </p>
+      </div>
+      <ul>
+        <li>Each zone is first characterized using <strong>independently measurable mechanical properties</strong> suited to its anatomy.</li>
+        <li>Candidate measurements remain <strong>distinct at acquisition</strong>. They are not assumed interchangeable across instruments or zones.</li>
+        <li>Any future <strong>composite restriction index</strong> must be specified <strong>prospectively</strong>, including: components, units, normalization, weighting or dimensional-reduction method, missing-data rules, reliability thresholds, zone-specific procedures, and explicit mapping from the index to computational transmission parameters.</li>
+        <li><strong>No post-hoc adjustment</strong> of the index is permitted on the basis of whether it produces a predicted physiological outcome.</li>
+        <li>The computational transmission model must <strong>never</strong> be used to define restriction retrospectively.</li>
+      </ul>
+    </section>
+
+    <section id="mpa" class="block">
+      <h2>5. Role of MPA and observational scores</h2>
+      <p>
+        MPA (and similar observational scores) are treated initially as
+        <strong>independent observational variables</strong>. Their reliability and their
+        correspondence with objective mechanical measurements will be evaluated through
+        <strong>preregistered</strong> analyses.
+      </p>
+      <p>
+        MPA is <strong>not</strong> used as the primary determinant of any computational
+        restriction parameter until and unless it demonstrates adequate validity for that
+        purpose. Until then, MPA may appear only in exploratory or secondary analyses, clearly labeled.
+      </p>
+    </section>
+
+    <section id="evidence" class="block">
+      <h2>6. Evidence matrix</h2>
+      <p>
         Strength labels are qualitative program judgments for communication, not meta-analytic grades.
       </p>
       <div class="table-wrap">
@@ -89,268 +167,246 @@ import Layout from '../layouts/BaseLayout.astro';
               <th>Component</th>
               <th>Status</th>
               <th>Evidence strength</th>
-              <th>Role in RAL program</th>
+              <th>Role in RAL</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Proprioceptive signaling from muscle and joint receptors</td>
+              <td>Proprioceptive / interoceptive transduction</td>
               <td><span class="tag est">Established</span></td>
               <td>High</td>
               <td>Background science</td>
             </tr>
             <tr>
-              <td>Interoceptive pathways and body-state representation</td>
+              <td>Soft-tissue viscoelasticity / continuum mechanics</td>
               <td><span class="tag est">Established</span></td>
               <td>High</td>
-              <td>Background science</td>
+              <td>Measurement &amp; representation substrate</td>
             </tr>
             <tr>
-              <td>Viscoelastic behavior of soft tissue (Kelvin–Voigt-type models)</td>
-              <td><span class="tag est">Established</span></td>
-              <td>High</td>
-              <td>Modeling substrate</td>
-            </tr>
-            <tr>
-              <td>Fascial and soft-tissue mechanotransduction</td>
+              <td>Fascial mechanotransduction</td>
               <td><span class="tag em">Emerging</span></td>
               <td>Moderate</td>
               <td>Motivates zone focus</td>
             </tr>
             <tr>
-              <td>Sensor-rich investment of selected cranio-cervical, oral, pharyngeal, visceral, and pelvic interfaces</td>
+              <td>Zone-appropriate measurable mechanical properties</td>
               <td><span class="tag em">Emerging</span></td>
-              <td>Moderate (anatomy-dependent)</td>
-              <td>Zone taxonomy</td>
+              <td>Variable / methods-dependent</td>
+              <td><strong>Measurement layer</strong></td>
             </tr>
             <tr>
-              <td>Chronic mechanical restriction → systematically altered afference at these zones</td>
-              <td><span class="tag hyp">RAL hypothesis</span></td>
-              <td>Limited / emerging</td>
-              <td>Core claim under test</td>
+              <td>Single latent “restriction” construct across measures</td>
+              <td><span class="tag hyp">Hypothesis</span></td>
+              <td>Limited</td>
+              <td>To be tested, not assumed</td>
             </tr>
             <tr>
-              <td>Altered afference → neurodevelopmental phenotype</td>
-              <td><span class="tag open">Unestablished</span></td>
-              <td>Unknown</td>
-              <td>Long-range question; not assumed</td>
-            </tr>
-            <tr>
-              <td>Operational 8-zone metric pipeline (fidelity, π<sub>eff</sub>, free energy, MPA)</td>
+              <td>Mechanical representation → predicted transmission metrics</td>
               <td><span class="tag hyp">RAL construct</span></td>
               <td>Model-defined</td>
-              <td>Measurement layer for tests</td>
+              <td><strong>Computational layer</strong></td>
+            </tr>
+            <tr>
+              <td>Mechanical state predicts physiological outcomes</td>
+              <td><span class="tag open">Open</span></td>
+              <td>Unknown</td>
+              <td><strong>Physiological test layer</strong></td>
+            </tr>
+            <tr>
+              <td>MPA as valid proxy for mechanical state</td>
+              <td><span class="tag open">Open</span></td>
+              <td>Unknown</td>
+              <td>Secondary until validated</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="note">
-        Citation expansion for each row is a living task of the program. Where peer-reviewed
-        support is strong, it will be linked from zone dossiers and publications; where support
-        is weak, language remains provisional.
-      </p>
     </section>
 
-    <!-- 4 -->
     <section id="zones" class="block">
-      <h2>4. Zone taxonomy (eight sensor-rich interfaces)</h2>
+      <h2>7. Zone taxonomy and zone-specific measurement</h2>
       <p>
-        Intake, calculation, and results use one consistent eight-zone schema. Labels denote
-        research interfaces, not diagnostic categories.
+        Intake and analysis use one consistent eight-zone schema. Labels denote research
+        interfaces, not diagnostic categories. The eight interfaces differ substantially in
+        anatomy: <strong>the common element is the analytical framework, not a single physical
+        measurement technique</strong>.
       </p>
       <div class="zone-grid">
         <div class="zone-card"><span class="zn">1</span><div><strong>Extraocular / Orbital</strong><p>Oculomotor–orbital soft tissue and periocular mechanical context.</p></div></div>
         <div class="zone-card"><span class="zn">2</span><div><strong>Middle-ear</strong><p>Middle-ear mechanical environment relevant to auditory coupling.</p></div></div>
         <div class="zone-card"><span class="zn">3</span><div><strong>Nasal</strong><p>Nasal airway and associated soft-tissue mechanical context.</p></div></div>
         <div class="zone-card"><span class="zn">4</span><div><strong>Tongue</strong><p>Tongue and floor-of-mouth complex.</p></div></div>
-        <div class="zone-card"><span class="zn">5</span><div><strong>Pharyngeal / Laryngeal</strong><p>Pharyngeal–laryngeal soft tissue interfaces.</p></div></div>
-        <div class="zone-card"><span class="zn">6</span><div><strong>Suboccipital</strong><p>Suboccipital muscular–fascial complex and upper cervical mechanical context.</p></div></div>
+        <div class="zone-card"><span class="zn">5</span><div><strong>Pharyngeal / Laryngeal</strong><p>Pharyngeal–laryngeal soft-tissue interfaces.</p></div></div>
+        <div class="zone-card"><span class="zn">6</span><div><strong>Suboccipital</strong><p>Suboccipital muscular–fascial complex and upper cervical context.</p></div></div>
         <div class="zone-card"><span class="zn">7</span><div><strong>Visceral fascia / Diaphragm</strong><p>Diaphragmatic and visceral fascial mechanical interface.</p></div></div>
         <div class="zone-card"><span class="zn">8</span><div><strong>Pelvic floor</strong><p>Pelvic floor and perineal mechanical interface.</p></div></div>
       </div>
+
+      <h3>Zone dossier requirements</h3>
+      <p>For each zone, documentation must specify:</p>
+      <ol>
+        <li>Anatomical target</li>
+        <li>Measurable mechanical properties (candidates)</li>
+        <li>Acquisition method / instrument class</li>
+        <li>Calibration and quality-control procedures</li>
+        <li>Expected measurement range</li>
+        <li>Test–retest requirements</li>
+        <li>Permitted transformation into the common computational representation</li>
+        <li>Which measurements are unavailable or inappropriate for that zone</li>
+      </ol>
       <p class="note">
-        Anatomical detail, candidate receptors, and literature for each zone are intended to
-        live as zone dossiers in the interactive model (evidence status marked explicitly).
+        Shear-wave elastography, force–displacement protocols, and related methods are
+        <strong>candidates where anatomically appropriate</strong>—not universal defaults for all eight zones.
       </p>
     </section>
 
-    <!-- 5 -->
     <section id="model" class="block">
-      <h2>5. Computational model (operational layer)</h2>
+      <h2>8. Computational transmission layer</h2>
       <p>
-        For each zone, collaborators supply restriction <em>r</em>, stiffness <em>G</em>,
-        viscosity <em>η</em>, and an integer MPA score. A Kelvin–Voigt-inspired transmission
-        step yields a transmitted amplitude treated as fidelity; an effective precision-weight
-        proxy π<sub>eff</sub> and a free-energy-style term <em>F</em> are computed so sessions
-        can be compared on a common scale.
+        After a zone’s mechanical state has been measured and mapped into a mechanical
+        representation, a computational transmission model may generate
+        <strong>predicted</strong> afferent-transmission quantities for research comparison
+        (amplitude/fidelity-like terms, effective precision proxies, free-energy-style costs).
       </p>
+      <div class="callout">
+        <p>
+          <strong>Phase 1 status.</strong> Current software may accept illustrative parameters
+          (including a didactic restriction-like control and stiffness/viscosity-style terms)
+          so collaborators can inspect model behavior. Those illustrative inputs are
+          <strong>not</strong> a claim that restriction has been measured in tissue.
+        </p>
+      </div>
       <ul>
-        <li><strong>What the model is:</strong> a transparent, session-level scoring layer for multi-zone mechanical parameters.</li>
-        <li><strong>What the model is not:</strong> a validated biomarker, a diagnostic classifier, or proof of central pathophysiology.</li>
-        <li><strong>Why it exists:</strong> without shared metrics, the hypothesis cannot be tested across labs in a comparable way.</li>
+        <li><strong>What the model is:</strong> a transparent, versioned mapping from a stated mechanical representation to predicted transmission metrics.</li>
+        <li><strong>What the model is not:</strong> a biomarker, diagnostic classifier, definition of the independent variable, or proof of central pathophysiology.</li>
+        <li><strong>Versioning:</strong> every calculation stores a <code>model_version</code> so later formula changes do not mix silently with historical outputs.</li>
       </ul>
-      <p>
-        Model versioning is recorded on calculation outputs. Refinement of constitutive
-        assumptions (linearity, frequency dependence, zone coupling) is an expected part of
-        the program, not a retrospective embarrassment.
-      </p>
     </section>
 
-    <!-- 6 -->
     <section id="testing" class="block">
-      <h2>6. How we test it (experimental program)</h2>
-      <p>
-        The sequence is deliberately ordered so later phases depend on earlier measurement
-        competence. Phases may overlap once ethics and methods are in place.
-      </p>
+      <h2>9. How we test it (experimental program)</h2>
       <div class="phases">
         <div class="phase">
-          <h3>Phase I — Schema and anatomical mapping</h3>
+          <h3>Phase I — Measurement competence</h3>
           <p>
-            Stabilize zone definitions, parameter ranges, and documentation. Align anatomical
-            claims with literature; mark weak claims as provisional. Deliverable: locked
-            taxonomy + intake schema (in operation).
+            For each zone: define anatomical target, candidate mechanical observables, acquisition
+            method, calibration/QC, expected ranges, and test–retest plan. Explicitly record what
+            is not measurable for that zone.
           </p>
         </div>
         <div class="phase">
-          <h3>Phase II — Physiological and mechanical measurement</h3>
+          <h3>Phase II — Mechanical representation</h3>
           <p>
-            Pair zone parameters with independent measures where available (e.g. elastography-like
-            stiffness estimates, structured clinical observation protocols, sensory threshold
-            batteries chosen by partner labs). Deliverable: paired datasets under partner IRB.
+            Specify how raw measurements map to a common analytical representation (parameters,
+            units, transforms). Assess reliability and, where multiple measures exist, concordance.
           </p>
         </div>
         <div class="phase">
-          <h3>Phase III — Controlled mechanical perturbation</h3>
+          <h3>Phase III — Transmission predictions</h3>
           <p>
-            Test whether specified, ethical mechanical changes at a zone produce predicted
-            short-horizon shifts in RAL metrics and in partner-chosen physiological readouts.
-            Deliverable: preregistered perturbation experiments.
+            Apply the computational layer to representations from Phase II. Predictions are
+            outputs, not inputs. Model version identifiers are retained with each run.
           </p>
         </div>
         <div class="phase">
-          <h3>Phase IV — Correlation with sensory / interoceptive measures</h3>
+          <h3>Phase IV — Physiological tests</h3>
           <p>
-            Assess whether metric patterns relate to validated sensory or interoceptive
-            instruments—without treating correlation as diagnosis. Deliverable: associative
-            analyses with transparent multiple-comparison practice.
+            Preregister whether measured mechanical state (and/or prospectively defined composites)
+            predicts independent physiological outcomes (e.g. interoceptive markers, partner-chosen
+            sensory measures). Partner institutions remain responsible for human-subjects compliance.
           </p>
         </div>
         <div class="phase">
           <h3>Phase V — Intervention-linked studies (only if warranted)</h3>
           <p>
-            Only if earlier phases support mechanistic relevance, test whether targeted
-            protocols change metrics and agreed outcomes. Deliverable: intervention trials
-            designed to fail clearly if effects are absent.
+            Only if earlier phases support mechanistic relevance under preregistered criteria.
+            Designs must be capable of clear failure if effects are absent.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="falsify" class="block">
+      <h2>10. Falsification criteria</h2>
+      <p>
+        The <strong>restriction construct</strong> will be considered <strong>unsupported</strong> if,
+        under adequate study design:
+      </p>
+      <div class="pred-list">
+        <div class="pred">
+          <h3>F1 — Reliability failure</h3>
+          <p>
+            Proposed mechanical measurements for a zone fail to demonstrate adequate reliability
+            (including test–retest criteria set in advance).
+          </p>
+        </div>
+        <div class="pred">
+          <h3>F2 — Construct failure</h3>
+          <p>
+            Where a common latent mechanical construct is predicted, different candidate measures
+            show no reproducible relationship.
+          </p>
+        </div>
+        <div class="pred">
+          <h3>F3 — Predictive failure</h3>
+          <p>
+            Measured mechanical state fails to predict independently collected physiological
+            outcomes under preregistered analyses.
           </p>
         </div>
       </div>
       <p class="note">
-        Partner institutions remain responsible for human-subjects compliance. RAL provides
-        governed intake, calculation, storage, and de-identified aggregate views.
+        Internal software checks (sensitivity of computed metrics to illustrative parameter changes)
+        are quality assurance only. They do not establish that restriction exists in tissue, and
+        the computational model must never define restriction retrospectively.
       </p>
     </section>
 
-    <!-- 7 -->
-    <section id="falsify" class="block">
-      <h2>7. Falsifiable predictions</h2>
-      <p>
-        The program is committed to revision or rejection when predictions fail under adequate tests.
-      </p>
-      <div class="pred-list">
-        <div class="pred">
-          <h3>P1 — Metric sensitivity</h3>
-          <p>
-            If restriction <em>r</em> is increased in a single zone while <em>G</em>, <em>η</em>,
-            and global parameters are held fixed within the model, computed fidelity for that
-            zone should decrease and free-energy-style cost should non-decrease. Failure of this
-            internal relationship under the published equations requires model correction.
-          </p>
-        </div>
-        <div class="pred">
-          <h3>P2 — Session reliability</h3>
-          <p>
-            Under standardized acquisition, repeated sessions on stable subjects should show
-            higher within-subject metric reliability than between randomly paired subjects
-            (thresholds preregistered per study). Persistent pure noise implies the operational
-            parameters are not capturing a stable latent state.
-          </p>
-        </div>
-        <div class="pred">
-          <h3>P3 — Perturbation coupling</h3>
-          <p>
-            If Phase III perturbations are correctly targeted, predicted zones should change
-            more than pre-specified control zones. Global undifferentiated change, or change
-            only in control zones, weakens the zone-specific hypothesis.
-          </p>
-        </div>
-        <div class="pred">
-          <h3>P4 — External correlate (conditional)</h3>
-          <p>
-            Where partners collect validated sensory/interoceptive measures, preregistered
-            associations with RAL metrics should replicate in direction. Repeated null results
-            under adequate power require narrowing or abandoning phenotype-linking claims—
-            without automatically voiding the biomechanical scoring layer itself.
-          </p>
-        </div>
-        <div class="pred">
-          <h3>P5 — Collective structure</h3>
-          <p>
-            De-identified group-level aggregates should not invent stable “signatures” that
-            disappear under split-half or multi-lab replication. Non-replicable aggregate
-            stories will be withdrawn from public scientific claims.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8 -->
     <section id="limits" class="block">
-      <h2>8. Scope and limits</h2>
+      <h2>11. Scope and limits</h2>
       <div class="limits">
         <div>
           <h3>We claim</h3>
           <ul>
             <li>A clear research question and mechanistic hypothesis.</li>
-            <li>An operational multi-zone parameter schema and calculation pipeline.</li>
-            <li>Governed collaboration, authentication, and de-identified aggregation tools.</li>
-            <li>Willingness to revise or reject predictions under test.</li>
+            <li>A layered method: measurement → representation → prediction → physiological test.</li>
+            <li>Zone-specific measurement dossiers as a requirement of serious work.</li>
+            <li>Versioned computational tools and governed collaboration infrastructure.</li>
+            <li>Willingness to revise or reject the restriction construct under F1–F3.</li>
           </ul>
         </div>
         <div>
           <h3>We do not claim</h3>
           <ul>
+            <li>That “restriction” is directly observed as a single scalar.</li>
             <li>That autism or any condition is caused by myofascial restriction alone.</li>
             <li>Diagnostic accuracy or clinical triage use.</li>
             <li>Proven therapeutic efficacy of any intervention.</li>
-            <li>Institutional endorsement by universities or clinics listed as collaborators unless explicitly stated by them.</li>
+            <li>That Phase-1 illustrative software parameters equal empirical measurements.</li>
           </ul>
         </div>
       </div>
       <p>
-        Independent status is intentional: Rex Autistikon Research Foundation, Inc. is a
-        501(c)(3) public charity (EIN 42-3220323). Determination documentation is available
-        via the Transparency page or upon request.
+        Rex Autistikon Research Foundation, Inc. is a 501(c)(3) public charity (EIN 42-3220323).
+        Determination documentation is available via the Transparency page or upon request.
       </p>
     </section>
 
-    <!-- 9 -->
     <section id="platform" class="block">
-      <h2>9. Research platform</h2>
-      <p>
-        The public program is paired with a live technical platform so tests are not purely rhetorical:
-      </p>
+      <h2>12. Research platform</h2>
       <ul>
         <li><a href="/collaborate">Collaborator access request</a> — reviewed institutional onboarding.</li>
-        <li><a href="/intake">Data Intake</a> — eight-zone session submission.</li>
-        <li><a href="/results">Results Dashboard</a> — personal history and de-identified collective laboratory views.</li>
-        <li><a href="/model">Interactive model</a> — conceptual exploration of interfaces (dossier depth expanding).</li>
-        <li><a href="/publications">Publications</a> — primary documents, DOI, and future methods/data releases.</li>
+        <li><a href="/how-to-collaborate">How to collaborate</a> / handbook materials — protocol expectations.</li>
+        <li><a href="/intake">Data Intake</a> — Phase-1 pipeline (illustrative parameters labeled as such).</li>
+        <li><a href="/results">Results Dashboard</a> — personal history and de-identified collective views; model version stamped.</li>
+        <li><a href="/model">Interactive model</a> — didactic transmission layer, not measurement.</li>
+        <li><a href="/publications">Publications</a> — primary documents, DOI, future methods/data releases.</li>
       </ul>
       <p class="closing">
-        A skeptical reader should be able to disagree with the hypothesis and still recognize
-        a structured attempt to state assumptions, measurements, and failure conditions.
-        That is the standard this framework is written to meet.
+        A skeptical reader should be able to disagree with the hypothesis and still recognize a
+        structured attempt to separate measurement from modeling, to state failure conditions,
+        and to refuse retrospective definition of the independent variable.
       </p>
     </section>
   </main>
@@ -367,22 +423,20 @@ import Layout from '../layouts/BaseLayout.astro';
     opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
   }
   .hero h1 {
-    font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 700;
-    max-width: 720px; margin: 0 auto 0.75rem; line-height: 1.25;
+    font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 700;
+    max-width: 760px; margin: 0 auto 0.75rem; line-height: 1.25;
   }
   .subtitle {
     max-width: 720px; margin: 0 auto; line-height: 1.6; opacity: 0.92; font-size: 1.02rem;
   }
-
   .toc {
     max-width: 900px; margin: 0 auto; padding: 1.25rem 1.25rem 0;
     display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; justify-content: center;
   }
   .toc a {
-    font-size: 0.8rem; color: #0f766e; text-decoration: none; font-weight: 600;
+    font-size: 0.78rem; color: #0f766e; text-decoration: none; font-weight: 600;
   }
   .toc a:hover { text-decoration: underline; }
-
   .block {
     max-width: 900px; margin: 0 auto; padding: 2.25rem 1.25rem 0.5rem;
   }
@@ -393,13 +447,11 @@ import Layout from '../layouts/BaseLayout.astro';
   .block h3 { font-size: 1.02rem; margin: 1.25rem 0 0.5rem; color: #134e4a; }
   .block p, .block li { line-height: 1.65; color: #334155; }
   .lead { font-size: 1.08rem; color: #1e293b; }
-
   .callout {
     background: #fff; border: 1px solid #99f6e4; border-left: 4px solid #0f766e;
     border-radius: 10px; padding: 1rem 1.15rem; margin: 0.75rem 0 1rem;
   }
   .callout p { margin: 0; color: #0f172a; }
-
   .chain { margin: 0.75rem 0 0; padding-left: 1.1rem; }
   .chain li { margin-bottom: 0.65rem; }
   .chain span {
@@ -407,7 +459,17 @@ import Layout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.04em; background: #ecfdf5; color: #065f46;
     padding: 0.15rem 0.45rem; border-radius: 4px; margin-right: 0.35rem;
   }
-
+  .layer-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem; margin: 1rem 0;
+  }
+  .layer-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 1rem 1.05rem;
+  }
+  .layer-card h3 { margin: 0 0 0.4rem; font-size: 0.95rem; color: #0f766e; }
+  .layer-card p { margin: 0 0 0.5rem; font-size: 0.9rem; }
+  .layer-not { font-size: 0.82rem !important; color: #64748b !important; }
   .table-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 10px; border: 1px solid #e2e8f0; }
   table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.88rem; }
   th, td { padding: 0.7rem 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
@@ -420,7 +482,6 @@ import Layout from '../layouts/BaseLayout.astro';
   .tag.em { background: #e0e7ff; color: #3730a3; }
   .tag.hyp { background: #fef3c7; color: #92400e; }
   .tag.open { background: #f1f5f9; color: #475569; }
-
   .zone-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 0.75rem; margin: 1rem 0;
@@ -436,7 +497,6 @@ import Layout from '../layouts/BaseLayout.astro';
   }
   .zone-card p { margin: 0.2rem 0 0; font-size: 0.85rem; color: #64748b; }
   .zone-card strong { font-size: 0.92rem; color: #0f172a; }
-
   .phases { display: grid; gap: 0.75rem; margin: 1rem 0; }
   .phase {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
@@ -444,7 +504,6 @@ import Layout from '../layouts/BaseLayout.astro';
   }
   .phase h3 { margin: 0 0 0.35rem; font-size: 0.98rem; color: #0f766e; }
   .phase p { margin: 0; font-size: 0.92rem; }
-
   .pred-list { display: grid; gap: 0.75rem; margin: 1rem 0; }
   .pred {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
@@ -452,7 +511,6 @@ import Layout from '../layouts/BaseLayout.astro';
   }
   .pred h3 { margin: 0 0 0.35rem; font-size: 0.98rem; color: #134e4a; }
   .pred p { margin: 0; font-size: 0.92rem; }
-
   .limits {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;
   }
@@ -464,7 +522,6 @@ import Layout from '../layouts/BaseLayout.astro';
   .limits h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
   .limits ul { margin: 0; padding-left: 1.1rem; }
   .limits li { margin-bottom: 0.35rem; font-size: 0.9rem; }
-
   .note {
     font-size: 0.88rem; color: #64748b; background: #f1f5f9;
     border-radius: 8px; padding: 0.75rem 0.9rem; margin-top: 0.75rem;
@@ -475,4 +532,5 @@ import Layout from '../layouts/BaseLayout.astro';
   }
   .block a { color: #0f766e; font-weight: 600; }
   .block:last-of-type { padding-bottom: 3.5rem; }
+  code { font-size: 0.85em; background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; }
 </style>
