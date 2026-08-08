@@ -3,16 +3,15 @@
 // src/pages/model.astro
 // Rex Autistikōn Labs — Interactive Biotensegrity / Afferent Signalling Model
 //
-// Phase 1. A static, dependency-free interactive model that contrasts a
-// "Normal" and a hypothesised "Neurodivergent" parameter set across the eight
-// sensor-rich myofascial and visceral interfaces described in the Pilot Study
-// Collaborator Handbook.
+// Phase 1 didactic transmission layer. Contrasts illustrative "Normal" and
+// "Neurodivergent" latent-state profiles across eight sensor-rich interfaces.
+// Not a measurement instrument. Restriction-like controls are hypothesis-level.
 // ---------------------------------------------------------------------------
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Interactive Model';
 const description =
-  'An interactive research and education model exploring how chronic mechanical restriction in eight sensor-rich myofascial and visceral interfaces may alter afferent signal fidelity, sensory precision, and prediction error.';
+  'Phase 1 didactic transmission model: exploratory visualisation of how a hypothesis-level latent mechanical state at eight sensor-rich interfaces may map to predicted afferent signal fidelity, precision proxies, and free-energy-style costs. Not a measurement instrument.';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -23,23 +22,33 @@ const description =
          =================================================================== -->
     <header class="mb-10 border-b border-slate-200 pb-8">
       <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-800">
-        Research Instrumentation · Phase 1
+        Computational transmission layer · Phase 1 (didactic)
       </p>
       <h1 class="mb-4 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-        Interactive Model: Mechanical Restriction and Afferent Signal Fidelity
+        Interactive Model: Predicted Afferent Transmission
       </h1>
+      <div class="mb-5 max-w-3xl rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
+        <strong>Phase 1 — illustrative only.</strong>
+        Adjustable controls (including any restriction-like slider) stand in for a
+        <em>hypothesis-level latent mechanical state</em>, not an instrument reading.
+        Empirical work follows measurement → mechanical representation → transmission prediction → physiological test.
+        See the
+        <a href="/research-framework" class="font-semibold text-amber-900 underline">Research Framework</a>
+        and
+        <a href="/model-docs" class="font-semibold text-amber-900 underline">How the model is computed</a>.
+      </div>
       <p class="max-w-3xl text-base leading-relaxed text-slate-600">
-        This model is a simplified, exploratory representation of the working
-        hypothesis under investigation at Rex Autistikōn Labs: that chronic
-        mechanical restriction within eight sensor-rich myofascial and visceral
-        interfaces may attenuate and delay the afferent signals those interfaces
-        generate, with downstream consequences for sensory precision and
-        predictive processing.
+        This page is a simplified, exploratory representation of the
+        <strong>computational transmission layer</strong> under investigation at
+        Rex Autistikōn Labs. The working hypothesis is that measurable differences
+        in local tissue mechanics at eight sensor-rich interfaces may alter the
+        statistics of ascending afferent signals. “Mechanical restriction” names
+        that hypothesized latent state; it is not treated here as a directly observed scalar.
       </p>
       <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-        Adjust the parameters below to see how tissue stiffness and viscosity
-        change what the nervous system receives. Nothing here is a measurement;
-        it is a way of making the hypothesis legible and testable.
+        Adjust the didactic parameters below to see how stiffness- and viscosity-like
+        terms change <em>predicted</em> transmission quantities. Nothing here is a
+        measurement; it is a way of making the transmission hypotheses legible and criticisable.
       </p>
     </header>
 
@@ -63,7 +72,7 @@ const description =
               <span>
                 <span class="block text-sm font-medium text-slate-900">Normal</span>
                 <span class="block text-xs leading-relaxed text-slate-500">
-                  Low baseline restriction across all eight zones.
+                  Low baseline didactic latent-state profile across all eight zones.
                 </span>
               </span>
             </label>
@@ -72,7 +81,7 @@ const description =
               <span>
                 <span class="block text-sm font-medium text-slate-900">Neurodivergent</span>
                 <span class="block text-xs leading-relaxed text-slate-500">
-                  Hypothesised restriction profile. Illustrative, not measured data.
+                  Illustrative elevated latent-state profile. Not measured data; not a diagnostic pattern.
                 </span>
               </span>
             </label>
@@ -92,12 +101,12 @@ const description =
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
               <div class="mb-1 flex items-baseline justify-between">
-                <label for="restrictionSlider" class="text-sm font-medium text-slate-700">Restriction level</label>
+                <label for="restrictionSlider" class="text-sm font-medium text-slate-700">Didactic latent-state scale</label>
                 <output id="restrictionOut" for="restrictionSlider" class="font-mono text-sm text-slate-900">100%</output>
               </div>
               <input type="range" id="restrictionSlider" min="0" max="150" step="1" value="100" class="w-full accent-amber-700" />
               <p class="mt-1 text-xs leading-relaxed text-slate-500">
-                Scales the selected baseline profile. Moving this resets any per-zone adjustments.
+                Scales the selected illustrative profile. Moving this resets any per-zone adjustments. Not a measured restriction index.
               </p>
             </div>
 
@@ -161,7 +170,7 @@ const description =
           <title id="netTitle">Simplified biotensegrity network of eight sensor-rich zones</title>
           <desc id="netDesc">
             Eight nodes arranged from cranial to pelvic, connected by fascial links.
-            Node colour and size indicate retained signal fidelity; link thickness indicates restriction.
+            Node colour and size indicate predicted retained signal fidelity; link thickness indicates didactic latent-state level.
           </desc>
           <g id="edgeLayer" stroke-linecap="round"></g>
           <g id="pulseLayer" aria-hidden="true"></g>
@@ -198,7 +207,7 @@ const description =
 
           <div class="mt-4">
             <div class="mb-1 flex items-baseline justify-between">
-              <label for="zoneRestriction" class="text-sm font-medium text-slate-700">Restriction in this zone</label>
+              <label for="zoneRestriction" class="text-sm font-medium text-slate-700">Didactic latent state in this zone</label>
               <output id="zoneRestrictionOut" for="zoneRestriction" class="font-mono text-sm text-slate-900">0.06</output>
             </div>
             <input type="range" id="zoneRestriction" min="0" max="100" step="1" value="6" class="w-full accent-amber-700" />
@@ -259,7 +268,7 @@ const description =
             <div class="h-2 w-full overflow-hidden rounded-full bg-slate-200">
               <div id="mpaBar" class="h-full rounded-full bg-teal-700 transition-all duration-300" style="width:0%"></div>
             </div>
-            <p class="mt-1 text-xs text-slate-500">Eight zones scored 0–8 each · composite range 0–64</p>
+            <p class="mt-1 text-xs text-slate-500">Observational MPA-style map from didactic latent state (0–8 each · composite 0–64). Not a validated mechanical gold standard.</p>
           </div>
           <dl class="grid grid-cols-3 gap-x-4 gap-y-3 border-t border-slate-200 pt-3 text-sm">
             <div>
@@ -305,8 +314,8 @@ const description =
             <tr class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
               <th scope="col" class="py-2 pr-3 font-medium">Zone</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">f<sub>c</sub> (Hz)</th>
-              <th scope="col" class="py-2 pr-3 text-right font-medium">r</th>
-              <th scope="col" class="py-2 pr-3 text-right font-medium">MPA</th>
+              <th scope="col" class="py-2 pr-3 text-right font-medium">r (didactic)</th>
+              <th scope="col" class="py-2 pr-3 text-right font-medium">MPA (obs.)</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">|H|</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">Fidelity</th>
               <th scope="col" class="py-2 pr-3 text-right font-medium">π<sub>eff</sub></th>
@@ -324,81 +333,56 @@ const description =
          =================================================================== -->
     <section aria-labelledby="method-heading" class="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
       <h2 id="method-heading" class="mb-3 text-lg font-semibold text-slate-900">
-        How the model is computed
+        How the model is computed (Phase 1 didactic)
       </h2>
       <div class="space-y-3 text-sm leading-relaxed text-slate-700">
         <p>
+          <strong>Place in the hierarchy.</strong>
+          Empirical work at Rex Autistikōn Labs separates (1) measurement of mechanical quantities,
+          (2) mechanical representation (e.g. moduli, strain, relaxation), and (3) computational
+          transmission predictions. This interactive page is layer (3) only. It does not acquire data.
+          Full policy: <a href="/research-framework" class="font-semibold text-teal-800 underline">Research Framework</a>
+          · <a href="/model-docs" class="font-semibold text-teal-800 underline">Model documentation</a>.
+        </p>
+        <p>
           Each zone is represented as a Kelvin–Voigt viscoelastic element. Driving the element at angular frequency ω yields transmitted strain amplitude
           <span class="font-mono">|H(ω)| = G₀ / √(G² + (ωη)²)</span>,
-          normalised so an unrestricted zone responds fully to very slow events. Restriction <span class="font-mono">r</span> raises both stiffness and viscosity, with viscosity rising faster.
+          normalised so an unrestricted didactic baseline responds fully to very slow events.
+          The control labelled as a latent-state / restriction-like parameter
+          <span class="font-mono">r</span> is a <strong>hypothesis-level didactic variable</strong>:
+          it raises both stiffness- and viscosity-like terms in the demo so predicted attenuation can be inspected.
+          It is not an instrument reading and must not be used to define “restriction” retrospectively from model outputs.
         </p>
         <p>
           Effective sensory precision is modelled as
           <span class="font-mono">π<sub>eff</sub> = (|H|² + c) / (1 + c)</span>.
-          Prediction error ε is the difference between the unrestricted expectation and the current transmitted signal. Variational free energy follows as
+          Prediction error ε is the difference between the unrestricted didactic expectation and the current transmitted signal. Variational free energy follows as
           <span class="font-mono">F = ½πε² − ½lnπ</span>.
-          The gradient ∂F/∂r indicates how strongly free energy responds to a change in mechanical restriction.
+          The gradient ∂F/∂r is a software sensitivity readout—not a scientific falsification test of the restriction construct
+          (see Research Framework criteria: reliability, construct coherence, and preregistered physiological prediction).
         </p>
         <p>
-          MPA–Zone scores map each zone’s restriction onto a 0–8 integer scale, giving a 0–64 composite intended for participant stratification. The values used here are illustrative parameter sets, not clinical measurements.
+          MPA–Zone integers map each zone’s didactic latent state onto a 0–8 scale (composite 0–64).
+          In the research program, MPA-style scores are treated as <strong>independent observational variables</strong>
+          until preregistered analyses establish correspondence with objective mechanical measurements.
+          They are not the primary definition of computational mechanical state.
+        </p>
+        <p>
+          <strong>Intended use:</strong>
+          Research communication, educational exploration, and generation of testable predictions
+          for future experimental work. Zone anatomy differs; one illustrative control law does not imply
+          one physical instrument for all eight interfaces.
         </p>
       </div>
     </section>
-    <!-- Methods & Version -->
-    <section class="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900">Methods & Version</h2>
-      <dl class="grid gap-4 sm:grid-cols-2 text-sm">
-        <div>
-          <dt class="font-medium text-slate-900">Version</dt>
-          <dd class="text-slate-600">Phase 1.0 · July 2026</dd>
-        </div>
-        <div>
-          <dt class="font-medium text-slate-900">Last updated</dt>
-          <dd class="text-slate-600">29 July 2026</dd>
-        </div>
-        <div>
-          <dt class="font-medium text-slate-900">Model type</dt>
-          <dd class="text-slate-600">Simplified Kelvin–Voigt viscoelastic network</dd>
-        </div>
-        <div>
-          <dt class="font-medium text-slate-900">Zones</dt>
-          <dd class="text-slate-600">Eight sensor-rich myofascial and visceral interfaces</dd>
-        </div>
-      </dl>
 
-      <div class="mt-6 space-y-3 text-sm leading-relaxed text-slate-600">
-        <p>
-          <strong class="text-slate-900">Parameters represented:</strong> 
-          Restriction (r), stiffness multiplier (G), viscosity multiplier (η), and probe frequency. 
-          The Neurodivergent preset is an illustrative restriction profile, not measured clinical data.
-        </p>
-        <p>
-          <strong class="text-slate-900">What is computed:</strong> 
-          Transmitted amplitude |H|, retained fidelity relative to an unrestricted equivalent, 
-          effective sensory precision π<sub>eff</sub>, prediction error ε, variational free energy F, 
-          and the gradient ∂F/∂r. An MPA–Zone composite score (0–64) is derived for stratification purposes.
-        </p>
-        <p>
-          <strong class="text-slate-900">Limitations:</strong> 
-          This is a low-dimensional educational and hypothesis-communication model. 
-          It does not simulate full soft-tissue mechanics, fluid dynamics, or neural circuits. 
-          Parameter values are provisional. It is not validated against empirical measurements 
-          and must not be used for clinical decision-making.
-        </p>
-        <p>
-          <strong class="text-slate-900">Intended use:</strong> 
-          Research communication, educational exploration, and generation of testable predictions 
-          for future experimental work.
-        </p>
-      </div>
-    </section>
     <!-- ===================================================================
          7. DISCLAIMER + INTELLECTUAL PROPERTY
          =================================================================== -->
     <aside role="note" class="rounded-lg border-l-4 border-amber-600 bg-amber-50 p-5">
       <h2 class="mb-2 text-sm font-semibold text-amber-950">Research and Education Tool</h2>
       <p class="text-sm leading-relaxed text-amber-950/85 mb-3">
-        This Interactive Model is a simplified teaching and hypothesis-communication instrument. It is not a diagnostic device, not a clinical assessment, and not a source of individual health information. It does not describe any specific person and should not be used to infer, screen for, or evaluate any condition.
+        This Interactive Model is a simplified teaching and hypothesis-communication instrument for the computational transmission layer. It is not a measurement instrument, not a diagnostic device, not a clinical assessment, and not a source of individual health information. Didactic latent-state controls are not observed mechanical data. It does not describe any specific person and should not be used to infer, screen for, or evaluate any condition.
       </p>
       <p class="text-sm leading-relaxed text-amber-950/85">
         © 2026 Rex Autistikon Research Foundation, Inc. All rights reserved.
@@ -663,22 +647,22 @@ const description =
       totalMPA <= 42 ? 'moderate' : 'pronounced';
 
     const p1 =
-      `At a probe frequency of ${state.freq.toFixed(2)} Hz, the ` +
-      `${z.short.toLowerCase()} zone transmits ${(s.H).toFixed(3)} of the ` +
-      `signal an unrestricted equivalent would transmit ` +
-      `(${s.Hhat.toFixed(3)}), a loss of ${lossPct.toFixed(0)} per cent. ` +
-      `Effective precision in this channel is ${s.pi.toFixed(3)}.`;
+      `At a didactic probe frequency of ${state.freq.toFixed(2)} Hz, the ` +
+      `${z.short.toLowerCase()} zone is predicted to transmit ${(s.H).toFixed(3)} of the ` +
+      `amplitude an unrestricted didactic baseline would transmit ` +
+      `(${s.Hhat.toFixed(3)}), a predicted loss of ${lossPct.toFixed(0)} per cent. ` +
+      `Effective precision proxy in this channel is ${s.pi.toFixed(3)}.`;
 
     const p2 =
-      `Because the internal model expects the unrestricted response, the ` +
-      `shortfall appears as a prediction error of ${Math.abs(s.eps).toFixed(3)}. ` +
-      `The gradient of free energy with respect to restriction is ` +
-      `${freeEnergyGradient(state.selected).toFixed(2)}.`;
+      `Under the model’s unrestricted didactic expectation, the ` +
+      `shortfall appears as a prediction-error term of ${Math.abs(s.eps).toFixed(3)}. ` +
+      `The gradient ∂F/∂r (${freeEnergyGradient(state.selected).toFixed(2)}) is a software sensitivity readout, ` +
+      `not a test of whether a latent mechanical “restriction” construct exists in tissue.`;
 
     const p3 =
-      `Across all eight zones the composite MPA–Zone score is ${totalMPA} of 64, ` +
-      `a ${band} restriction burden, with mean effective precision ` +
-      `${meanPi.toFixed(3)}.`;
+      `Across all eight zones the observational MPA–Zone composite is ${totalMPA} of 64 ` +
+      `(${band} on this illustrative scale), with mean effective precision proxy ` +
+      `${meanPi.toFixed(3)}. These values explore the transmission layer only.`;
 
     return [p1, p2, p3];
   }
