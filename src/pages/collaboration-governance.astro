@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Collaboration Governance"
+  description="Roles, data-use principles, authorship, protocol versioning, and access assignment for research collaboration with Rex Autistikon Research Foundation."
+>
+  <main class="guide-page">
+    <section class="hero">
+      <h1>Collaboration Governance</h1>
+      <p class="subtitle">
+        Rex Autistikon Research Foundation stewards the research measurement architecture so
+        multi-site work can remain comparable. Collaborators are partners in data generation,
+        not subordinate to a vendor relationship.
+      </p>
+    </section>
+
+    <section class="content">
+      <div class="card" id="roles">
+        <h2>1. Roles and stewardship</h2>
+        <p>
+          Clear roles keep measurement comparable across sites without transferring
+          institutional responsibilities that belong at the collaborating site.
+        </p>
+        <ul>
+          <li>
+            <strong>Foundation.</strong> Stewards the platform and protocol architecture:
+            the zone protocol framework, the QC criteria model, official dossier and SOP
+            versions, and the hosted collaborator environment.
+          </li>
+          <li>
+            <strong>Collaborating institution.</strong> Owns IRB or ethics review, informed
+            consent, local conduct of measurement, and primary data. Access to Foundation
+            systems is granted after review; it is not automatic.
+          </li>
+          <li>
+            <strong>Instrument vendors.</strong> Remain responsible for device software and
+            hardware. Foundation software complements those instruments; it does not replace them.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="data-use">
+        <h2>2. Data use principles</h2>
+        <p>
+          These principles describe how collaboration data are hosted and seen. A formal data-use
+          agreement, where required by the site, should be consistent with them.
+        </p>
+        <ul>
+          <li>The collaborating site owns its primary data.</li>
+          <li>
+            The Foundation hosts submitted and processed data under governed access for the
+            collaboration; hosting is not a transfer of ownership.
+          </li>
+          <li>
+            Collaborators see their own results. Cross-site visibility is limited to
+            de-identified aggregates unless a written agreement provides otherwise.
+          </li>
+          <li>External sharing requires explicit written agreement.</li>
+          <li>
+            The platform is designed around participant pseudonyms. Direct identifiers are
+            not required for use of the platform.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="access">
+        <h2>3. Access</h2>
+        <p>
+          Collaborator access is granted after Foundation review. Submitting a request does
+          not itself provision an account.
+        </p>
+        <ul>
+          <li>
+            Investigators submit a <a href="/collaborate">Collaborator Access Request</a>.
+            The Foundation reviews the request and sends a decision to the institutional
+            email provided.
+          </li>
+          <li>
+            Approved collaborators sign in with Microsoft Entra. Assignment to the
+            collaborator environment is required in addition to a successful request.
+          </li>
+          <li>
+            Access may be revoked if collaboration terms are violated or the collaboration ends.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="authorship">
+        <h2>4. Authorship and scientific credit</h2>
+        <p>
+          Authorship follows contribution. Foundation staff are not required authors on
+          collaborator papers.
+        </p>
+        <ul>
+          <li>
+            Software, protocol design, and methods infrastructure may be credited as a
+            Foundation contribution when they materially enable the work. That contribution
+            is citable; it does not displace site scientific credit.
+          </li>
+          <li>
+            Data-generating investigators retain scientific credit for the data they collect
+            and for clinical or domain interpretation.
+          </li>
+          <li>
+            Authorship and acknowledgment expectations should be discussed before substantive
+            analysis where feasible, and decided by contribution.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="protocols">
+        <h2>5. Protocols, dossiers, and versioning</h2>
+        <p>
+          Official Rex zone criteria and SOPs are versioned and Foundation-maintained so that
+          “Rex-standard” refers to a stated lineage rather than an ad hoc local copy.
+        </p>
+        <ul>
+          <li>
+            Locked dossiers freeze criteria for a study cycle. Supersession is by a new
+            version, not a silent edit of a locked record.
+          </li>
+          <li>
+            Provisional thresholds are labeled provisional. They are working criteria, not
+            validated reliability results.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="reliability">
+        <h2>6. Reliability claims</h2>
+        <p>
+          Platform readiness is not the same as validated measurement coefficients.
+          Scientific claims about reliability require formal validation under a defined
+          analysis plan.
+        </p>
+        <ul>
+          <li>
+            Formal reliability metrics (including ICC, SEM, MDC, and related coefficients)
+            are not established until a prospective validation study is completed under a
+            defined analysis plan.
+          </li>
+          <li>
+            QC gates and readiness materials support process quality. They are not
+            substitutes for peer-reviewed reliability validation and do not imply those
+            coefficients.
+          </li>
+          <li>
+            Public and collaborator communications must not imply clinical validation or
+            diagnostic use.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="software">
+        <h2>7. Software openness and project identity</h2>
+        <p>
+          The Foundation intends research software to remain inspectable and reusable where
+          appropriate, while keeping official protocol identity distinct from arbitrary forks.
+        </p>
+        <ul>
+          <li>
+            Official protocol names, dossier versions, and Foundation marks remain
+            stewarded so that “Rex-standard” means Foundation-maintained versions.
+          </li>
+          <li>
+            Use of the platform does not transfer ownership of Foundation intellectual
+            property in the architecture, criteria model, or marks.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" id="research-use">
+        <h2>8. Research use</h2>
+        <p>
+          This site and the collaborator environment are research communication and methods
+          infrastructure. They are not a medical-device user interface, and they are not
+          for diagnosis or treatment decisions.
+        </p>
+      </div>
+
+      <div class="card" id="contact">
+        <h2>Collaboration discussions</h2>
+        <p>
+          For collaboration questions, write to{' '}
+          <a href="mailto:info@rexautistikonlabs.org">info@rexautistikonlabs.org</a>.
+        </p>
+        <ul>
+          <li><a href="/how-to-collaborate">How to Collaborate</a></li>
+          <li><a href="/collaborate">Request Access</a></li>
+          <li><a href="/irb-faq">IRB &amp; Ethics FAQ</a></li>
+          <li>
+            <a href="https://rex-biomech-staging-dkegcbhtauffehbt.westus-01.azurewebsites.net/login">
+              Biomechanics Portal
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cta">
+        <a href="/collaborate" class="btn-primary">Request Access →</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    background: #f8fafc;
+    min-height: 80vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    color: white;
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .card h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+  }
+
+  .card p {
+    color: #475569;
+    line-height: 1.6;
+    margin: 0 0 0.85rem;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #475569;
+  }
+
+  .card li {
+    line-height: 1.6;
+    margin-bottom: 0.55rem;
+  }
+
+  .card li:last-child {
+    margin-bottom: 0;
+  }
+
+  .card a {
+    color: #0f766e;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: #0f766e;
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #0d9488;
+  }
+</style>

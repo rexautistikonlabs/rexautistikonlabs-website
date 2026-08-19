@@ -85,6 +85,10 @@ import Layout from '../layouts/BaseLayout.astro';
       <p class="footer-note">
         After submission, requests are reviewed by the Rex Autistikōn Labs team. Approved collaborators
         will receive onboarding instructions via the institutional email provided.
+        Submitting this form does not itself provision access; approved collaborators sign in with
+        Microsoft Entra after assignment.
+        Roles, data-use principles, and protocol versioning are described in
+        <a href="/collaboration-governance">Collaboration Governance</a>.
       </p>
     </section>
   </main>
@@ -148,6 +152,8 @@ import Layout from '../layouts/BaseLayout.astro';
   .footer-note {
     margin-top: 1.5rem; font-size: 0.85rem; color: #64748b; line-height: 1.5; text-align: center;
   }
+  .footer-note a { color: #0f766e; font-weight: 500; text-decoration: none; }
+  .footer-note a:hover { text-decoration: underline; }
 </style>
 
 <script is:inline>
