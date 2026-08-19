@@ -117,8 +117,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">2.2 What is measured in Phase 1</h3>
         <p class="text-slate-600 leading-relaxed mb-4">
           Phase 1 does not yet ingest raw imaging. It accepts collaborator-supplied zone
-          parameters—restriction ratio <span class="font-mono text-sm">r</span>, stiffness
-          <span class="font-mono text-sm">G</span>, viscosity
+          parameters—restriction ratio <span class="font-mono text-sm">r</span>, stiffness{' '}
+          <span class="font-mono text-sm">G</span>, viscosity{' '}
           <span class="font-mono text-sm">η</span>, and an integer MPA-style score—together
           with study metadata (group, demographics as provided, study ID, session, world
           region, notes). Server-side calculation returns, per zone and in aggregate:
@@ -360,7 +360,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="text-slate-600 leading-relaxed mb-4">
           Soft tissue is neither pure spring nor pure damper. A minimal useful description is
           the Kelvin–Voigt element: elastic modulus G in parallel with viscosity η. At angular
-          frequency ω, transmitted amplitude takes the form
+          frequency ω, transmitted amplitude takes the form{' '}
           <span class="font-mono text-sm">|H(ω)| = G₀ / √(G² + (ωη)²)</span>.
           Raising G reduces deformation for a given stress; raising η attenuates fast events
           more than slow ones. The platform’s restriction parameter increases both, with
@@ -472,9 +472,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           unit of parameter entry and calculation for approved collaborators.
         </p>
         <p class="text-slate-600 leading-relaxed">
-          See
+          See{' '}
           <a href="/model" class="text-teal-700 font-medium hover:text-teal-800">Interactive Model</a>
-          and, for authorized measurement,
+          {' '}and, for authorized measurement,{' '}
           <a href="/intake" class="text-teal-700 font-medium hover:text-teal-800">Data Intake</a>.
         </p>
       </section>
@@ -563,7 +563,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="text-slate-600 leading-relaxed mb-4">
           Programs capable of confirming, refining, or falsifying the mid-path—including
           shear-wave elastography protocols, interoceptive and sensory correlates, and
-          preregistered pilots—are outlined on the
+          preregistered pilots—are outlined on the{' '}
           <a href="/roadmap" class="text-teal-700 font-medium hover:text-teal-800">Research Roadmap</a>.
           Until those data exist, the appropriate epistemic stance is structured
           agnosticism coupled to instrumentation: the path is specified clearly enough to
@@ -576,11 +576,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </section>
 
       <footer class="text-sm text-slate-500 border-t border-slate-200 pt-6 leading-relaxed">
-        Collaboration process:
+        Collaboration process:{' '}
         <a href="/how-to-collaborate" class="text-teal-700 font-medium hover:text-teal-800">How to Collaborate</a>.
-        Data handling for institutional review:
+        Data handling for institutional review:{' '}
         <a href="/irb-faq" class="text-teal-700 font-medium hover:text-teal-800">IRB &amp; Ethics FAQ</a>.
-        Organizational transparency:
+        Organizational transparency:{' '}
         <a href="/transparency" class="text-teal-700 font-medium hover:text-teal-800">Transparency &amp; Legal</a>.
       </footer>
     </div>

@@ -28,13 +28,13 @@ const description =
         Interactive Model: Predicted Afferent Transmission
       </h1>
       <div class="mb-5 max-w-3xl rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
-        <strong>Phase 1 — illustrative only.</strong>
-        Adjustable controls (including any restriction-like slider) stand in for a
+        <strong>Phase 1 — illustrative only.</strong>{' '}
+        Adjustable controls (including any restriction-like slider) stand in for a{' '}
         <em>hypothesis-level latent mechanical state</em>, not an instrument reading.
         Empirical work follows measurement → mechanical representation → transmission prediction → physiological test.
-        See the
+        See the{' '}
         <a href="/research-framework" class="font-semibold text-amber-900 underline">Research Framework</a>
-        and
+        {' '}and{' '}
         <a href="/model-docs" class="font-semibold text-amber-900 underline">How the model is computed</a>.
       </div>
 
@@ -49,7 +49,7 @@ const description =
       </div>
 
       <p class="max-w-3xl text-base leading-relaxed text-slate-600">
-        This page is a simplified, exploratory representation of the
+        This page is a simplified, exploratory representation of the{' '}
         <strong>computational transmission layer</strong> under investigation at
         Rex Autistikōn Labs. The working hypothesis is that measurable differences
         in local tissue mechanics at eight sensor-rich interfaces may alter the
@@ -348,7 +348,7 @@ const description =
       </h2>
       <div class="space-y-3 text-sm leading-relaxed text-slate-700">
         <p>
-          <strong>Place in the hierarchy.</strong>
+          <strong>Place in the hierarchy.</strong>{' '}
           Empirical work at Rex Autistikōn Labs separates (1) measurement of mechanical quantities,
           (2) mechanical representation (e.g. moduli, strain, relaxation), and (3) computational
           transmission predictions. This interactive page is layer (3) only. It does not acquire data.
@@ -356,30 +356,30 @@ const description =
           · <a href="/model-docs" class="font-semibold text-teal-800 underline">Model documentation</a>.
         </p>
         <p>
-          Each zone is represented as a Kelvin–Voigt viscoelastic element. Driving the element at angular frequency ω yields transmitted strain amplitude
+          Each zone is represented as a Kelvin–Voigt viscoelastic element. Driving the element at angular frequency ω yields transmitted strain amplitude{' '}
           <span class="font-mono">|H(ω)| = G₀ / √(G² + (ωη)²)</span>,
           normalised so an unrestricted didactic baseline responds fully to very slow events.
-          The control labelled as a latent-state / restriction-like parameter
+          The control labelled as a latent-state / restriction-like parameter{' '}
           <span class="font-mono">r</span> is a <strong>hypothesis-level didactic variable</strong>:
           it raises both stiffness- and viscosity-like terms in the demo so predicted attenuation can be inspected.
           It is not an instrument reading and must not be used to define “restriction” retrospectively from model outputs.
         </p>
         <p>
-          Effective sensory precision is modelled as
+          Effective sensory precision is modelled as{' '}
           <span class="font-mono">π<sub>eff</sub> = (|H|² + c) / (1 + c)</span>.
-          Prediction error ε is the difference between the unrestricted didactic expectation and the current transmitted signal. Variational free energy follows as
+          Prediction error ε is the difference between the unrestricted didactic expectation and the current transmitted signal. Variational free energy follows as{' '}
           <span class="font-mono">F = ½πε² − ½lnπ</span>.
           The gradient ∂F/∂r is a software sensitivity readout—not a scientific falsification test of the restriction construct
           (see Research Framework criteria: reliability, construct coherence, and preregistered physiological prediction).
         </p>
         <p>
           MPA–Zone integers map each zone’s didactic latent state onto a 0–8 scale (composite 0–64).
-          In the research program, MPA-style scores are treated as <strong>independent observational variables</strong>
+          In the research program, MPA-style scores are treated as <strong>independent observational variables</strong>{' '}
           until preregistered analyses establish correspondence with objective mechanical measurements.
           They are not the primary definition of computational mechanical state.
         </p>
         <p>
-          <strong>Intended use:</strong>
+          <strong>Intended use:</strong>{' '}
           Research communication, educational exploration, and generation of testable predictions
           for future experimental work. Zone anatomy differs; one illustrative control law does not imply
           one physical instrument for all eight interfaces.
