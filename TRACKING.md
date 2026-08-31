@@ -57,7 +57,7 @@ Search Partners and Display stay **off**. That setting lives in Google Ads, not 
 
 ## Contact form backend
 
-The `/contact` form posts to Formsubmit (`https://formsubmit.co/ajax/info@rexautistikonlabs.org`) and, on success, routes to `/contact/received`.
+The `/contact` form is a normal HTML POST to Formsubmit (`https://formsubmit.co/info@rexautistikonlabs.org`). After submit, Formsubmit redirects the browser to `https://rexautistikonlabs.org/contact/received` via the `_next` field.
 
 The first Formsubmit delivery to `info@rexautistikonlabs.org` requires confirming the mailbox. Until that confirmation is done, submissions may not arrive.
 
