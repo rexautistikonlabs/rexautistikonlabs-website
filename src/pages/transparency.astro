@@ -73,7 +73,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           United States
         </p>
         <p class="text-slate-600 mt-4">
-          <a href="mailto:info@rexautistikonlabs.org" class="text-teal-700 font-medium hover:text-teal-800">
+          <a href="mailto:info@rexautistikonlabs.org" data-analytics-event="contact_email_click" class="text-teal-700 font-medium hover:text-teal-800">
             info@rexautistikonlabs.org
           </a>
         </p>
@@ -105,6 +105,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
         <h2 class="text-lg font-semibold text-slate-900 mb-3">Related pages</h2>
         <ul class="space-y-2 text-slate-600">
+          <li>
+            <a href="/about" class="text-teal-700 font-medium hover:text-teal-800">About the Foundation</a>
+            — legal identity and mission
+          </li>
+          <li>
+            <a href="/privacy" class="text-teal-700 font-medium hover:text-teal-800">Privacy Policy</a>
+            — what we collect and how to request access or correction
+          </li>
           <li>
             <a href="/support" class="text-teal-700 font-medium hover:text-teal-800">Support the Research</a>
             — tax-deductible contributions

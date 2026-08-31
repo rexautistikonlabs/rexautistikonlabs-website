@@ -2,33 +2,81 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About" description="About Rex Autistikōn Labs and the Rex Autistikon Research Foundation.">
+<BaseLayout
+  title="About the Foundation"
+  description="Rex Autistikon Research Foundation, Inc. is an independent 501(c)(3) public charity (EIN 42-3220323). Rex Autistikōn Labs is its research initiative — not a clinic and not a diagnostic or therapeutic service."
+  organizationSchema={true}
+>
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">About</h1>
+      <p class="text-sm font-semibold uppercase tracking-wider text-teal-800 mb-3">About the Foundation</p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+        Rex Autistikon Research Foundation, Inc.
+      </h1>
+
+      <div class="bg-teal-50 border border-teal-100 rounded-xl p-6 sm:p-8 mb-10">
+        <p class="text-slate-800 leading-relaxed mb-3">
+          Rex Autistikon Research Foundation, Inc. is an independent <strong>501(c)(3) public charity</strong>
+          classified under IRC Section 509(a)(2). EIN <strong>42-3220323</strong>.
+        </p>
+        <p class="text-slate-800 leading-relaxed mb-3">
+          <strong>Rex Autistikōn Labs</strong> is the research initiative operated by the Foundation.
+        </p>
+        <p class="text-slate-700 leading-relaxed mb-4">
+          We are an independent 501(c)(3) research foundation investigating testable questions
+          in human mechanobiology, mechanosensation, and physiological regulation.
+        </p>
+        <p class="text-slate-700 leading-relaxed">
+          We are <strong>not a clinic</strong>. We do not offer diagnosis, treatment, or any
+          licensed scoring instrument. We make no causal claim about autism.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-slate-900 mb-4">What we do</h2>
+      <ul class="list-disc list-inside text-lg text-slate-600 space-y-3 mb-10">
+        <li>Specify a falsifiable research programme and keep established evidence, proposed mechanism, testable predictions, experiments, and falsification criteria distinct</li>
+        <li>Publish openly, including the primary specification Kim (2026), DOI 10.5281/zenodo.22149318</li>
+        <li>Seek scientific collaborators under reviewed institutional access</li>
+        <li>Accept tax-deductible gifts to the extent allowed by law</li>
+      </ul>
+
+      <div class="flex flex-wrap gap-3 mb-12">
+        <a href="/research" class="inline-flex items-center px-5 py-2.5 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors">Research</a>
+        <a href="/publications" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">Publications</a>
+        <a href="/how-to-collaborate" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">How to collaborate</a>
+        <a href="/support" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">Support</a>
+        <a href="/transparency" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">Transparency</a>
+        <a href="/501c3-determination-letter.pdf" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">Determination letter (PDF)</a>
+      </div>
 
       <h2 class="text-2xl font-semibold text-slate-900 mb-4">Rex Autistikōn Labs</h2>
       <p class="text-lg text-slate-600 leading-relaxed mb-6">
-        Rex Autistikōn Labs is an independent research initiative operating under the Rex Autistikon Research Foundation, Inc. We investigate the hypothesis that chronic mechanical restriction within specific sensor-rich myofascial and visceral interfaces contributes to altered afferent signaling in neurodevelopmental conditions.
+        The Labs investigate whether measurable tissue mechanical state at defined
+        cranial-nerve-adjacent and midline-visceral interfaces relates to first-order afferent
+        and physiological outcomes. Mechanical restriction is a hypothesis-level latent construct,
+        not a diagnosis. The Phase 1 interactive model is illustrative only; empirical validation
+        is pending.
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed mb-10">
+        We integrate biotensegrity theory, fascia as a sensory organ, mechanotransduction,
+        viscoelastic signal filtering, and predictive coding frameworks to generate testable,
+        mechanism-based hypotheses. The work prioritizes open science, mathematical formalization,
+        and clear experimental pathways.
       </p>
 
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Our Approach</h2>
-      <p class="text-lg text-slate-600 leading-relaxed mb-6">
-        We integrate biotensegrity theory, fascia as a sensory organ, mechanotransduction, viscoelastic signal filtering, and predictive coding frameworks to generate testable, mechanism-based hypotheses. Our work prioritizes open science, mathematical formalization, and clear experimental pathways.
-      </p>
-
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Legal Structure</h2>
-      <p class="text-lg text-slate-600 leading-relaxed mb-4">
-        Rex Autistikon Research Foundation, Inc. is a 501(c)(3) public charity.
-      </p>
-      <ul class="list-disc list-inside text-lg text-slate-600 space-y-2 mb-6">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-4">Legal structure</h2>
+      <ul class="list-disc list-inside text-lg text-slate-600 space-y-2 mb-10">
+        <li>Legal name: Rex Autistikon Research Foundation, Inc.</li>
+        <li>501(c)(3) public charity · 509(a)(2)</li>
         <li>EIN: 42-3220323</li>
         <li>Address: 1485 Fouraker Rd #2402, Jacksonville, FL 32221, United States</li>
+        <li>Email: info@rexautistikonlabs.org</li>
       </ul>
 
-      <h2 class="text-2xl font-semibold text-slate-900 mt-12 mb-4">Founder</h2>
+      <h2 class="text-2xl font-semibold text-slate-900 mb-4">Leadership</h2>
       <p class="text-lg text-slate-600 leading-relaxed">
-        Hai Young Kim — independent researcher focused on the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions.
+        Hai Young Kim — independent researcher focused on the biomechanics of sensory and
+        interoceptive signaling in neurodevelopmental conditions.
       </p>
     </div>
   </section>

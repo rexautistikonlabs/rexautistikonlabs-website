@@ -2,18 +2,36 @@
 import Layout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout title="Research | Rex Autistikōn Labs">
+<Layout
+  title="Research Programme"
+  description="Research programme of Rex Autistikōn Labs, operated by Rex Autistikon Research Foundation, Inc., a 501(c)(3) public charity. For researchers and the scientifically literate public. Not a clinic. No causal claim about autism."
+>
   <main class="research-page">
     <section class="hero">
       <p class="kicker">Research</p>
+      <p class="identity">
+        Rex Autistikon Research Foundation, Inc. · 501(c)(3) public charity · EIN 42-3220323
+      </p>
+      <p class="audience">
+        For researchers and the scientifically literate public. Not for patients seeking care.
+        Not a clinic. No causal claim about autism. No licensed scoring instrument.
+      </p>
       <h1>Sensor-rich interfaces, measurable mechanics, and afferent prediction</h1>
       <p class="subtitle">
         An independent research program testing whether measurable mechanical conditions at
         eight defined interfaces form a reproducible latent state that predicts physiological
         outcomes—without treating “restriction” as a directly observed scalar.
       </p>
-      <p class="hero-link">
-        <a href="/research-framework">Read the full Research Framework →</a>
+      <div class="hero-ctas">
+        <a href="/research-framework" id="cta-research-framework" class="btn-primary">
+          Read the research framework
+        </a>
+        <a href="/how-to-collaborate" class="btn-secondary">How to collaborate</a>
+      </div>
+      <p class="hero-note">
+        This page is the public overview. The layered specification is on
+        <a href="/research-framework">Research Framework</a>.
+        Specification of record: Kim (2026), DOI 10.5281/zenodo.22149318.
       </p>
     </section>
 
@@ -138,20 +156,37 @@ import Layout from '../layouts/BaseLayout.astro';
   .research-page { background: #f8fafc; color: #0f172a; }
   .hero {
     background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
-    color: #fff; padding: 3rem 1.25rem 2.5rem; text-align: center;
+    color: #fff; padding: 2rem 1.25rem 1.75rem; text-align: center;
   }
   .kicker {
     text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;
-    opacity: 0.85; margin-bottom: 0.5rem; font-weight: 600;
+    opacity: 0.85; margin-bottom: 0.45rem; font-weight: 600;
+  }
+  .identity, .audience {
+    max-width: 720px; margin: 0 auto 0.55rem; line-height: 1.45;
+    font-size: 0.92rem; opacity: 0.95;
   }
   .hero h1 {
     font-size: clamp(1.45rem, 3vw, 2.1rem); font-weight: 700;
-    max-width: 720px; margin: 0 auto 0.75rem; line-height: 1.25;
+    max-width: 720px; margin: 0.85rem auto 0.75rem; line-height: 1.25;
   }
   .subtitle {
     max-width: 680px; margin: 0 auto 1rem; line-height: 1.6; opacity: 0.92;
   }
-  .hero-link a { color: #ccfbf1; font-weight: 600; }
+  .hero-ctas {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+  .btn-primary, .btn-secondary {
+    display: inline-flex; align-items: center; font-weight: 600;
+    padding: 0.65rem 1.15rem; border-radius: 8px; text-decoration: none;
+  }
+  .btn-primary { background: #fff; color: #134e4a; }
+  .btn-primary:hover { background: #ccfbf1; }
+  .btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.55); }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+  .hero-note { font-size: 0.9rem; opacity: 0.9; }
+  .hero-note a { color: #ccfbf1; font-weight: 600; }
   .block {
     max-width: 800px; margin: 0 auto; padding: 2rem 1.25rem 0.25rem;
   }

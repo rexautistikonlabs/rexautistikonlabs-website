@@ -3,15 +3,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout 
-  title="How to Collaborate | Rex Autistikōn Labs"
-  description="Process for research partners to request access to the Rex Autistikōn Labs secure data intake and calculation platform."
+  title="How to Collaborate"
+  description="How institutional researchers request reviewed access to Rex Autistikōn Labs. Operated by Rex Autistikon Research Foundation, Inc., a 501(c)(3) public charity. Not a clinical enrollment form."
 >
   <main class="guide-page">
     <section class="hero">
+      <p class="identity">
+        Rex Autistikon Research Foundation, Inc. is an independent 501(c)(3) public charity.
+        Rex Autistikōn Labs is its research initiative. Not a clinic. No causal claim about
+        autism. No licensed scoring instrument.
+      </p>
       <h1>How to Collaborate</h1>
       <p class="subtitle">
-        Rex Autistikōn Labs operates a controlled research environment for sensor-rich myofascial zone measurements and free-energy calculations.
+        We investigate testable questions in human mechanobiology, mechanosensation, and
+        physiological regulation. Access is reviewed: submitting a request does not provision
+        access. We ask for institutional affiliation and ethics/IRB status. This is not a
+        clinical enrollment form.
       </p>
+      <a href="/collaborate" id="cta-collaborate" class="btn-hero">Request Access</a>
     </section>
 
     <section class="content">
@@ -59,6 +68,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="cta">
         <a href="/collaborate" class="btn-primary">Request Access →</a>
       </div>
+      <p class="not-clinic">
+        The Foundation is not a clinic and does not offer diagnosis or treatment.
+        No causal claim about autism. No licensed scoring instrument.
+      </p>
     </section>
   </main>
 </BaseLayout>
@@ -73,8 +86,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
     color: white;
     text-align: center;
-    padding: 3.5rem 1.5rem;
+    padding: 2.25rem 1.5rem 2rem;
   }
+  .identity {
+    font-size: 0.92rem;
+    opacity: 0.95;
+    max-width: 640px;
+    margin: 0 auto 0.85rem;
+    line-height: 1.45;
+  }
+  .btn-hero {
+    display: inline-block;
+    margin-top: 1.1rem;
+    background: #fff;
+    color: #134e4a;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn-hero:hover { background: #ccfbf1; }
 
   .hero h1 {
     font-size: 2.25rem;
@@ -146,5 +177,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .btn-primary:hover {
     background: #0d9488;
+  }
+
+  .not-clinic {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.5;
   }
 </style>

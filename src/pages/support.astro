@@ -2,33 +2,55 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Support" description="Support the research of Rex Autistikōn Labs and the Rex Autistikon Research Foundation.">
-  <section class="py-16">
+<BaseLayout
+  title="Support the Research"
+  description="Support Rex Autistikon Research Foundation, Inc., a 501(c)(3) public charity (EIN 42-3220323). Gifts fund computational work, experimental collaboration, and open publication — not a clinical service."
+>
+  <section class="py-12 sm:py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">Support the Research</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Support the Research</h1>
 
-      <p class="text-lg text-slate-600 leading-relaxed mb-8">
-        Rex Autistikōn Labs is an independent research initiative. All primary theoretical work is published openly. Your support helps fund computational modeling, experimental collaboration, and the continued development of the interactive biotensegrity model.
-      </p>
-
-      <!-- Donation Box -->
-      <div class="bg-teal-50 border border-teal-100 rounded-xl p-8 mb-12 text-center">
-        <h2 class="text-xl font-semibold text-slate-900 mb-3">Make a Tax-Deductible Donation</h2>
-        <p class="text-lg text-slate-600 mb-6">
-          Rex Autistikon Research Foundation, Inc. is a 501(c)(3) public charity (EIN: 42-3220323). Contributions are tax-deductible to the extent allowed by law.
+      <div class="bg-teal-50 border border-teal-100 rounded-xl p-6 sm:p-8 mb-10">
+        <p class="text-slate-800 leading-relaxed mb-2">
+          <strong>Rex Autistikon Research Foundation, Inc.</strong>
         </p>
-        <a 
-          href="https://www.zeffy.com/en-US/donation-form/invest-in-the-future-of-neurodivergent-research" 
-          target="_blank" 
+        <p class="text-slate-700 leading-relaxed mb-2">
+          501(c)(3) public charity · 509(a)(2) · EIN 42-3220323
+        </p>
+        <p class="text-slate-700 leading-relaxed mb-4">
+          <a
+            href="/501c3-determination-letter.pdf"
+            class="text-teal-700 font-medium hover:text-teal-800"
+          >IRS determination letter (PDF)</a>
+          ·
+          <a href="/transparency" class="text-teal-700 font-medium hover:text-teal-800">Transparency</a>
+        </p>
+        <p class="text-slate-700 leading-relaxed mb-4">
+          Gifts fund computational work, experimental collaboration, and open publication.
+          They do not fund a clinical service. The Foundation is not a clinic and does not
+          offer diagnosis or treatment. No causal claim about autism.
+        </p>
+        <p class="text-slate-700 leading-relaxed mb-6">
+          Contributions are tax-deductible to the extent allowed by law.
+        </p>
+        <a
+          id="cta-donate"
+          href="https://www.zeffy.com/en-US/donation-form/invest-in-the-future-of-neurodivergent-research"
+          target="_blank"
           rel="noopener noreferrer"
+          data-analytics-event="donate_click"
           class="inline-flex items-center px-8 py-4 bg-teal-700 text-white text-lg font-medium rounded-lg hover:bg-teal-800 transition-colors"
         >
           Donate via Zeffy
         </a>
         <p class="text-sm text-slate-500 mt-4">
-          Secure donation form powered by Zeffy
+          Checkout is on Zeffy’s domain. The Foundation does not store full card numbers.
         </p>
       </div>
+
+      <p class="text-lg text-slate-600 leading-relaxed mb-8">
+        Rex Autistikōn Labs is an independent research initiative. All primary theoretical work is published openly. Your support helps fund computational modeling, experimental collaboration, and the continued development of the interactive biotensegrity model.
+      </p>
 
       <h2 class="text-2xl font-semibold text-slate-900 mb-4">Other Ways to Help</h2>
       <ul class="list-disc list-inside text-lg text-slate-600 space-y-3 mb-10">

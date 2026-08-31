@@ -1,3 +1,15 @@
+# Rex Autistikōn Labs website
+
+Public site for Rex Autistikon Research Foundation, Inc. (501(c)(3); EIN 42-3220323) and Rex Autistikōn Labs. Built with Astro.
+
+## Tracking
+
+Optional Google Analytics 4. Set `PUBLIC_GA4_MEASUREMENT_ID` (a `G-…` ID) at **build** time.
+
+If the variable is missing or empty, the site loads **no** Google tags.
+
+See `TRACKING.md` for event names, landing pages, and Google Ads notes that belong on this domain.
+
 # Astro Starter Kit: Minimal
 
 ```sh

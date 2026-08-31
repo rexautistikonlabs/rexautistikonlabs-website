@@ -2,19 +2,77 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Contact" description="Contact Rex Autistikōn Labs and the Rex Autistikon Research Foundation.">
+<BaseLayout
+  title="Contact"
+  description="Contact Rex Autistikon Research Foundation, Inc. and Rex Autistikōn Labs. This form is for Foundation inquiries, not clinical intake and not collaborator portal access."
+>
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">Contact</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Contact</h1>
 
-      <p class="text-lg text-slate-600 leading-relaxed mb-10">
-        For research collaboration inquiries, general questions, or media requests, please reach out using the information below.
+      <p class="text-lg text-slate-600 leading-relaxed mb-4">
+        Rex Autistikon Research Foundation, Inc. is an independent 501(c)(3) public charity.
+        This form is for Foundation inquiries (research, collaboration, media, donations, and other).
+        It is not clinical intake and not a collaborator-access request.
       </p>
+      <p class="text-slate-600 leading-relaxed mb-10">
+        For platform access, use
+        <a href="/collaborate" class="text-teal-700 font-medium hover:text-teal-800">Request Access</a>.
+      </p>
+
+      <form id="contactForm" class="border border-slate-200 rounded-xl p-6 sm:p-8 mb-10 bg-white" novalidate>
+        <div class="grid sm:grid-cols-2 gap-5 mb-5">
+          <div>
+            <label for="name" class="block text-sm font-semibold text-slate-700 mb-1">Name <span class="text-red-700">*</span></label>
+            <input id="name" name="name" type="text" required autocomplete="name" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-semibold text-slate-700 mb-1">Institutional email <span class="text-red-700">*</span></label>
+            <input id="email" name="email" type="email" required autocomplete="email" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20" />
+          </div>
+          <div>
+            <label for="role" class="block text-sm font-semibold text-slate-700 mb-1">Role <span class="text-red-700">*</span></label>
+            <input id="role" name="role" type="text" required autocomplete="organization-title" placeholder="e.g. researcher, journalist, donor" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20" />
+          </div>
+          <div>
+            <label for="topic" class="block text-sm font-semibold text-slate-700 mb-1">Topic <span class="text-red-700">*</span></label>
+            <select id="topic" name="topic" required class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20">
+              <option value="">—</option>
+              <option value="research">Research</option>
+              <option value="collaboration">Collaboration</option>
+              <option value="media">Media</option>
+              <option value="donation">Donation</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-5">
+          <label for="message" class="block text-sm font-semibold text-slate-700 mb-1">Message <span class="text-red-700">*</span></label>
+          <textarea id="message" name="message" rows="5" required class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"></textarea>
+        </div>
+        <p class="text-sm text-slate-500 mb-5">
+          By submitting, you agree that we may use these fields to respond to your inquiry, as described in the
+          <a href="/privacy" class="text-teal-700 font-medium hover:text-teal-800">Privacy Policy</a>.
+        </p>
+        <button
+          type="submit"
+          id="contactSubmit"
+          class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors disabled:opacity-60"
+        >
+          Send message
+        </button>
+        <p id="contactStatus" class="mt-4 text-sm min-h-6" aria-live="polite"></p>
+      </form>
 
       <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-10">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">Email</h2>
         <p class="text-lg text-slate-600">
-          <a href="mailto:info@rexautistikonlabs.org" class="text-teal-700 hover:text-teal-800 font-medium">
+          <a
+            id="contact-email"
+            href="mailto:info@rexautistikonlabs.org"
+            data-analytics-event="contact_email_click"
+            class="text-teal-700 hover:text-teal-800 font-medium"
+          >
             info@rexautistikonlabs.org
           </a>
         </p>
@@ -31,8 +89,65 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <p class="text-sm text-slate-500">
-        We aim to respond to inquiries within a reasonable timeframe. For collaboration proposals, please include a brief description of your interest and relevant background.
+        We aim to respond to inquiries within a reasonable timeframe. The Foundation is not a clinic.
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById("contactForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      var btn = document.getElementById("contactSubmit");
+      var status = document.getElementById("contactStatus");
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var role = document.getElementById("role").value.trim();
+      var topic = document.getElementById("topic").value;
+      var message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !role || !topic || !message) {
+        status.style.color = "#b91c1c";
+        status.textContent = "Please complete all required fields.";
+        return;
+      }
+
+      btn.disabled = true;
+      status.style.color = "#475569";
+      status.textContent = "Sending…";
+
+      try {
+        var res = await fetch("https://formsubmit.co/ajax/info@rexautistikonlabs.org", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            role: role,
+            topic: topic,
+            message: message,
+            _subject: "Foundation contact form (" + topic + ")",
+            _captcha: "false"
+          })
+        });
+        var data = await res.json().catch(function () { return {}; });
+        if (!res.ok || data.success === "false") {
+          throw new Error((data && data.message) || ("HTTP " + res.status));
+        }
+        window.location.assign("/contact/received");
+      } catch (err) {
+        status.style.color = "#b91c1c";
+        status.textContent =
+          "The form could not be sent. Email info@rexautistikonlabs.org directly, or try again.";
+        btn.disabled = false;
+      }
+    });
+  })();
+</script>

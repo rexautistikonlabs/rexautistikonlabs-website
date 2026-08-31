@@ -1,0 +1,83 @@
+---
+const rawId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const measurementId = typeof rawId === 'string' ? rawId.trim() : '';
+const enabled = /^G-[A-Z0-9]+$/i.test(measurementId);
+---
+
+{enabled && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script is:inline define:vars={{ measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId);
+    </script>
+  </>
+)}
+
+<script is:inline>
+  window.rexTrack = function rexTrack(eventName, params) {
+    if (typeof window.gtag === 'function' && eventName) {
+      window.gtag('event', eventName, params || {});
+    }
+  };
+
+  document.addEventListener(
+    'click',
+    function (event) {
+      var node = event.target;
+      if (!node || !node.closest) return;
+      var link = node.closest('a');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      var named = link.getAttribute('data-analytics-event');
+
+      if (
+        named === 'contact_email_click' ||
+        href.toLowerCase().indexOf('mailto:info@rexautistikonlabs.org') === 0
+      ) {
+        window.rexTrack('contact_email_click');
+        return;
+      }
+
+      if (named === 'donate_click' || link.id === 'cta-donate') {
+        window.rexTrack('donate_click', { link_url: href });
+        return;
+      }
+
+      if (named === 'publication_click') {
+        window.rexTrack('publication_click', { link_url: href });
+        return;
+      }
+
+      var path = window.location.pathname.replace(/\/$/, '') || '/';
+      if (path === '/publications' && href) {
+        try {
+          var url = new URL(href, window.location.origin);
+          var host = url.hostname.replace(/^www\./, '');
+          if (host === 'doi.org' || host === 'zenodo.org') {
+            window.rexTrack('publication_click', { link_url: url.href });
+          }
+        } catch (err) {}
+      }
+    },
+    true
+  );
+
+  function fireConversionHook() {
+    var el = document.getElementById('analytics-conversion');
+    if (!el) return;
+    var name = el.getAttribute('data-analytics-event');
+    if (name) window.rexTrack(name);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fireConversionHook);
+  } else {
+    fireConversionHook();
+  }
+</script>

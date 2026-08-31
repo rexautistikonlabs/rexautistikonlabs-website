@@ -2,13 +2,18 @@
 import Layout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout title="Request Collaborator Access | Rex Autistikōn Labs">
+<Layout
+  title="Request Collaborator Access"
+  description="Request reviewed institutional access to Rex Autistikōn Labs. Submitting this form does not provision access and is not clinical enrollment."
+>
   <main class="page">
     <section class="hero">
       <h1>Collaborator Access Request</h1>
       <p class="subtitle">
-        Institutional researchers may request access to the Data Intake and Results platforms.
-        Requests are reviewed by Rex Autistikōn Labs.
+        Rex Autistikon Research Foundation, Inc. is an independent 501(c)(3) public charity.
+        Rex Autistikōn Labs is its research initiative. Institutional researchers may request
+        access to the Data Intake and Results platforms. Requests are reviewed; submitting
+        this form does not provision access and is not a clinical enrollment form.
       </p>
     </section>
 
@@ -226,12 +231,8 @@ import Layout from '../layouts/BaseLayout.astro';
         throw new Error(typeof msg === "string" ? msg : JSON.stringify(msg));
       }
 
-      status.className = "status success";
-      status.textContent =
-        "Request submitted successfully" +
-        (data && data.request_id ? " (ID: " + data.request_id + ")" : "") +
-        ". You will be contacted at the email provided.";
-      document.getElementById("accessForm").reset();
+      window.location.assign("/collaborate/received");
+      return;
     } catch (err) {
       status.className = "status error";
       status.textContent = "Error: " + (err && err.message ? err.message : String(err));

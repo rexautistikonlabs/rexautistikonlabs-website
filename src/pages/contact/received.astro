@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Message received"
+  description="Your message to Rex Autistikon Research Foundation, Inc. was received. This is not clinical intake and not collaborator portal access."
+>
+  <div id="analytics-conversion" data-analytics-event="generate_lead" hidden></div>
+
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Message received</h1>
+      <p class="text-lg text-slate-600 leading-relaxed mb-4">
+        Thank you. Rex Autistikon Research Foundation, Inc. has received your message.
+        If a reply is needed, we will use the email address you provided.
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed mb-10">
+        This is not clinical intake, not a diagnostic or therapeutic service, and not
+        collaborator portal access.
+      </p>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-10">
+        <p class="text-slate-600 leading-relaxed mb-2">
+          Direct email:
+          <a
+            id="contact-email"
+            href="mailto:info@rexautistikonlabs.org"
+            data-analytics-event="contact_email_click"
+            class="text-teal-700 font-medium hover:text-teal-800"
+          >info@rexautistikonlabs.org</a>
+        </p>
+        <p class="text-slate-600 leading-relaxed">
+          Rex Autistikon Research Foundation, Inc.<br />
+          1485 Fouraker Rd #2402<br />
+          Jacksonville, FL 32221<br />
+          United States
+        </p>
+      </div>
+      <a href="/" class="text-teal-700 font-medium hover:text-teal-800">Return to the homepage →</a>
+    </div>
+  </section>
+</BaseLayout>

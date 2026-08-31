@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Collaborator request received"
+  description="Your collaborator access request was received by Rex Autistikōn Labs. A decision will be sent to the institutional email you provided. This page is not portal access."
+>
+  <div id="analytics-conversion" data-analytics-event="collaborator_request" hidden></div>
+
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Request received</h1>
+      <p class="text-lg text-slate-600 leading-relaxed mb-4">
+        Rex Autistikon Research Foundation, Inc. has received your collaborator access request
+        for Rex Autistikōn Labs.
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed mb-4">
+        A decision will be sent to the <strong>institutional email</strong> you provided.
+        Submitting a request does not provision access. This page is not the collaborator
+        portal, and it does not sign you in with Microsoft.
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed mb-10">
+        This is not clinical enrollment. The Foundation is not a clinic and does not offer
+        diagnosis or treatment.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/how-to-collaborate" class="inline-flex items-center px-5 py-2.5 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors">
+          How collaboration works
+        </a>
+        <a href="/research" class="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+          Research programme
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,22 +1,48 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  organizationSchema?: boolean;
 }
 
 const {
   title = "Rex Autistikōn Labs",
-  description = "Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions."
+  description = "Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions.",
+  organizationSchema = false,
 } = Astro.props;
 
 const siteName = "Rex Autistikōn Labs";
 const siteUrl = "https://rexautistikonlabs.org";
-const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const fullTitle =
+  title === siteName || title.endsWith(` | ${siteName}`)
+    ? title
+    : `${title} | ${siteName}`;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Rex Autistikon Research Foundation, Inc.",
+  "alternateName": "Rex Autistikōn Labs",
+  "url": "https://rexautistikonlabs.org",
+  "logo": "https://rexautistikonlabs.org/logo.png",
+  "email": "info@rexautistikonlabs.org",
+  "taxID": "42-3220323",
+  "nonprofitStatus": "Nonprofit501c3",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1485 Fouraker Rd #2402",
+    "addressLocality": "Jacksonville",
+    "addressRegion": "FL",
+    "postalCode": "32221",
+    "addressCountry": "US"
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -75,6 +101,10 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
         "https://substack.com/@rexautistikonlabs"
       ]
     })} />
+    {organizationSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
+    )}
+    <Analytics />
   </head>
   <body class="bg-white text-slate-800 font-sans antialiased">
     <Header />

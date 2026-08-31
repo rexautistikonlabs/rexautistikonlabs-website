@@ -2,13 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Publications" description="Open-access publications from Rex Autistikōn Labs.">
+<BaseLayout
+  title="Publications"
+  description="Open-access programme materials from Rex Autistikōn Labs. Protocol and theory documents only. No individual-level score is licensed. No causal claim about autism."
+>
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">Publications</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Publications</h1>
+      <p class="text-base text-slate-500 mb-6">
+        For researchers, collaborators, and readers of the programme specification — not patients seeking care.
+      </p>
 
       <p class="text-lg text-slate-600 leading-relaxed mb-12">
-        All primary theoretical work from Rex Autistikōn Labs is published with open access. We prioritize transparent, citable dissemination of hypotheses, mathematical formalizations, and experimental protocols.
+        All primary theoretical work from Rex Autistikōn Labs is published with open access. We prioritize transparent, citable dissemination of hypotheses, mathematical formalizations, and experimental protocols. These are protocol materials only. No individual-level score is licensed.
       </p>
 
       <div class="space-y-8">
@@ -30,6 +36,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               href="https://doi.org/10.5281/zenodo.22149318"
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="publication_click"
               class="text-teal-700 font-medium hover:text-teal-800"
             >
               DOI: 10.5281/zenodo.22149318 →
@@ -40,6 +47,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               href="https://zenodo.org/records/22149318"
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="publication_click"
               class="text-teal-700 font-medium hover:text-teal-800"
             >
               View on Zenodo →
@@ -70,6 +78,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               href="https://doi.org/10.5281/zenodo.20737319"
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="publication_click"
               class="text-teal-700 font-medium hover:text-teal-800"
             >
               DOI: 10.5281/zenodo.20737319 →
@@ -93,6 +102,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             href="https://zenodo.org/records/21536946" 
             target="_blank" 
             rel="noopener noreferrer"
+            data-analytics-event="publication_click"
             class="text-teal-700 font-medium hover:text-teal-800"
           >
             View on Zenodo →

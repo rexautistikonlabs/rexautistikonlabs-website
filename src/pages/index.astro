@@ -4,7 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout 
   title="Rex Autistikōn Labs" 
-  description="Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions."
+  description="Independent 501(c)(3) research foundation investigating testable questions in human mechanobiology, mechanosensation, and physiological regulation. Not a clinic."
+  organizationSchema={true}
 >
   <!-- Hero -->
   <section class="py-16 sm:py-20 border-b border-slate-100">
@@ -29,6 +30,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <a href="/publications" class="inline-flex items-center px-6 py-3 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
           Publications
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About the Foundation -->
+  <section class="py-10 bg-slate-50 border-b border-slate-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-teal-800 mb-3">About the Foundation</h2>
+      <p class="text-slate-700 leading-relaxed mb-4">
+        <strong>Rex Autistikon Research Foundation, Inc.</strong> is an independent 501(c)(3) public charity (EIN 42-3220323).
+        Rex Autistikōn Labs is the research initiative it operates. We are not a clinic and we do not offer diagnostic or therapeutic services.
+      </p>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <a href="/about" class="text-teal-700 font-medium hover:text-teal-800">About</a>
+        <a href="/research" class="text-teal-700 font-medium hover:text-teal-800">Research</a>
+        <a href="/how-to-collaborate" class="text-teal-700 font-medium hover:text-teal-800">How to collaborate</a>
+        <a href="/support" class="text-teal-700 font-medium hover:text-teal-800">Support</a>
       </div>
     </div>
   </section>
