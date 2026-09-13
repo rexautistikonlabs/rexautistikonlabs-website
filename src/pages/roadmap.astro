@@ -2,88 +2,387 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout 
-  title="Research Roadmap" 
-  description="Research roadmap of Rex Autistikōn Labs — from computational model to experimental validation."
+<BaseLayout
+  title="Research Roadmap"
+  description="Measurement Roadmap v2.0 (RAL-RM-2026.09) of Rex Autistikōn Labs — scientific phases and instrument horizons for mechanical observables at eight sensor-rich interfaces. Not a clinic."
 >
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Research Roadmap</h1>
-      <p class="text-lg text-slate-600 leading-relaxed mb-12">
-        Our work moves from theoretical formalization and interactive modelling 
-        toward empirical tests that can confirm, refine, or falsify the core hypothesis.
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Research Roadmap</h1>
+      <p class="text-sm font-medium text-teal-800 mb-6">
+        Document ID RAL-RM-2026.09 · Version 2.0 · 13 September 2026
+      </p>
+      <p class="text-lg text-slate-600 leading-relaxed mb-6">
+        This page supersedes the prior four-step staging and splits scientific phases from instrument horizons.
+      </p>
+      <p class="text-slate-600 leading-relaxed mb-6">
+        A <strong>measurement</strong>, on this page, is a repeatable mechanical observable with known units, bandwidth, and interrogation depth, and a prospective map into shear modulus <em>G</em>, viscosity <em>η</em>, or frequency-dependent wave speed <em>c(f)</em> and attenuation <em>α(f)</em>. It is not a smaller sensor.
+      </p>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 mb-12 space-y-3 text-slate-600 leading-relaxed">
+        <p>
+          Specification of record: Kim (2026),
+          <a href="https://doi.org/10.5281/zenodo.22149318" class="text-teal-700 font-medium hover:text-teal-800">DOI 10.5281/zenodo.22149318</a>.
+          Where this page and the specification differ, the specification governs.
+        </p>
+        <p>
+          “Mechanical restriction” is a hypothesis-level latent construct, not a measured scalar.
+        </p>
+        <p>
+          Rex Autistikon Research Foundation, Inc. (operating as Rex Autistikōn Labs) is a 501(c)(3) public charity · 509(a)(2) · EIN 42-3220323. It is not a clinic. It does not diagnose, treat, or license an individual-level score. Partner institutions own human-subjects compliance.
+        </p>
+      </div>
+
+      <!-- Principles -->
+      <h2 id="principles" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        Principles
+      </h2>
+      <ul class="list-disc list-inside space-y-2 text-slate-600 mb-12">
+        <li><strong class="text-slate-800">Frequency content</strong> — the observable must resolve the bandwidth of the hypothesized mechanical filter, not only a single quasi-static reading.</li>
+        <li><strong class="text-slate-800">Depth match</strong> — interrogation depth must match the anatomical interface named in the zone dossier.</li>
+        <li><strong class="text-slate-800">Anisotropy</strong> — fiber-aligned tissues are not treated as isotropic by default; orientation is recorded.</li>
+        <li><strong class="text-slate-800">Operator independence</strong> — hand-circling is not a wavenumber; pose, aperture, and scan path are logged.</li>
+        <li><strong class="text-slate-800">Concordance path</strong> — candidate instruments on the same zone are compared before any composite is formed.</li>
+        <li><strong class="text-slate-800">F1–F3 falsification</strong> — reliability failure (F1), construct failure (F2), and predictive failure (F3) remain the exit conditions.</li>
+      </ul>
+
+      <!-- Three-layer instrument architecture -->
+      <h2 id="architecture" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        Three-layer instrument architecture
+      </h2>
+      <p class="text-slate-600 leading-relaxed mb-6">
+        Instruments are specified as access, readout, and inverse. This is an instrument stack, not the scientific stack of measurement → representation → transmission. No post-hoc restriction ratio <em>r</em> is computed from these layers.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="border border-slate-200 rounded-xl p-5">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-teal-800 mb-2">Access</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">How energy is delivered to the named interface (actuator, acoustic drive, optical launch, or indentation).</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-5">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-teal-800 mb-2">Readout</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">How motion or strain is recorded (tracking array, optical coherence tomography, shear-wave imaging, coil, or hydrophone).</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-5">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-teal-800 mb-2">Inverse</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">How recorded motion is mapped, prospectively, into <em>G</em>, <em>η</em>, or <em>c(f)</em> and <em>α(f)</em>.</p>
+        </div>
+      </div>
+      <ul class="list-disc list-inside space-y-2 text-slate-600 mb-12">
+        <li>Carbon-nanotube–silicone (CNT–silicone) is a readout-layer strain array around a known actuator, not a source of <em>G</em>.</li>
+        <li>Lasers launch or listen only.</li>
+        <li>Circular geometry means a fixed annular aperture or a motorized scan with logged pose.</li>
+      </ul>
+
+      <!-- Scientific phases -->
+      <h2 id="phases" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        Scientific phases
+      </h2>
+      <p class="text-slate-600 leading-relaxed mb-8">
+        These five phases replace the former four-step staging. Intervention is not a default next step. The interactive model stays didactic until empirical mechanical inputs replace illustrative sliders.
       </p>
 
-      <!-- Phase 1 -->
+      <!-- Phase I -->
       <div class="mb-12">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-700 text-white text-sm font-semibold">1</span>
-          <h2 class="text-xl font-semibold text-slate-900">Phase 1 — Formalization & Interactive Model</h2>
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-700 text-white text-sm font-semibold">I</span>
+          <h3 class="text-xl font-semibold text-slate-900">Phase I — Measurement competence</h3>
+          <span class="inline-flex items-center rounded-full bg-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5">Active / expanding</span>
         </div>
         <div class="ml-11 border-l-2 border-teal-200 pl-6 space-y-3 text-slate-600">
-          <p class="font-medium text-teal-800">Status: Active</p>
+          <p class="leading-relaxed">
+            For each zone: define the anatomical target, candidate mechanical observables, acquisition method, calibration and quality control, expected ranges, and a test–retest plan. Record explicitly what is not measurable for that zone.
+          </p>
           <ul class="list-disc list-inside space-y-1">
-            <li>Core biotensegrity-informed hypothesis published with open DOI</li>
-            <li>Pilot Study Collaborator Handbook released</li>
-            <li>Phase 1 Interactive Model deployed (Normal vs Neurodivergent parameter sets)</li>
-            <li>Mathematical formalization of viscoelastic filtering, precision, and free-energy gradients</li>
+            <li>Zone dossiers in progress for 2, 4, and 6, with later work on 1 and 8 as instruments allow</li>
+            <li>Shear-wave elastography protocol development for zone 6</li>
+            <li>Collaborator search for optical-coherence-tomography vibrometry at zone 2</li>
           </ul>
         </div>
       </div>
 
-      <!-- Phase 2 -->
+      <!-- Phase II -->
       <div class="mb-12">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">2</span>
-          <h2 class="text-xl font-semibold text-slate-900">Phase 2 — Experimental Design & Pilot Measurements</h2>
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">II</span>
+          <h3 class="text-xl font-semibold text-slate-900">Phase II — Mechanical representation</h3>
+          <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-700 text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5">Planning</span>
         </div>
         <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
-          <p class="font-medium text-slate-500">Status: Planning</p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Shear-wave elastography protocols for the eight sensor-rich zones</li>
-            <li>Interoceptive accuracy tasks and heartbeat-evoked potential measurements</li>
-            <li>MPA–Zone scoring system for participant stratification</li>
-            <li>Pre-registration of pilot study methods</li>
+          <p class="leading-relaxed">
+            Specify how raw measurements map to a common analytical representation (parameters, units, transforms). Assess reliability and, where multiple measures exist, concordance. A transform document is required before any multi-zone composite.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase III -->
+      <div class="mb-12">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">III</span>
+          <h3 class="text-xl font-semibold text-slate-900">Phase III — Transmission predictions</h3>
+          <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-900 text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5">Conditional on II</span>
+        </div>
+        <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
+          <p class="leading-relaxed">
+            Apply the computational layer to representations from Phase II. Predictions are outputs, not inputs. Model version identifiers are retained with each run. This phase does not open until Phase II is specified.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase IV -->
+      <div class="mb-12">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">IV</span>
+          <h3 class="text-xl font-semibold text-slate-900">Phase IV — Physiological tests</h3>
+          <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-600 text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5">Future</span>
+        </div>
+        <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
+          <p class="leading-relaxed">
+            Preregister whether measured mechanical state (and any prospectively defined composite) predicts independent physiological outcomes. Studies run under partner institutional review boards. Partner institutions remain responsible for human-subjects compliance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase V -->
+      <div class="mb-12">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">V</span>
+          <h3 class="text-xl font-semibold text-slate-900">Phase V — Intervention-linked studies</h3>
+          <span class="inline-flex items-center rounded-full bg-rose-50 text-rose-800 text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5">Only if warranted</span>
+        </div>
+        <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
+          <p class="leading-relaxed">
+            Only if earlier phases support mechanistic relevance under preregistered criteria. Designs must be able to fail if effects are absent. Targeted fascial interventions in well-characterized cohorts are not a planned default.
+          </p>
+        </div>
+      </div>
+
+      <!-- Instrument horizons -->
+      <h2 id="horizons" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        Instrument horizons
+      </h2>
+
+      <h3 class="text-xl font-semibold text-slate-900 mb-4">Horizon A (0–3 years)</h3>
+      <div class="overflow-x-auto mb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <table class="stack-table w-full text-sm text-left min-w-[36rem] border border-slate-200 rounded-xl overflow-hidden">
+          <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="px-4 py-3 font-semibold">ID</th>
+              <th class="px-4 py-3 font-semibold">Instrument</th>
+              <th class="px-4 py-3 font-semibold">Target</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-600 divide-y divide-slate-200">
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A1</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">Multi-frequency shear-wave elastography (SWE)</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Zones 6, 4, later 8</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A2</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">Optical-coherence-tomography (OCT) vibrometry + wideband immittance</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Zone 2</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A3</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">Strain elastography of extraocular muscle + orbital MRI geometry</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Zone 1</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A4</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">Wireless mechano-acoustic wave (MAW) patch</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Zone 6</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A5</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">Fiber-optic micro-indentation (partner cadaver / intra-operative)</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Calibration</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="ID">A6</td>
+              <td class="px-4 py-3 align-top" data-label="Instrument">CNT–silicone strain annulus as receiver only</td>
+              <td class="px-4 py-3 align-top" data-label="Target">Surface sites of zones 4 and 6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-slate-600 leading-relaxed mb-10">
+        <strong class="text-slate-800">Deliverable.</strong> Zone dossiers for 2, 4, and 6; phantom concordance; no new latent score.
+      </p>
+
+      <h3 class="text-xl font-semibold text-slate-900 mb-3">Horizon B (3–7 years)</h3>
+      <ul class="list-disc list-inside space-y-1 text-slate-600 mb-10">
+        <li>B1 Stretchable ultrasound + SWE</li>
+        <li>B2 Custom-driver orbital magnetic resonance elastography (MRE)</li>
+        <li>B3 Endoscopic / ostoscopic optical coherence elastography (OCE)</li>
+        <li>B4 Photoacoustic shear-wave launch</li>
+        <li>B5 Instrumented palpation</li>
+        <li>B6 Gated diaphragm / pelvic MRE</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-slate-900 mb-3">Horizon C (8–15+ years)</h3>
+      <ul class="list-disc list-inside space-y-1 text-slate-600 mb-12">
+        <li>C1 Brillouin + OCE on mucosa / globe (longitudinal modulus is not Young’s modulus)</li>
+        <li>C2 Clearable magnetomotive reporters, not permanent CNT dust</li>
+        <li>C3 Nitrogen-vacancy nanodiamond as bench calibration, not a zone scanner</li>
+        <li>C4 Intra-luminal torsional shear probes</li>
+        <li>C5 Acoustoelastic / prestress imaging</li>
+        <li>C6 Temporary submucosal micro-electromechanical systems via surgical partners only — the Foundation does not own an implant programme</li>
+        <li>C7 Driver-free 7T MRE</li>
+        <li>C8 Closed-loop mechanical spectroscopy protocol</li>
+      </ul>
+
+      <!-- Zone path -->
+      <h2 id="zones" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        Zone path
+      </h2>
+      <div class="overflow-x-auto mb-12 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <table class="stack-table w-full text-sm text-left min-w-[44rem] border border-slate-200 rounded-xl overflow-hidden">
+          <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+            <tr>
+              <th class="px-4 py-3 font-semibold">Zone</th>
+              <th class="px-4 py-3 font-semibold">Horizon A now</th>
+              <th class="px-4 py-3 font-semibold">Worth waiting for</th>
+              <th class="px-4 py-3 font-semibold">Explicitly not this</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-600 divide-y divide-slate-200">
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">1 Extraocular / orbital</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Strain elastography + MRI pulleys</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Custom-driver orbital MRE; conjunctival OCE / Brillouin; acoustoelastic gaze</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Lid skin patch as orbital fascia</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">2 Middle ear</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">OCT vibrometry + immittance</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Endoscopic OCE; tensor-tympani load test</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Cervical strain as middle-ear mechanics</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">3 Nasal</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Mucosal indentation / OCT pilot</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Slim nasal OCE; Brillouin of mucosa</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Acoustic rhinometry as a modulus</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">4 Tongue / floor of mouth</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Intraoral SWE or indentation</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Wearable ultrasound + intraoral OCE</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Untracked surface EMG as stiffness</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">5 Pharyngeal / laryngeal</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Functional partners only, not modular <em>G</em></td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Distal rotary OCE; ultra-slim SWE endoscope</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Voice quality as tissue modulus</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">6 Suboccipital</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">SWE + MAW patch; CNT array as receiver</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Stretchable ultrasound; multi-frequency cervical MRE</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Manual orbit without pose</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">7 Visceral fascia / diaphragm</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Breath-gated SWE or MRE at costal margin</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Dynamic MRE; wearable ultrasound with respiratory inverse</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Abdominal skin strain as diaphragmatic viscosity</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 align-top font-medium text-slate-800" data-label="Zone">8 Pelvic floor</td>
+              <td class="px-4 py-3 align-top" data-label="Horizon A now">Endocavitary SWE at partner clinics</td>
+              <td class="px-4 py-3 align-top" data-label="Worth waiting for">Stretchable perineal ultrasound; gated pelvic MRE</td>
+              <td class="px-4 py-3 align-top" data-label="Explicitly not this">Foundation-run internal device programme</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 24-month workplan -->
+      <h2 id="workplan" class="text-2xl font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200 scroll-mt-28">
+        24-month workplan
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-3">Year 1</h3>
+          <ul class="list-disc list-inside space-y-2 text-slate-600">
+            <li>Zone dossiers for 2, 4, and 6</li>
+            <li>SWE protocol for zone 6</li>
+            <li>OCT-vibrometry collaborator for zone 2</li>
+            <li>CNT annulus only as A6 (receiver, not a source of <em>G</em>)</li>
+            <li>Do not ingest didactic sliders as data</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-3">Year 2</h3>
+          <ul class="list-disc list-inside space-y-2 text-slate-600">
+            <li>Phantom concordance of SWE vs MAW vs indentation</li>
+            <li>Phase II transform document before any multi-zone composite</li>
+            <li>Open Horizon B talks for stretchable ultrasound and orbital MRE</li>
+            <li>Update this page if F1 fails</li>
           </ul>
         </div>
       </div>
 
-      <!-- Phase 3 -->
-      <div class="mb-12">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">3</span>
-          <h2 class="text-xl font-semibold text-slate-900">Phase 3 — Intervention & Correlation Studies</h2>
-        </div>
-        <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
-          <p class="font-medium text-slate-500">Status: Future</p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Targeted fascial interventions in well-characterized cohorts</li>
-            <li>Correlation of reduced local stiffness/viscosity with changes in interoceptive markers</li>
-            <li>Open data and protocol release</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Phase 4 -->
-      <div class="mb-12">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-sm font-semibold">4</span>
-          <h2 class="text-xl font-semibold text-slate-900">Phase 4 — Higher-Fidelity Modelling</h2>
-        </div>
-        <div class="ml-11 border-l-2 border-slate-200 pl-6 space-y-3 text-slate-600">
-          <p class="font-medium text-slate-500">Status: Future</p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Integration with soft-tissue simulation frameworks (e.g. SOFA / NTRTsim)</li>
-            <li>Anatomical and 3D visualization of tension dynamics</li>
-            <li>Publicly accessible refined interactive tools</li>
-          </ul>
-        </div>
+      <div class="border-l-2 border-teal-200 pl-6 mb-8">
+        <p class="text-slate-800 font-medium leading-relaxed">
+          The precise measurement is multi-frequency wave propagation through a geometrically identified interface. Every material and laser is only a way to launch or listen to that wave.
+        </p>
       </div>
 
       <p class="text-sm text-slate-500 border-t border-slate-200 pt-6">
-        This roadmap is provisional and will be updated as results and collaborations develop. 
+        This roadmap is provisional and will be updated as results and collaborations develop.
         All primary outputs will continue to be released under open-access principles whenever possible.
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  @media (max-width: 640px) {
+    .stack-table {
+      min-width: 0;
+      border: 0;
+    }
+    .stack-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .stack-table tbody,
+    .stack-table tr,
+    .stack-table td {
+      display: block;
+      width: 100%;
+    }
+    .stack-table tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .stack-table tr {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 0.35rem 0;
+      background: #fff;
+    }
+    .stack-table td {
+      padding: 0.45rem 1rem;
+    }
+    .stack-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 0.15rem;
+    }
+  }
+</style>
