@@ -1,0 +1,10 @@
+{
+  "name": "rex-website-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Contact form API. POST /api/contact forwards to Logic App logic-rex-contact.",
+  "main": "src/index.js",
+  "dependencies": {
+    "@azure/functions": "^4.7.2"
+  }
+}

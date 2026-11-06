@@ -23,14 +23,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <form
         id="contactForm"
         class="border border-slate-200 rounded-xl p-6 sm:p-8 mb-10 bg-white"
-        action="https://formsubmit.co/info@rexautistikonlabs.org"
+        action="/api/contact"
         method="POST"
       >
-        <input type="hidden" name="_next" value="https://rexautistikonlabs.org/contact/received" />
-        <input type="hidden" name="_subject" value="Rex Autistikon contact form" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_url" value="https://rexautistikonlabs.org/contact/" />
         <div class="grid sm:grid-cols-2 gap-5 mb-5">
           <div>
             <label for="name" class="block text-sm font-semibold text-slate-700 mb-1">Name <span class="text-red-700">*</span></label>
@@ -80,8 +75,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           var button = document.getElementById('contactSubmit');
           if (!form || !status || !button) return;
 
-          var endpoint = 'https://formsubmit.co/ajax/info@rexautistikonlabs.org';
-          var received = 'https://rexautistikonlabs.org/contact/received';
+          // POST /api/contact is the Static Web App function. It forwards to
+          // Logic App logic-rex-contact, which emails info@rexautistikonlabs.org.
+          var endpoint = '/api/contact';
+          var received = '/contact/received/';
 
           function showStatus(message, isError) {
             status.hidden = false;
@@ -105,10 +102,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             button.disabled = true;
             showStatus('Sending your message…', false);
 
+            var payload = {
+              name: document.getElementById('name').value.trim(),
+              email: document.getElementById('email').value.trim(),
+              role: document.getElementById('role').value.trim(),
+              topic: document.getElementById('topic').value.trim(),
+              message: document.getElementById('message').value.trim()
+            };
+
             fetch(endpoint, {
               method: 'POST',
-              headers: { Accept: 'application/json' },
-              body: new FormData(form)
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
             })
               .then(function (response) {
                 return response.json().then(function (data) {
@@ -119,16 +127,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               })
               .then(function (result) {
                 var message = result.data && result.data.message ? String(result.data.message) : '';
-                var accepted = result.ok && result.data && String(result.data.success) === 'true';
+                var accepted = result.ok && result.data && result.data.success === true;
                 if (accepted) {
                   window.location.assign(received);
                   return;
                 }
                 button.disabled = false;
-                if (/activat/i.test(message)) {
-                  showStatus('This form still needs a one-time activation. Open the FormSubmit email sent to info@rexautistikonlabs.org and click Activate Form, then submit again.', true);
-                  return;
-                }
                 showStatus(message || 'The message could not be sent. Please email info@rexautistikonlabs.org directly.', true);
               })
               .catch(function () {

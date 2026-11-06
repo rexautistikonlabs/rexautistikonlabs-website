@@ -57,18 +57,11 @@ Search Partners and Display stay **off**. That setting lives in Google Ads, not 
 
 ## Contact form backend
 
-The `/contact` form posts to FormSubmit (`https://formsubmit.co/info@rexautistikonlabs.org`; the page script uses the JSON endpoint `https://formsubmit.co/ajax/info@rexautistikonlabs.org`). `_next` stays `https://rexautistikonlabs.org/contact/received`. After FormSubmit accepts the message, the page navigates there. Empty required fields are stopped in the browser.
+The `/contact` form posts JSON to this site at `POST /api/contact`. Empty required fields are stopped in the browser. When the function returns `{ "success": true }`, the page goes to `/contact/received/`. Any other result stays on the form and shows an error.
 
-The first submission to a new FormSubmit address does not deliver mail until the mailbox is confirmed:
+`/api/contact` is the Azure Functions endpoint deployed with this Static Web App (`rex-lab-intake`). It forwards name, email, role, topic, and message to Logic App `logic-rex-contact` in resource group `rg-rex-lab-prod`. That Logic App emails info@rexautistikonlabs.org from the Foundation Office 365 connection. Its callback URL is the Static Web App application setting `CONTACT_LOGIC_URL`.
 
-1. Submit the contact form once.
-2. Open the inbox for `info@rexautistikonlabs.org` (check spam).
-3. Open the message from FormSubmit and click **Activate Form**.
-4. Submit again. Later messages should arrive, and the browser should land on `/contact/received`.
-
-Until that click, or while formsubmit.co itself is unavailable, the form shows an error and does not claim the message was received.
-
-There is no Foundation-hosted contact API in this repo (the collaborator form uses a separate Azure Function).
+The collaborator form uses a separate Azure Function and is not this contact endpoint.
 
 ## Zeffy return URL
 

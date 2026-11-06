@@ -13,6 +13,9 @@ yarn-error.log*
 pnpm-debug.log*
 
 
+# local Azure Functions settings (may contain CONTACT_LOGIC_URL)
+api/local.settings.json
+
 # environment variables
 .env
 .env.local
