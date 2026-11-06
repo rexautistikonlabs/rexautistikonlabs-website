@@ -57,9 +57,16 @@ Search Partners and Display stay **off**. That setting lives in Google Ads, not 
 
 ## Contact form backend
 
-The `/contact` form is a normal HTML POST to Formsubmit (`https://formsubmit.co/info@rexautistikonlabs.org`). After submit, Formsubmit redirects the browser to `https://rexautistikonlabs.org/contact/received` via the `_next` field.
+The `/contact` form posts to FormSubmit (`https://formsubmit.co/info@rexautistikonlabs.org`; the page script uses the JSON endpoint `https://formsubmit.co/ajax/info@rexautistikonlabs.org`). `_next` stays `https://rexautistikonlabs.org/contact/received`. After FormSubmit accepts the message, the page navigates there. Empty required fields are stopped in the browser.
 
-The first Formsubmit delivery to `info@rexautistikonlabs.org` requires confirming the mailbox. Until that confirmation is done, submissions may not arrive.
+The first submission to a new FormSubmit address does not deliver mail until the mailbox is confirmed:
+
+1. Submit the contact form once.
+2. Open the inbox for `info@rexautistikonlabs.org` (check spam).
+3. Open the message from FormSubmit and click **Activate Form**.
+4. Submit again. Later messages should arrive, and the browser should land on `/contact/received`.
+
+Until that click, or while formsubmit.co itself is unavailable, the form shows an error and does not claim the message was received.
 
 There is no Foundation-hosted contact API in this repo (the collaborator form uses a separate Azure Function).
 

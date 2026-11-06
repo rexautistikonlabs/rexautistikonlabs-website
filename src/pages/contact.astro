@@ -29,7 +29,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <input type="hidden" name="_next" value="https://rexautistikonlabs.org/contact/received" />
         <input type="hidden" name="_subject" value="Rex Autistikon contact form" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_url" value="https://rexautistikonlabs.org/contact" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_url" value="https://rexautistikonlabs.org/contact/" />
         <div class="grid sm:grid-cols-2 gap-5 mb-5">
           <div>
             <label for="name" class="block text-sm font-semibold text-slate-700 mb-1">Name <span class="text-red-700">*</span></label>
@@ -63,14 +64,80 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           By submitting, you agree that we may use these fields to respond to your inquiry, as described in the{' '}
           <a href="/privacy" class="text-teal-700 font-medium hover:text-teal-800">Privacy Policy</a>.
         </p>
+        <p id="contactStatus" class="text-sm text-red-700 mb-4" role="alert" hidden></p>
         <button
           type="submit"
           id="contactSubmit"
-          class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors"
+          class="inline-flex items-center px-6 py-3 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-800 transition-colors disabled:opacity-60"
         >
           Send message
         </button>
       </form>
+      <script is:inline>
+        (function () {
+          var form = document.getElementById('contactForm');
+          var status = document.getElementById('contactStatus');
+          var button = document.getElementById('contactSubmit');
+          if (!form || !status || !button) return;
+
+          var endpoint = 'https://formsubmit.co/ajax/info@rexautistikonlabs.org';
+          var received = 'https://rexautistikonlabs.org/contact/received';
+
+          function showStatus(message, isError) {
+            status.hidden = false;
+            status.textContent = message;
+            status.className = isError
+              ? 'text-sm text-red-700 mb-4'
+              : 'text-sm text-slate-600 mb-4';
+          }
+
+          form.addEventListener('invalid', function () {
+            showStatus('Please complete all required fields.', true);
+          }, true);
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (!form.checkValidity()) {
+              showStatus('Please complete all required fields.', true);
+              return;
+            }
+
+            button.disabled = true;
+            showStatus('Sending your message…', false);
+
+            fetch(endpoint, {
+              method: 'POST',
+              headers: { Accept: 'application/json' },
+              body: new FormData(form)
+            })
+              .then(function (response) {
+                return response.json().then(function (data) {
+                  return { ok: response.ok, data: data };
+                }).catch(function () {
+                  return { ok: false, data: null };
+                });
+              })
+              .then(function (result) {
+                var message = result.data && result.data.message ? String(result.data.message) : '';
+                var accepted = result.ok && result.data && String(result.data.success) === 'true';
+                if (accepted) {
+                  window.location.assign(received);
+                  return;
+                }
+                button.disabled = false;
+                if (/activat/i.test(message)) {
+                  showStatus('This form still needs a one-time activation. Open the FormSubmit email sent to info@rexautistikonlabs.org and click Activate Form, then submit again.', true);
+                  return;
+                }
+                showStatus(message || 'The message could not be sent. Please email info@rexautistikonlabs.org directly.', true);
+              })
+              .catch(function () {
+                button.disabled = false;
+                showStatus('The form service did not respond. Please email info@rexautistikonlabs.org directly.', true);
+              });
+          });
+        })();
+      </script>
 
       <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-10">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">Email</h2>
