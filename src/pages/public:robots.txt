@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Authenticated tools are not public pages
+Disallow: /admin
+Disallow: /intake
+Disallow: /results
+
 Sitemap: https://rexautistikonlabs.org/sitemap.xml

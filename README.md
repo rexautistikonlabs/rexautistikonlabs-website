@@ -2,6 +2,8 @@
 
 Public site for Rex Autistikon Research Foundation, Inc. (501(c)(3); EIN 42-3220323) and Rex Autistikōn Labs. Built with Astro.
 
+The deployed site is static. It has no server-side PHP. Security headers live in `staticwebapp.config.json`. See [SECURITY.md](SECURITY.md).
+
 ## Tracking
 
 Optional Google Analytics 4. Set `PUBLIC_GA4_MEASUREMENT_ID` (a `G-…` ID) at **build** time.

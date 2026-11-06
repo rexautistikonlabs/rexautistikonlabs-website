@@ -8,12 +8,14 @@ interface Props {
   title?: string;
   description?: string;
   organizationSchema?: boolean;
+  noindex?: boolean;
 }
 
 const {
   title = "Rex Autistikōn Labs",
-  description = "Independent research into the biomechanics of sensory and interoceptive signaling in neurodevelopmental conditions.",
+  description = "Independent 501(c)(3) studying human mechanobiology and afferent signaling. Not a clinic.",
   organizationSchema = false,
+  noindex = false,
 } = Astro.props;
 
 const siteName = "Rex Autistikōn Labs";
@@ -34,6 +36,11 @@ const organizationJsonLd = {
   "email": "info@rexautistikonlabs.org",
   "taxID": "42-3220323",
   "nonprofitStatus": "Nonprofit501c3",
+  "description": "Independent 501(c)(3) public charity. Rex Autistikōn Labs is its research initiative in human mechanobiology and afferent signaling. Not a clinic.",
+  "sameAs": [
+    "https://www.youtube.com/@RexAutistikon",
+    "https://substack.com/@rexautistikonlabs"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "1485 Fouraker Rd #2402",
@@ -55,6 +62,7 @@ const organizationJsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -63,11 +71,15 @@ const organizationJsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={`${siteUrl}/logo.png`} />
+    <meta property="og:image:alt" content={siteName} />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/logo.png`} />
+    <meta name="twitter:image:alt" content={siteName} />
 
     <!-- Theme & Icons -->
     <meta name="theme-color" content="#0f766e" />
