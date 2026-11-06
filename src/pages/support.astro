@@ -17,6 +17,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="text-slate-700 leading-relaxed mb-2">
           501(c)(3) public charity · 509(a)(2) · EIN 42-3220323
         </p>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+          Registered with the Florida Department of Agriculture and Consumer Services
+          under the Solicitation of Contributions Act (Registration # CH84474,
+          expiration 28 July 2027, DTN 4288286). Fee-exempt under s. 496.406 because
+          the organization met the small-revenue, volunteer, and no-professional-solicitor
+          criteria at the time of registration. Annual registration is still required.
+        </p>
         <p class="text-slate-700 leading-relaxed mb-4">
           <a
             href="/501c3-determination-letter.pdf"
@@ -33,19 +40,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="text-slate-700 leading-relaxed mb-6">
           Contributions are tax-deductible to the extent allowed by law.
         </p>
-        <a
-          id="cta-donate"
-          href="https://www.zeffy.com/en-US/donation-form/invest-in-the-future-of-neurodivergent-research"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-analytics-event="donate_click"
-          class="inline-flex items-center px-8 py-4 bg-teal-700 text-white text-lg font-medium rounded-lg hover:bg-teal-800 transition-colors"
-        >
-          Donate via Zeffy
-        </a>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8">
+          <a
+            id="cta-donate"
+            href="https://www.zeffy.com/en-US/donation-form/invest-in-the-future-of-neurodivergent-research"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="donate_click"
+            class="inline-flex items-center px-8 py-4 bg-teal-700 text-white text-lg font-medium rounded-lg hover:bg-teal-800 transition-colors"
+          >
+            Donate via Zeffy
+          </a>
+          <a
+            href="https://www.zeffy.com/en-US/donation-form/invest-in-the-future-of-neurodivergent-research"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="donate_click"
+            class="inline-flex flex-col items-center gap-2 w-fit"
+          >
+            <img
+              src="/zeffy-qr.svg"
+              width="220"
+              height="220"
+              alt="QR code for the Zeffy donation form"
+              class="w-[220px] max-w-full h-auto bg-white border border-slate-200 rounded-md"
+            />
+            <span class="text-sm text-slate-600">Scan to donate on Zeffy</span>
+          </a>
+        </div>
         <p class="text-sm text-slate-500 mt-4">
           Checkout is on Zeffy’s domain. The Foundation does not store full card numbers.
         </p>
+        <aside class="mt-4 border border-slate-300 bg-white rounded-lg p-4" aria-label="Florida solicitation disclosure">
+          <p class="text-sm text-slate-700 leading-relaxed">
+            A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE WITHIN THE STATE AT <a href="tel:+18004357352" class="underline">1-800-HELP-FLA (435-7352)</a> OR VIA THE INTERNET AT <a href="https://www.fdacs.gov" class="underline" target="_blank" rel="noopener noreferrer">WWW.FDACS.GOV</a>. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.
+          </p>
+          <p class="text-sm text-slate-800 mt-2">
+            Florida registration number: CH84474.
+          </p>
+        </aside>
       </div>
 
       <p class="text-lg text-slate-600 leading-relaxed mb-8">
