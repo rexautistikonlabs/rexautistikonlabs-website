@@ -8,15 +8,17 @@ This file is for the website only. It does not define Google Ads campaign struct
 | --- | --- |
 | `PUBLIC_GA4_MEASUREMENT_ID` | GA4 measurement ID (`G-…`). Read at **build** time by Astro. |
 
-- If the variable is missing or empty, **no Google tag is loaded**.
+- If the variable is missing or empty, the site does not hard-code a GA4 measurement ID.
 - Do not commit a real measurement ID.
 - Copy `.env.example` to `.env` locally, or set the variable in the Azure Static Web Apps / CI build settings.
 
 ## What loads
 
-When `PUBLIC_GA4_MEASUREMENT_ID` is a `G-` ID, the base layout loads `gtag.js` and fires `page_view` on each Astro page load.
+The base layout loads Google Tag Manager container `GTM-TQPHCKCS` on every page. GA4 and other tags are configured in that container, not in the site source.
 
-Named events below are implemented as DOM hooks even when the ID is empty. They only reach GA4 when gtag is present.
+When `PUBLIC_GA4_MEASUREMENT_ID` is a `G-` ID, the layout also loads `gtag.js`. Leave that variable unset so Tag Manager is the only Google tag.
+
+Named events below are implemented as DOM hooks. They reach GA4 when `gtag` is present.
 
 ## Named events
 

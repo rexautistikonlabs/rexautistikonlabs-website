@@ -18,12 +18,13 @@ Strict-Transport-Security is set by Azure. This repository does not override it.
 
 CSP exceptions that the current pages actually use:
 
-- `script-src` allows `'self'`, `'unsafe-inline'`, and `https://www.googletagmanager.com`. Inline scripts already ship in the layout and in the contact-adjacent, collaborator, intake, results, and admin pages. Google tag loading is optional and happens only when `PUBLIC_GA4_MEASUREMENT_ID` is set at build time. No other third-party scripts are allowed.
+- `script-src` allows `'self'`, `'unsafe-inline'`, and `https://www.googletagmanager.com`. Inline scripts already ship in the layout and in the contact-adjacent, collaborator, intake, results, and admin pages. The base layout loads Google Tag Manager container `GTM-TQPHCKCS`. No measurement ID is hard-coded. No other third-party scripts are allowed. `'unsafe-eval'` is not enabled.
 - `style-src` allows `'self'`, `'unsafe-inline'`, and `https://fonts.googleapis.com`. Inline `style` attributes and the existing Inter stylesheet need that.
 - `font-src` allows `'self'` and `https://fonts.gstatic.com`.
-- `connect-src` allows `'self'`, the existing Azure Functions host used by collaborator and authenticated tools, and Google Analytics endpoints used by the optional tag. The contact form posts to this site’s `/api/contact` function, which is covered by `'self'`.
+- `img-src` allows `'self'`, `data:`, `https://www.googletagmanager.com`, and `https://*.google-analytics.com` so Tag Manager and GA4 pixels can load.
+- `connect-src` allows `'self'`, the existing Azure Functions host used by collaborator and authenticated tools, `https://www.googletagmanager.com`, `https://www.google-analytics.com`, `https://*.google-analytics.com`, `https://*.analytics.google.com`, and `https://www.google.com`. The contact form posts to this site’s `/api/contact` function, which is covered by `'self'`.
 - `form-action` allows `'self'` (the contact form posts to `/api/contact`).
-- `frame-src` and `object-src` are `'none'`. `frame-ancestors` is `'none'`.
+- `frame-src` allows `https://www.googletagmanager.com` for the Tag Manager noscript iframe. `object-src` is `'none'`. `frame-ancestors` is `'none'`.
 - Zeffy, SunFrog, Zenodo, and Microsoft sign-in are ordinary links or the Azure `/.auth` redirect. They are not framed and are not script sources. Authenticated routes (`/admin/*`, `/intake`, `/results`) stay role-gated.
 
 Production builds set Vite `sourcemap: false`. Unknown URLs are not rewritten to the homepage.
