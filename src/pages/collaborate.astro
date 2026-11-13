@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
+import ProtectedForm from '../components/ProtectedForm.astro';
 ---
 
 <Layout
@@ -18,40 +19,47 @@ import Layout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="form-wrap">
-      <form id="accessForm" class="card" onsubmit="return false;">
+      <ProtectedForm
+        formId="accessForm"
+        formType="collaborate"
+        class="card"
+        successUrl="/collaborate/received/"
+        statusId="status"
+        submitId="submitBtn"
+      >
         <h2>1. Investigator</h2>
         <div class="grid-2">
           <div class="field">
             <label for="full_name">Full name <span class="req">*</span></label>
-            <input type="text" id="full_name" required />
+            <input type="text" id="full_name" name="full_name" required />
           </div>
           <div class="field">
             <label for="email">Institutional email <span class="req">*</span></label>
-            <input type="email" id="email" required />
+            <input type="email" id="email" name="email" required />
           </div>
           <div class="field">
             <label for="organization">Organization / University <span class="req">*</span></label>
-            <input type="text" id="organization" required />
+            <input type="text" id="organization" name="organization" required />
           </div>
           <div class="field">
             <label for="role">Role / title <span class="req">*</span></label>
-            <input type="text" id="role" required placeholder="e.g. Principal Investigator, Postdoctoral Fellow" />
+            <input type="text" id="role" name="role" required placeholder="e.g. Principal Investigator, Postdoctoral Fellow" />
           </div>
           <div class="field">
             <label for="department">Department</label>
-            <input type="text" id="department" />
+            <input type="text" id="department" name="department" />
           </div>
         </div>
 
         <h2>2. Intended use</h2>
         <div class="field">
           <label for="intended_use">Describe intended research use <span class="req">*</span></label>
-          <textarea id="intended_use" rows="4" required placeholder="Study aims, population, and how the 8-zone platform will be used."></textarea>
+          <textarea id="intended_use" name="intended_use" rows="4" required placeholder="Study aims, population, and how the 8-zone platform will be used."></textarea>
         </div>
         <div class="grid-2">
           <div class="field">
             <label for="irb_status">IRB / Ethics Committee status</label>
-            <select id="irb_status">
+            <select id="irb_status" name="irb_status">
               <option value="">—</option>
               <option value="approved">Yes – Approved</option>
               <option value="pending">Pending / in preparation</option>
@@ -61,31 +69,33 @@ import Layout from '../layouts/BaseLayout.astro';
           </div>
           <div class="field">
             <label for="start_date">Preferred start date (approximate)</label>
-            <input type="date" id="start_date" />
+            <input type="date" id="start_date" name="start_date" />
           </div>
         </div>
 
         <h2>3. Data handling &amp; compliance</h2>
         <label class="check">
-          <input type="checkbox" id="agree_data_security" required />
+          <input type="checkbox" id="agree_data_security" name="agree_data_security" required />
           <span>I understand that all submitted data will be stored in a secure Azure environment controlled by Rex Autistikon Research Foundation, Inc. and will not be shared outside approved research collaborators without explicit written agreement.</span>
         </label>
         <label class="check">
-          <input type="checkbox" id="agree_terms" required />
+          <input type="checkbox" id="agree_terms" name="agree_terms" required />
           <span>I agree to use the platform solely for legitimate scientific research purposes consistent with the mission of Rex Autistikōn Labs.</span>
         </label>
         <label class="check">
-          <input type="checkbox" id="agree_citation" required />
+          <input type="checkbox" id="agree_citation" name="agree_citation" required />
           <span>I agree to cite Rex Autistikōn Labs / the underlying theoretical framework in any resulting publications or presentations.</span>
         </label>
 
+        <Fragment slot="footer">
         <div class="actions">
-          <button type="button" id="submitBtn" class="btn-primary" onclick="submitRequest()">
+          <button type="submit" id="submitBtn" class="btn-primary">
             Submit Access Request
           </button>
-          <p id="status" class="status"></p>
+          <p id="status" class="status" role="alert"></p>
         </div>
-      </form>
+        </Fragment>
+      </ProtectedForm>
 
       <p class="footer-note">
         After submission, requests are reviewed by the Rex Autistikōn Labs team. Approved collaborators
@@ -161,83 +171,4 @@ import Layout from '../layouts/BaseLayout.astro';
   .footer-note a:hover { text-decoration: underline; }
 </style>
 
-<script is:inline>
-  const REQUEST_URL =
-    "https://func-rex-calc-egaydydtenewdzf4.westus2-01.azurewebsites.net/api/collaborator-request?code=MVsz41m3_N0tVgsoF7cVGVhvEl8PO4i6O_W6gOPLkhagAzFupAmusg==";
 
-  window.submitRequest = async function submitRequest() {
-    const btn = document.getElementById("submitBtn");
-    const status = document.getElementById("status");
-
-    const full_name = document.getElementById("full_name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const organization = document.getElementById("organization").value.trim();
-    const role = document.getElementById("role").value.trim();
-    const intended_use = document.getElementById("intended_use").value.trim();
-    const agree_data_security = document.getElementById("agree_data_security").checked;
-    const agree_terms = document.getElementById("agree_terms").checked;
-    const agree_citation = document.getElementById("agree_citation").checked;
-
-    if (!full_name || !email || !organization || !role || !intended_use) {
-      status.className = "status error";
-      status.textContent = "Please complete all required fields.";
-      return;
-    }
-    if (!agree_data_security || !agree_terms || !agree_citation) {
-      status.className = "status error";
-      status.textContent = "Please accept all compliance statements.";
-      return;
-    }
-
-    const payload = {
-      full_name,
-      email,
-      organization,
-      role,
-      department: document.getElementById("department").value.trim(),
-      intended_use,
-      irb_status: document.getElementById("irb_status").value,
-      start_date: document.getElementById("start_date").value,
-      agree_data_security,
-      agree_terms,
-      agree_citation
-    };
-
-    btn.disabled = true;
-    status.className = "status";
-    status.textContent = "Submitting…";
-
-    try {
-      const res = await fetch(REQUEST_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const text = await res.text();
-      let data = null;
-      if (text && text.trim()) {
-        try {
-          data = JSON.parse(text);
-        } catch (parseErr) {
-          throw new Error("HTTP " + res.status + " — server returned non-JSON: " + text.slice(0, 180));
-        }
-      }
-
-      if (!res.ok) {
-        const msg =
-          (data && (data.error || data.message)) ||
-          ("HTTP " + res.status + (text ? "" : " (empty response — often 401 bad key or CORS)"));
-        throw new Error(typeof msg === "string" ? msg : JSON.stringify(msg));
-      }
-
-      window.location.assign("/collaborate/received");
-      return;
-    } catch (err) {
-      status.className = "status error";
-      status.textContent = "Error: " + (err && err.message ? err.message : String(err));
-    } finally {
-      btn.disabled = false;
-    }
-  };
-</script>

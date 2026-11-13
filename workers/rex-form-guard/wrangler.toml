@@ -1,0 +1,18 @@
+# rex-form-guard — form protection Worker for rexautistikonlabs.org
+name = "rex-form-guard"
+main = "turnstile-form-worker.js"
+compatibility_date = "2026-11-12"
+workers_dev = true
+
+# Secrets (do not put values here):
+#   wrangler secret put TURNSTILE_SECRET_KEY
+#   wrangler secret put FORWARD_URL
+#   wrangler secret put COLLAB_FORWARD_URL
+
+[[routes]]
+pattern = "rexautistikonlabs.org/api/forms*"
+zone_name = "rexautistikonlabs.org"
+
+[[routes]]
+pattern = "www.rexautistikonlabs.org/api/forms*"
+zone_name = "rexautistikonlabs.org"

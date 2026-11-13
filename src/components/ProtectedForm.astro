@@ -1,0 +1,245 @@
+---
+interface Props {
+  formType: "contact" | "collaborate";
+  formId: string;
+  class?: string;
+  successUrl: string;
+  statusId: string;
+  submitId: string;
+}
+
+const {
+  formType,
+  formId,
+  class: className = "",
+  successUrl,
+  statusId,
+  submitId,
+} = Astro.props;
+
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
+const workerUrl = import.meta.env.PUBLIC_FORM_WORKER_URL ?? "/api/forms";
+---
+
+<form
+  id={formId}
+  class:list={[className, "protected-form"]}
+  method="POST"
+  action={workerUrl}
+  data-form-type={formType}
+  data-success-url={successUrl}
+  data-worker-url={workerUrl}
+  data-site-key={siteKey}
+  data-status-id={statusId}
+  data-submit-id={submitId}
+>
+  <div class="pf-hp" aria-hidden="true">
+    <label for={`${formId}-website`}>Website</label>
+    <input
+      type="text"
+      id={`${formId}-website`}
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+  <input type="hidden" name="form_type" value={formType} />
+  <input type="hidden" name="form_started_at" value="" />
+
+  <slot />
+
+  <div class="pf-turnstile" data-turnstile-slot>
+    {siteKey ? (
+      <div class="cf-turnstile" data-sitekey={siteKey} data-theme="light"></div>
+    ) : null}
+  </div>
+
+  <slot name="footer" />
+</form>
+
+{siteKey && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
+
+<script is:inline>
+  (function () {
+    function bind(form) {
+      if (!form || form.dataset.pfBound === "1") return;
+      form.dataset.pfBound = "1";
+
+      var started = form.querySelector('input[name="form_started_at"]');
+      if (started) started.value = String(Date.now());
+
+      var status = document.getElementById(form.getAttribute("data-status-id") || "");
+      var button = document.getElementById(form.getAttribute("data-submit-id") || "");
+      var workerUrl = form.getAttribute("data-worker-url") || "/api/forms";
+      var successUrl = form.getAttribute("data-success-url") || "";
+      var formType = form.getAttribute("data-form-type") || "contact";
+
+      function showStatus(message, isError) {
+        if (!status) return;
+        status.hidden = false;
+        status.textContent = message;
+        if (status.classList.contains("status") || formType === "collaborate") {
+          status.className = isError ? "status error" : "status";
+        } else {
+          status.className = isError
+            ? "text-sm text-red-700 mb-4"
+            : "text-sm text-slate-600 mb-4";
+        }
+      }
+
+      function resetTurnstile() {
+        var widget = form.querySelector(".cf-turnstile");
+        if (window.turnstile && widget) {
+          try {
+            window.turnstile.reset(widget);
+          } catch (e) {}
+        }
+      }
+
+      function turnstileToken() {
+        var named = form.querySelector('[name="cf-turnstile-response"]');
+        if (named && named.value) return named.value;
+        var widget = form.querySelector(".cf-turnstile");
+        if (window.turnstile && widget) {
+          try {
+            return window.turnstile.getResponse(widget) || "";
+          } catch (e) {
+            return "";
+          }
+        }
+        return "";
+      }
+
+      form.addEventListener(
+        "invalid",
+        function () {
+          showStatus(
+            formType === "collaborate"
+              ? "Please complete all required fields and accept all compliance statements."
+              : "Please complete all required fields.",
+            true
+          );
+        },
+        true
+      );
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          showStatus(
+            formType === "collaborate"
+              ? "Please complete all required fields and accept all compliance statements."
+              : "Please complete all required fields.",
+            true
+          );
+          return;
+        }
+
+        var payload = {};
+        var fd = new FormData(form);
+        fd.forEach(function (value, key) {
+          payload[key] = typeof value === "string" ? value : String(value);
+        });
+        // Checkboxes omitted from FormData when unchecked; include explicit booleans.
+        form.querySelectorAll('input[type="checkbox"][id]').forEach(function (el) {
+          if (el.name) payload[el.name] = el.checked;
+        });
+        payload["form_type"] = formType;
+        if (started) payload["form_started_at"] = started.value;
+        var token = turnstileToken();
+        if (token) payload["cf-turnstile-response"] = token;
+
+        if (button) button.disabled = true;
+        showStatus("Sending your message…", false);
+
+        fetch(workerUrl, {
+          method: "POST",
+          credentials: "omit",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        })
+          .then(function (response) {
+            return response
+              .text()
+              .then(function (text) {
+                var data = null;
+                if (text && text.trim()) {
+                  try {
+                    data = JSON.parse(text);
+                  } catch (e) {
+                    data = null;
+                  }
+                }
+                return { ok: response.ok, status: response.status, data: data };
+              });
+          })
+          .then(function (result) {
+            var accepted = result.ok && result.data && result.data.success === true;
+            if (accepted) {
+              if (successUrl) {
+                window.location.assign(successUrl);
+                return;
+              }
+              showStatus("Thank you. Your message was sent.", false);
+              form.reset();
+              if (started) started.value = String(Date.now());
+              resetTurnstile();
+              if (button) button.disabled = false;
+              return;
+            }
+            var message =
+              (result.data && result.data.message) ||
+              (result.status === 400
+                ? "The submission could not be accepted. Please try again."
+                : "The message could not be sent. Please email info@rexautistikonlabs.org directly.");
+            if (button) button.disabled = false;
+            showStatus(message, true);
+            resetTurnstile();
+          })
+          .catch(function () {
+            if (button) button.disabled = false;
+            showStatus(
+              "The form service did not respond. Please email info@rexautistikonlabs.org directly.",
+              true
+            );
+            resetTurnstile();
+          });
+      });
+    }
+
+    function init() {
+      document.querySelectorAll("form.protected-form").forEach(bind);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  .pf-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .protected-form {
+    position: relative;
+  }
+  .pf-turnstile {
+    margin: 1rem 0 1.25rem;
+  }
+</style>
